@@ -10,10 +10,10 @@ class SplashScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // When splash completes, navigate. Replace with your own branching (login/home) if needed.
+    // When splash completes, navigate.
     ref.listen(splashReadyProvider, (prev, next) {
       next.whenData((_) {
-        context.pushNamed(RouteNames.onboarding); // or RouteNames.signUp
+        context.pushNamed(RouteNames.onboarding);
       });
     });
     return Scaffold(

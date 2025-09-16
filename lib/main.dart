@@ -22,7 +22,7 @@ class MyApp extends ConsumerWidget {
       routerConfig: router,
 
       debugShowCheckedModeBanner: false,
-      title: 'Eugene Staff App',
+      title: 'Jimmy Sir App',
       // theme: ThemeData(
       //   primarySwatch: Colors.blue,
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
