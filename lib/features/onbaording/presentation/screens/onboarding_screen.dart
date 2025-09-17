@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:jimmy_sir_app/core/components/apptext/inter_apptext.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urban_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
@@ -69,6 +68,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               ),
             ),
             SizedBox(height: height * 0.01),
+
             Expanded(
               child: PageView.builder(
                 // physics: const NeverScrollableScrollPhysics(),
@@ -77,11 +77,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 onPageChanged: (index) =>
                     ref.read(onboardingPageProvider.notifier).state = index,
                 itemBuilder: (context, index) {
-                  return _OnboardingPage(pages[index]);
+                  return _OnboardingPage(
+                    pages[index],
+                    key: ValueKey(pages[index].imagePath),
+                  );
                 },
               ),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: width * 0.05,
@@ -101,14 +103,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       if (currentPage < pages.length - 1) {
                         pageController.jumpToPage(currentPage + 1);
-
-                        // pageController.nextPage(
-                        //   duration: const Duration(milliseconds: 300),
-                        //   curve: Curves.easeInCirc,
-                        // );
                       } else {
                         // Finish onboarding
                       }
@@ -149,71 +146,105 @@ class _OnboardingPage extends ConsumerWidget {
 
   const _OnboardingPage(this.model, {super.key});
 
+  // Minimal helper to map image → index (so we can vary the effect per page)
+  int _pageIndexFor(String path) {
+    if (path == AppImages.onboarding_11) return 0;
+    if (path == AppImages.onboarding_22) return 1;
+    return 2;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
     final currentPage = ref.watch(onboardingPageProvider);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        /// AnimatedSwitcher handles image transitions
-        // AnimatedSwitcher(
-        //   duration: const Duration(milliseconds: 600),
-        //   transitionBuilder: (child, animation) {
-        //     return FadeTransition(
-        //       opacity: animation,
-        //       child: ScaleTransition(scale: animation, child: child),
-        //     );
-        //   },
-        //   child: Container(
-        //     key: ValueKey<String>(model.imagePath),
-        //     height: height * 0.33,
-        //     // decoration: const BoxDecoration(
-        //     //   shape: BoxShape.circle,
-        //     //   color: Colors.white,
-        //     // ),
-        //     child: Image.asset(model.imagePath, fit: BoxFit.contain),
-        //   ),
-        // ),
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          transitionBuilder: (child, animation) {
-            final offsetAnimation =
-                Tween<Offset>(
-                  begin: const Offset(1, 0),
-                  end: Offset.zero,
-                ).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
-                );
+    final pageIndex = _pageIndexFor(model.imagePath);
+    final isCurrent = currentPage == pageIndex;
+    final double targetOpacity = isCurrent ? 1.0 : 0.0;
+    final double targetScale = (pageIndex == 2)
+        ? (isCurrent ? 1.0 : 0.88)
+        : (isCurrent ? 1.0 : 0.10);
 
-            return SlideTransition(
-              position: offsetAnimation,
-              textDirection: TextDirection.ltr,
-              child: FadeTransition(opacity: animation, child: child),
-            );
-          },
-          child: TweenAnimationBuilder<double>(
-            key: ValueKey<String>(model.imagePath),
-            tween: Tween<double>(begin: 0.8, end: 1.0),
-            duration: const Duration(milliseconds: 600),
-            builder: (context, scale, child) {
-              return Transform.scale(
-                scale: scale,
-                child: Container(
-                  height: height * 0.33,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                  child: Image.asset(model.imagePath, fit: BoxFit.contain),
+    final double targetTurns = (isCurrent && pageIndex == 1)
+        ? 0.0
+        : (isCurrent && pageIndex == 2)
+        ? (11.0 / 360.0)
+        : (12.0 / 360.0);
+
+    final Offset slideOffset = (pageIndex == 1)
+        ? (isCurrent ? Offset.zero : const Offset(0.4, 0.0))
+        : (pageIndex == 2)
+        ? (isCurrent ? const Offset(0.0, -0.16) : Offset.zero)
+        : Offset.zero;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: height * 0.37,
+                width: width * 0.69,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
                 ),
-              );
-            },
-          ),
+              ),
+            ),
+
+            Positioned(
+              child: SizedBox(
+                height: height * 0.38,
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    // curve: Curves.easeOutBack,
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 400),
+                      // curve: Curves.easeOut,
+                      opacity: targetOpacity,
+                      child: AnimatedSlide(
+                        // <-- added
+                        duration: const Duration(milliseconds: 500),
+                        offset: slideOffset,
+                        child: AnimatedScale(
+                          duration: isCurrent
+                              ? const Duration(
+                                  milliseconds: 700,
+                                ) // nice elastic bump when entering
+                              : const Duration(
+                                  milliseconds: 260,
+                                ), // quick blow-out when leaving
+                          curve: Curves.easeOutCubic,
+                          scale: targetScale,
+                          child: AnimatedRotation(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeOut,
+                            turns: targetTurns,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                model.imagePath,
+                                width: height * 0.38,
+                                height: height * 0.40,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        SizedBox(height: height * 0.1),
+
+        // SizedBox(height: height * 0.1),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.05),
           child: Column(
@@ -224,7 +255,6 @@ class _OnboardingPage extends ConsumerWidget {
                 textAlign: TextAlign.start,
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
-
                 color: Colors.white,
               ),
               SizedBox(height: height * 0.02),
@@ -243,3 +273,79 @@ class _OnboardingPage extends ConsumerWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------wrough work--------------
+
+
+   // final double targetScale = isCurrent
+    //     ? 1.0
+    //     : 0.12;
+    // final double targetTurns = (isCurrent && pageIndex == 1)
+    //     ? 0.0
+    //     : (isCurrent && pageIndex == 2)
+    //     ? (11.0 / 360.0)
+    //     : (12.0 / 360.0);
+    // // ? (-10.0 / 320.0) // <-- clockwise on 3rd index
+    // // : (10.0 / 360.0); // this is for all image
+    // // ? -(10.0 / 360.0) // anti-clockwise 45° for page 3
+    // // : (13.0 / 360.0); // small idle tilt for others
+
+    // // Slide:
+    // // - index 1: right → center (your existing)
+    // // - index 2: left → center (new)
+
+    // final Offset slideOffset = (pageIndex == 1)
+    //     ? (isCurrent ? Offset.zero : const Offset(0.4, 0.0))
+    //     : (pageIndex == 2)
+    //     ? (isCurrent ? Offset.zero : const Offset(0.0, 0.0))
+    //     : Offset.zero;
+    // // final Offset slideOffset = (pageIndex == 1)
+    // //     ? (isCurrent ? Offset.zero : const Offset(0.4, 0.0))
+    // //     : (pageIndex == 2)
+    // //     ? (isCurrent ? Offset.zero : const Offset(-0.4, 0.0))
+    // //     : Offset.zero;
+
+
+
+
+
+ // AnimatedSwitcher(
+        //   duration: const Duration(milliseconds: 600),
+        //   transitionBuilder: (child, animation) {
+        //     return FadeTransition(
+        //       opacity: animation,
+        //       child: ScaleTransition(scale: animation, child: child),
+        //     );
+        //   },
+        //   child: Container(
+        //     key: ValueKey<String>(model.imagePath),
+        //     height: height * 0.33,
+        //     // decoration: const BoxDecoration(
+        //     //   shape: BoxShape.circle,
+        //     //   color: Colors.white,
+        //     // ),
+        //     child: Image.asset(model.imagePath, fit: BoxFit.contain),
+        //   ),
+        // ),
+       
