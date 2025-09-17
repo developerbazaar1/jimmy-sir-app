@@ -159,61 +159,60 @@ class _OnboardingPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         /// AnimatedSwitcher handles image transitions
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          transitionBuilder: (child, animation) {
-            return FadeTransition(
-              opacity: animation,
-              child: ScaleTransition(scale: animation, child: child),
-            );
-          },
-          child: Container(
-            key: ValueKey<String>(model.imagePath),
-            height: height * 0.33,
-            // decoration: const BoxDecoration(
-            //   shape: BoxShape.circle,
-            //   color: Colors.white,
-            // ),
-            child: Image.asset(model.imagePath, fit: BoxFit.contain),
-          ),
-        ),
-
         // AnimatedSwitcher(
         //   duration: const Duration(milliseconds: 600),
         //   transitionBuilder: (child, animation) {
-        //     final offsetAnimation =
-        //         Tween<Offset>(
-        //           begin: const Offset(1, 0),
-        //           end: Offset.zero,
-        //         ).animate(
-        //           CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
-        //         );
-
-        //     return SlideTransition(
-        //       position: offsetAnimation,
-        //       textDirection: TextDirection.ltr,
-        //       child: FadeTransition(opacity: animation, child: child),
+        //     return FadeTransition(
+        //       opacity: animation,
+        //       child: ScaleTransition(scale: animation, child: child),
         //     );
         //   },
-        //   child: TweenAnimationBuilder<double>(
+        //   child: Container(
         //     key: ValueKey<String>(model.imagePath),
-        //     tween: Tween<double>(begin: 0.8, end: 1.0),
-        //     duration: const Duration(milliseconds: 600),
-        //     builder: (context, scale, child) {
-        //       return Transform.scale(
-        //         scale: scale,
-        //         child: Container(
-        //           height: height * 0.33,
-        //           decoration: BoxDecoration(
-        //             shape: BoxShape.circle,
-        //             color: Colors.white,
-        //           ),
-        //           child: Image.asset(model.imagePath, fit: BoxFit.contain),
-        //         ),
-        //       );
-        //     },
+        //     height: height * 0.33,
+        //     // decoration: const BoxDecoration(
+        //     //   shape: BoxShape.circle,
+        //     //   color: Colors.white,
+        //     // ),
+        //     child: Image.asset(model.imagePath, fit: BoxFit.contain),
         //   ),
         // ),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 600),
+          transitionBuilder: (child, animation) {
+            final offsetAnimation =
+                Tween<Offset>(
+                  begin: const Offset(1, 0),
+                  end: Offset.zero,
+                ).animate(
+                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+                );
+
+            return SlideTransition(
+              position: offsetAnimation,
+              textDirection: TextDirection.ltr,
+              child: FadeTransition(opacity: animation, child: child),
+            );
+          },
+          child: TweenAnimationBuilder<double>(
+            key: ValueKey<String>(model.imagePath),
+            tween: Tween<double>(begin: 0.8, end: 1.0),
+            duration: const Duration(milliseconds: 600),
+            builder: (context, scale, child) {
+              return Transform.scale(
+                scale: scale,
+                child: Container(
+                  height: height * 0.33,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: Image.asset(model.imagePath, fit: BoxFit.contain),
+                ),
+              );
+            },
+          ),
+        ),
         SizedBox(height: height * 0.1),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.05),
