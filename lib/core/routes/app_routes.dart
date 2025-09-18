@@ -1,6 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/about_yourself_screen.dart';
+
+import 'package:jimmy_sir_app/features/auth/login/screens/login_screen.dart';
+import '../../features/auth/changePassword/screen/change_password_screen.dart';
+
 import 'route_import.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -18,9 +23,24 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, __) => const OnboardingScreen(),
       ),
       GoRoute(
-        path: RoutePaths.signUp,
-        name: RouteNames.signUp,
-        builder: (_, __) => const SignUpScreen(),
+        path: RoutePaths.login,
+        name: RouteNames.login,
+        builder: (_, __) => LoginScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.forgotPassword,
+        name: RouteNames.forgotPassword,
+        builder: (_, __) => ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.verifyOTP,
+        name: RouteNames.verifyOTP,
+        builder: (_, __) => VerifyOTPScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.changePassword,
+        name: RouteNames.changePassword,
+        builder: (_, __) => ChangePasswordScreen(),
       ),
       GoRoute(
         path: RoutePaths.aboutYourself,
