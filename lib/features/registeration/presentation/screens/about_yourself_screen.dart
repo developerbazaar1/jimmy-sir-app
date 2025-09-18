@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jimmy_sir_app/core/components/apptext/urban_apptext.dart';
+import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 
@@ -31,7 +31,7 @@ class AboutYourselfScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: height * 0.03),
-                UrbanApptext(
+                UrbanistApptext(
                   text: "Welcome ",
                   fontSize: width * 0.055,
                   color: AppColor.textBrownColor,
@@ -80,7 +80,7 @@ class AboutYourselfScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                UrbanApptext(
+                UrbanistApptext(
                   text: "Tell us a Little Bit about Yourself",
                   fontSize: width * 0.040,
                   fontWeight: FontWeight.w400,
@@ -119,7 +119,7 @@ class AboutFieldLabel extends StatelessWidget {
       padding: EdgeInsets.only(
         bottom: MediaQuery.sizeOf(context).height * 0.01,
       ),
-      child: UrbanApptext(
+      child: UrbanistApptext(
         text: text,
         fontSize: width * 0.040,
         fontWeight: FontWeight.w400,

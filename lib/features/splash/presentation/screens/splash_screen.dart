@@ -13,7 +13,7 @@ class SplashScreen extends ConsumerWidget {
     // When splash completes, navigate.
     ref.listen(splashReadyProvider, (prev, next) {
       next.whenData((_) {
-        context.pushNamed(RouteNames.login);
+        context.pushNamed(RouteNames.onboarding);
       });
     });
     return Scaffold(
