@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/inter_apptext.dart';
 import 'package:jimmy_sir_app/core/components/apptext/plus_jakarta_sans.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';  
 import 'package:jimmy_sir_app/core/constants/app_images.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
+import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/onbaording/data/providers/onboarding_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -20,7 +21,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  final pageController = PageController();
+  late PageController pageController;
 
   final List<_OnboardingPageModel> pages = [
     _OnboardingPageModel(
@@ -47,10 +48,23 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: 0);
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final currentPage = ref.watch(onboardingPageProvider);
-    final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
+    final size = MediaQuery.sizeOf(context);
+    final height = size.height;
+    final width = size.width;
 
     return Scaffold(
       backgroundColor: pages[currentPage].color,
@@ -70,51 +84,88 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ),
               ),
             ),
-            SizedBox(height: height * 0.01),
             Expanded(
-              child: PageView.builder(
+              child: PageView.custom(
                 // physics: const NeverScrollableScrollPhysics(),
                 controller: pageController,
-                itemCount: pages.length,
                 onPageChanged: (index) =>
                     ref.read(onboardingPageProvider.notifier).state = index,
-                itemBuilder: (context, index) {
-                  return _OnboardingPage(pages[index]);
-                },
+                childrenDelegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return _OnboardingPage(pages[index], key: ValueKey(index));
+                  },
+                  childCount: pages.length,
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  addSemanticIndexes: false,
+                ),
               ),
             ),
 
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * 0.05,
-                vertical: height * 0.03,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: width * 0.05),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SmoothPageIndicator(
-                    controller: pageController,
-                    count: pages.length,
-                    effect: ExpandingDotsEffect(
-                      dotHeight: 10,
-                      dotWidth: 12,
-                      dotColor: Colors.grey.withOpacity(0.6),
-                      activeDotColor: Colors.white,
-                    ),
+                  AnimatedBuilder(
+                    animation: pageController,
+                    builder: (context, _) {
+                      if (!pageController.hasClients) {
+                        return const SizedBox(height: 12, width: 80);
+                      }
+                      return SmoothPageIndicator(
+                        controller: pageController,
+                        count: pages.length,
+                        effect: ExpandingDotsEffect(
+                          dotHeight: 10,
+                          dotWidth: 12,
+                          dotColor: Colors.grey.withOpacity(0.6),
+                          activeDotColor: Colors.white,
+                        ),
+                      );
+                    },
                   ),
                   GestureDetector(
-                    onTap: () {
-                      if (currentPage < pages.length - 1) {
-                        pageController.jumpToPage(currentPage + 1);
+                    onTap: () async {
+                      final current = ref.read(onboardingPageProvider);
 
-                        // pageController.nextPage(
-                        //   duration: const Duration(milliseconds: 300),
-                        //   curve: Curves.easeInCirc,
-                        // );
+                      if (!pageController.hasClients) return;
+
+                      if (current < pages.length - 1) {
+                        // Trigger animation manually
+                        ref.read(animateImageProvider.notifier).state = true;
+
+                        // Thoda delay do taaki animation visible ho
+                        await Future.delayed(const Duration(milliseconds: 50));
+
+                        pageController.jumpToPage(current + 1);
+                        ref.read(onboardingPageProvider.notifier).state =
+                            current + 1;
+
+                        // Reset flag
+                        Future.delayed(const Duration(milliseconds: 800), () {
+                          ref.read(animateImageProvider.notifier).state = false;
+                        });
                       } else {
-                        // Finish onboarding
+                        context.pushNamed(RouteNames.aboutYourself);
                       }
                     },
+
+                    // onTap: () async {
+                    //   final current = ref.read(onboardingPageProvider);
+                    //   if (!pageController.hasClients) return;
+
+                    //   if (current < pages.length - 1) {
+                    //     // remove sliding effect
+                    //     pageController.jumpToPage(current + 1);
+
+                    //     // update provider manually (since jumpToPage is instant)
+                    //     ref.read(onboardingPageProvider.notifier).state =
+                    //         current + 1;
+                    //   } else {
+                    //     context.pushNamed(RouteNames.aboutYourself);
+                    //   }
+                    // },
                     child: SvgPicture.asset(
                       AppSvg.roundNextIcon,
                       height: height * 0.06,
@@ -132,6 +183,21 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 }
 
+// onTap: () async {
+//   final current = ref.read(onboardingPageProvider);
+//   if (!pageController.hasClients) return;
+//   if (current < pages.length - 1) {
+//     await pageController.nextPage(
+//       duration: const Duration(milliseconds: 380),
+//       curve: Curves.easeInOut,
+//     );
+//   } else {
+//     context.pushNamed(RouteNames.aboutYourself);
+//     print(
+//       "navigate-------------------------------------to nexttt screennnnnnn",
+//     );
+//   }
+// },
 class _OnboardingPageModel {
   final Color color;
   final String imagePath;
@@ -151,17 +217,207 @@ class _OnboardingPage extends ConsumerWidget {
 
   const _OnboardingPage(this.model, {super.key});
 
+  int _pageIndexFor(String path) {
+    if (path == AppImages.onboarding_11) return 0;
+    if (path == AppImages.onboarding_22) return 1;
+    return 2;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
     final currentPage = ref.watch(onboardingPageProvider);
 
+    final pageIndex = _pageIndexFor(model.imagePath);
+    final isCurrent = currentPage == pageIndex;
+
+    final double targetOpacity = isCurrent ? 1.0 : 0.0;
+    final double targetScale = (pageIndex == 2)
+        ? (isCurrent ? 1.0 : 0.88)
+        : (isCurrent ? 1.0 : 0.10);
+
+    final double targetTurns = (isCurrent && pageIndex == 1)
+        ? 0.0
+        : (isCurrent && pageIndex == 2)
+        ? (11.0 / 360.0)
+        : (5.0 / 360.0);
+
+    final Offset slideOffset = (pageIndex == 1)
+        ? (isCurrent ? Offset.zero : const Offset(0.4, 0.0))
+        : (pageIndex == 2)
+        ? (isCurrent ? const Offset(0.0, -0.16) : Offset.zero)
+        : Offset.zero;
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        /// AnimatedSwitcher handles image transitions
-        // AnimatedSwitcher(
+        Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: height * 0.36,
+                width: width * 0.69,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Positioned(
+              child: SizedBox(
+                height: height * 0.33,
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 400),
+                      opacity: targetOpacity,
+                      child: AnimatedSlide(
+                        duration: const Duration(milliseconds: 500),
+                        offset: slideOffset,
+                        child: AnimatedScale(
+                          duration: isCurrent
+                              ? const Duration(milliseconds: 700)
+                              : const Duration(milliseconds: 260),
+                          curve: Curves.easeOutCubic,
+                          scale: targetScale,
+                          child: AnimatedRotation(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeOut,
+                            turns: targetTurns,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                model.imagePath,
+                                width: height * 0.38,
+                                height: height * 0.40,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: height * 0.09),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                UrbanistApptext(
+                text: model.title,
+                textAlign: TextAlign.start,
+                fontSize: width * 0.08,
+                fontWeight: FontWeight.w800,
+                color: Colors.white,
+              ),
+              SizedBox(height: height * 0.02),
+              InterApptext(
+                text: model.description,
+                maxLines: 3,
+                textAlign: TextAlign.start,
+                fontSize: width * 0.04,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------wrough work--------------
+
+
+   // final double targetScale = isCurrent
+    //     ? 1.0
+    //     : 0.12;
+    // final double targetTurns = (isCurrent && pageIndex == 1)
+    //     ? 0.0
+    //     : (isCurrent && pageIndex == 2)
+    //     ? (11.0 / 360.0)
+    //     : (12.0 / 360.0);
+    // // ? (-10.0 / 320.0) // <-- clockwise on 3rd index
+    // // : (10.0 / 360.0); // this is for all image
+    // // ? -(10.0 / 360.0) // anti-clockwise 45° for page 3
+    // // : (13.0 / 360.0); // small idle tilt for others
+
+    // // Slide:
+    // // - index 1: right → center (your existing)
+    // // - index 2: left → center (new)
+
+    // final Offset slideOffset = (pageIndex == 1)
+    //     ? (isCurrent ? Offset.zero : const Offset(0.4, 0.0))
+    //     : (pageIndex == 2)
+    //     ? (isCurrent ? Offset.zero : const Offset(0.0, 0.0))
+    //     : Offset.zero;
+    // // final Offset slideOffset = (pageIndex == 1)
+    // //     ? (isCurrent ? Offset.zero : const Offset(0.4, 0.0))
+    // //     : (pageIndex == 2)
+    // //     ? (isCurrent ? Offset.zero : const Offset(-0.4, 0.0))
+    // //     : Offset.zero;
+
+
+
+
+
+ // AnimatedSwitcher(
         //   duration: const Duration(milliseconds: 600),
         //   transitionBuilder: (child, animation) {
         //     return FadeTransition(
@@ -179,69 +435,4 @@ class _OnboardingPage extends ConsumerWidget {
         //     child: Image.asset(model.imagePath, fit: BoxFit.contain),
         //   ),
         // ),
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          transitionBuilder: (child, animation) {
-            final offsetAnimation =
-                Tween<Offset>(
-                  begin: const Offset(1, 0),
-                  end: Offset.zero,
-                ).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
-                );
-
-            return SlideTransition(
-              position: offsetAnimation,
-              textDirection: TextDirection.ltr,
-              child: FadeTransition(opacity: animation, child: child),
-            );
-          },
-          child: TweenAnimationBuilder<double>(
-            key: ValueKey<String>(model.imagePath),
-            tween: Tween<double>(begin: 0.8, end: 1.0),
-            duration: const Duration(milliseconds: 600),
-            builder: (context, scale, child) {
-              return Transform.scale(
-                scale: scale,
-                child: Container(
-                  height: height * 0.33,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                  child: Image.asset(model.imagePath, fit: BoxFit.contain),
-                ),
-              );
-            },
-          ),
-        ),
-        SizedBox(height: height * 0.1),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-                UrbanistApptext(
-                text: model.title,
-                textAlign: TextAlign.start,
-                fontSize: 28,
-                fontWeight: FontWeight.w700,
-
-                color: Colors.white,
-              ),
-              SizedBox(height: height * 0.02),
-              InterApptext(
-                text: model.description,
-                maxLines: 3,
-                textAlign: TextAlign.start,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
+       

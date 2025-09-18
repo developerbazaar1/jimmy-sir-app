@@ -10,7 +10,11 @@ class AppColor {
   static Color redColor = Color(0XFFE33C10);
   static Color textColor = Color(0XFF151514);
   static Color textGreyColor = Color(0XFF8F8F8F);
+
+  static Color textBrownColor = Color(0XFF442200);
+
   static Color textGreyColor2 = Color(0XFF8E8E93);
   static Color border = Color(0XFFCDCDCD);
   static Color placeholderColor = Color(0XFFA4A4A4);
+
 }
