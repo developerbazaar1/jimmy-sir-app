@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 
-class UrbanApptext extends StatelessWidget {
+class UrbanistApptext extends StatelessWidget {
   final String text;
   final double? fontSize;
   final Color? color;
@@ -12,7 +12,7 @@ class UrbanApptext extends StatelessWidget {
   final TextAlign? textAlign;
   final TextDecoration? textDecoration;
 
-  const UrbanApptext({
+  const UrbanistApptext({
     super.key,
     required this.text,
     this.fontSize,

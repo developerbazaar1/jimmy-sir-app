@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jimmy_sir_app/core/components/apptext/inter_apptext.dart';
-import 'package:jimmy_sir_app/core/components/apptext/urban_apptext.dart';
-import 'package:jimmy_sir_app/core/constants/app_colors.dart';
+import 'package:jimmy_sir_app/core/components/apptext/plus_jakarta_sans.dart';
+import 'package:jimmy_sir_app/core/constants/app_colors.dart';  
 import 'package:jimmy_sir_app/core/constants/app_images.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/features/onbaording/data/providers/onboarding_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../../core/components/apptext/urbanist_apptext.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -219,7 +221,7 @@ class _OnboardingPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UrbanApptext(
+                UrbanistApptext(
                 text: model.title,
                 textAlign: TextAlign.start,
                 fontSize: 28,

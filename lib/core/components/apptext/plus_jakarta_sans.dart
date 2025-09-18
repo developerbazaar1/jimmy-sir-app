@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 
-class AppText extends StatelessWidget {
+class PlusJakartaSansApptext extends StatelessWidget {
   final String text;
   final double? fontSize;
   final Color? color;
@@ -12,7 +12,7 @@ class AppText extends StatelessWidget {
   final TextAlign? textAlign;
   final TextDecoration? textDecoration;
 
-  const AppText({
+  const PlusJakartaSansApptext({
     super.key,
     required this.text,
     this.fontSize,
@@ -30,7 +30,7 @@ class AppText extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     return Text(
       text,
-      style: GoogleFonts.poppins(
+      style: GoogleFonts.plusJakartaSans(
         fontSize: fontSize ?? width * 0.065,
         fontWeight: fontWeight ?? FontWeight.w700,
         fontStyle: FontStyle.normal,
