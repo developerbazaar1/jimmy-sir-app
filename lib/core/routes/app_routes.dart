@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/about_yourself_screen.dart';
 import 'route_import.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -20,6 +21,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.signUp,
         name: RouteNames.signUp,
         builder: (_, __) => const SignUpScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.aboutYourself,
+        name: RouteNames.aboutYourself,
+        builder: (_, __) => const AboutYourselfScreen(),
       ),
     ],
   );

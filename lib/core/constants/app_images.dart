@@ -6,4 +6,5 @@ class AppImages {
   static String onboarding_11 = '$basePath/onboarding_11.png';
   static String onboarding_22 = '$basePath/onboarding_22.png';
   static String onboarding_33 = '$basePath/onboarding_33.png';
+  static String aboutYourself = '$basePath/about_your_screen_image.png';
 }

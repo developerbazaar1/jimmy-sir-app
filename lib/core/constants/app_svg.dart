@@ -5,4 +5,5 @@ class AppSvg {
   // static String logo2 = "$basePath/onboarding_2.svg";
   // static String logo3 = "$basePath/onboarding_3.svg";
   static String roundNextIcon = "$basePath/roundNextIcon.svg";
+  static String aboutYourScreenImage = "$basePath/about_your_screenImage.svg";
 }

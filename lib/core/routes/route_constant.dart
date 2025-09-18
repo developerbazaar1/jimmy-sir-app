@@ -8,13 +8,15 @@
 
 /// Use names for navigation (goNamed) and paths for deep linking (go)
 class RouteNames {
-  static const splash     = 'splash_screen';
+  static const splash = 'splash_screen';
   static const onboarding = 'onboarding_screen';
-  static const signUp     = 'signUp_screen';
+  static const signUp = 'signUp_screen';
+  static const aboutYourself = 'about_yourself_screen';
 }
 
 class RoutePaths {
-  static const splash     = '/splash_screen';
+  static const splash = '/splash_screen';
   static const onboarding = '/onboarding_screen';
-  static const signUp     = '/signUp_screen';
+  static const signUp = '/signUp_screen';
+  static const aboutYourself = '/about_yourself_screen';
 }
