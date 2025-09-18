@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/inter_apptext.dart';
 import 'package:jimmy_sir_app/core/components/apptext/plus_jakarta_sans.dart';
-import 'package:jimmy_sir_app/core/constants/app_colors.dart';  
+import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_images.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
@@ -312,7 +312,7 @@ class _OnboardingPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                UrbanistApptext(
+              UrbanistApptext(
                 text: model.title,
                 textAlign: TextAlign.start,
                 fontSize: width * 0.08,
