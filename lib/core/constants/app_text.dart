@@ -1,6 +1,30 @@
 class AppText {
+  //------------ashu-------------
   static const String splashTitle = 'Splash';
   static const String welcomeBack = 'Welcome Back';
+  static const String skip = 'Skip';
+  static const String onboardingHeading = 'Set Goals.\nGet Smarter Plans.';
+  static const String onboardingDescription =
+      'Whether it’s weight loss, better sleep, or stress relief — choose what matters most to you.';
+  static const String onboardingHeading2 = 'Stay on Top of your\nProgress';
+  static const String onboardingDescription2 =
+      'Monitor nutrition, sleep, activity, and wellness with clear insights and simple visuals.';
+  static const String onboardingHeading3 = 'Meet Your Smart Life\nAssistant';
+  static const String onboardingDescription3 =
+      'Get quick tips, reminders, and guidance whenever you need extra support.';
+  static const String welcome = 'Welcome';
+  static const String aboutYourself = 'Tell us a Little Bit about Yourself';
+  static const String name = 'Name';
+  static const String gender = 'Gender';
+  static const String age = 'Age';
+  static const String height = 'Height';
+  static const String weight = 'Weight';
+  static const String next = 'Next';
+  static const String whatYourName = 'What’s your name ?';
+  static const String pleaseSelectYourGender =
+      'Please select your gender to determine your daily calorie intake.';
+
+  //----------pramod sir-----------
   static const String welcomeBackDescription =
       'We Exited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.';
   static const String emailOrPhone = 'Email Address / Phone Number';

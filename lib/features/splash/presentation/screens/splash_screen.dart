@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
-import 'package:jimmy_sir_app/features/splash/presentation/providers/splash_provider.dart';
+import 'package:jimmy_sir_app/features/splash/providers/splash_provider.dart';
 
 class SplashScreen extends ConsumerWidget {
   const SplashScreen({Key? key}) : super(key: key);
