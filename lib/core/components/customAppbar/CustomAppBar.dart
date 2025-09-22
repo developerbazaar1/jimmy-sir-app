@@ -31,44 +31,49 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: AppColor.white,
       backgroundColor: AppColor.white,
       automaticallyImplyLeading: false,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      title: Column(
         children: [
-          /// Back Button + Title
+          SizedBox(height: height * 0.02),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (showBack)
+              /// Back Button + Title
+              Row(
+                children: [
+                  if (showBack)
+                    GestureDetector(
+                      onTap: onBackTap ?? () => context.pop(),
+                      child: SvgPicture.asset(
+                        AppSvg.arrowLeftIcon,
+                        height: height * 0.03,
+                        width: width * 0.02,
+                      ),
+                    ),
+                  if (showBack) SizedBox(width: width * 0.01),
+                  UrbanistApptext(
+                    textAlign: TextAlign.center,
+                    text: title,
+                    fontWeight: FontWeight.w700,
+                    color: AppColor.textBrownColor,
+                    fontSize: width * 0.055,
+                  ),
+                ],
+              ),
+
+              /// Skip Button
+              if (showSkip)
                 GestureDetector(
-                  onTap: onBackTap ?? () => context.pop(),
-                  child: SvgPicture.asset(
-                    AppSvg.arrowLeftIcon,
-                    height: height * 0.03,
-                    width: width * 0.02,
+                  onTap: onSkipTap,
+                  child: UrbanistApptext(
+                    textAlign: TextAlign.center,
+                    text: AppText.skip,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.textGreyColor3,
+                    fontSize: width * 0.038,
                   ),
                 ),
-              if (showBack) SizedBox(width: width * 0.01),
-              UrbanistApptext(
-                textAlign: TextAlign.center,
-                text: title,
-                fontWeight: FontWeight.w700,
-                color: AppColor.textBrownColor,
-                fontSize: width * 0.055,
-              ),
             ],
           ),
-
-          /// Skip Button
-          if (showSkip)
-            GestureDetector(
-              onTap: onSkipTap,
-              child: UrbanistApptext(
-                textAlign: TextAlign.center,
-                text: AppText.skip,
-                fontWeight: FontWeight.w500,
-                color: AppColor.textGreyColor3,
-                fontSize: width * 0.038,
-              ),
-            ),
         ],
       ),
     );
