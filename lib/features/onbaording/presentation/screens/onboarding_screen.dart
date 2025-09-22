@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/inter_apptext.dart';
-import 'package:jimmy_sir_app/core/components/apptext/plus_jakarta_sans.dart';
-import 'package:jimmy_sir_app/core/constants/app_colors.dart';  
+import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_images.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
+import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
-import 'package:jimmy_sir_app/features/onbaording/data/providers/onboarding_provider.dart';
+import 'package:jimmy_sir_app/features/onbaording/providers/onboarding_provider.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../../core/components/apptext/urbanist_apptext.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
@@ -27,23 +27,20 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     _OnboardingPageModel(
       color: AppColor.primaryColor,
       imagePath: AppImages.onboarding_11,
-      title: "Set Goals.\nGet Smarter Plans.",
-      description:
-          "Whether it’s weight loss, better sleep, or stress relief — choose what matters most to you.",
+      title: AppText.onboardingHeading,
+      description: AppText.onboardingDescription,
     ),
     _OnboardingPageModel(
       color: AppColor.secondaryColor,
       imagePath: AppImages.onboarding_22,
-      title: "Stay on Top of your\nProgress",
-      description:
-          "Monitor nutrition, sleep, activity, and wellness with clear insights and simple visuals.",
+      title: AppText.onboardingHeading2,
+      description: AppText.onboardingDescription2,
     ),
     _OnboardingPageModel(
       color: AppColor.ternaryColor,
       imagePath: AppImages.onboarding_33,
-      title: "Meet Your Smart Life\nAssistant",
-      description:
-          "Get quick tips, reminders, and guidance whenever you need extra support.",
+      title: AppText.onboardingHeading3,
+      description: AppText.onboardingDescription3,
     ),
   ];
 
@@ -77,7 +74,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: InterApptext(
-                  text: "Skip",
+                  text: AppText.skip,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: width * 0.04,
@@ -312,7 +309,7 @@ class _OnboardingPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                UrbanistApptext(
+              UrbanistApptext(
                 text: model.title,
                 textAlign: TextAlign.start,
                 fontSize: width * 0.08,

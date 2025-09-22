@@ -46,7 +46,6 @@ class LoginScreen extends ConsumerWidget {
                   description: AppText.welcomeBackDescription,
                 ),
 
-              
                 Form(
                   key: _formKey,
                   child: Column(

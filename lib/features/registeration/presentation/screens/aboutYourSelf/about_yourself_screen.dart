@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
+import 'package:jimmy_sir_app/core/constants/app_text.dart';
+import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 
 class AboutYourselfScreen extends ConsumerWidget {
   const AboutYourselfScreen({super.key});
@@ -32,7 +36,7 @@ class AboutYourselfScreen extends ConsumerWidget {
               children: [
                 SizedBox(height: height * 0.03),
                 UrbanistApptext(
-                  text: "Welcome ",
+                  text: AppText.welcome,
                   fontSize: width * 0.055,
                   color: AppColor.textBrownColor,
                 ),
@@ -81,19 +85,34 @@ class AboutYourselfScreen extends ConsumerWidget {
                   ),
                 ),
                 UrbanistApptext(
-                  text: "Tell us a Little Bit about Yourself",
+                  text: AppText.aboutYourself,
                   fontSize: width * 0.040,
                   fontWeight: FontWeight.w400,
                   color: AppColor.textBrownColor,
                 ),
                 SizedBox(height: height * 0.01),
                 // Field labels
-                const AboutFieldLabel(text: "Name"),
-                const AboutFieldLabel(text: "Gender"),
-                const AboutFieldLabel(text: "Age"),
-                const AboutFieldLabel(text: "Height"),
-                const AboutFieldLabel(text: "Weight"),
+                const AboutFieldLabel(text: AppText.name),
+                const AboutFieldLabel(text: AppText.gender),
+                const AboutFieldLabel(text: AppText.age),
+                const AboutFieldLabel(text: AppText.height),
+                const AboutFieldLabel(text: AppText.weight),
                 const Spacer(),
+                CustomButton(
+                  text: AppText.next,
+                  color: AppColor.primaryColor,
+                  textColor: AppColor.white,
+                  fontSize: width * 0.046,
+                  height: width * 0.13,
+                  width: width,
+                  borderRadius: 10,
+                  borderColor: AppColor.primaryColor,
+                  fontWeight: FontWeight.w600,
+                  onPressed: () {
+                    context.pushNamed(RouteNames.aboutYourselfScreen1);
+                    print("welcom brooo");
+                  },
+                ),
                 SvgPicture.asset(
                   AppSvg.aboutYourScreenImage,
                   fit: BoxFit.contain,
