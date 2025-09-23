@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
+import 'package:jimmy_sir_app/core/components/Button/custom_outline_border_button.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
+import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
+import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_aboutfield_label.dart';
 
 class AllergiesScreen extends ConsumerWidget {
@@ -81,8 +87,7 @@ class AllergiesScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-
-                SizedBox(height: height * 0.01),
+                SizedBox(height: height * 0.02),
                 const commonAboutFieldLabel(text: AppText.foodAllergies),
                 const commonAboutFieldLabel(text: AppText.foodIntolerances),
                 const commonAboutFieldLabel(text: AppText.severity),
@@ -91,6 +96,43 @@ class AllergiesScreen extends ConsumerWidget {
                 ),
                 const commonAboutFieldLabel(
                   text: AppText.environmentalAllergies,
+                ),
+
+                SizedBox(height: height * 0.02),
+                CustomButton(
+                  text: AppText.next,
+                  color: AppColor.primaryColor,
+                  textColor: AppColor.white,
+                  fontSize: width * 0.046,
+                  height: width * 0.13,
+                  width: width,
+                  borderRadius: 10,
+                  borderColor: AppColor.primaryColor,
+                  fontWeight: FontWeight.w600,
+                  onPressed: () {
+                    context.pushNamed(RouteNames.allergiesScreen1);
+                  },
+                ),
+                SizedBox(height: height * 0.01),
+                CustomOutlineBorderButton(
+                  borderRadius: 15,
+                  text: AppText.skipForNow,
+                  fontSize: width * 0.038,
+                  height: width * 0.13,
+                  width: width,
+                  borderColor: AppColor.primaryColor,
+                  fontWeight: FontWeight.w600,
+
+                  onPressed: () {
+                    // context.pushNamed(RouteNames.aboutYourselfScreen1);
+                  },
+                ),
+                const Spacer(),
+                SvgPicture.asset(
+                  AppSvg.allergiesImage,
+                  fit: BoxFit.cover,
+                  height: height * 0.4,
+                  width: width * 0.4,
                 ),
               ],
             ),

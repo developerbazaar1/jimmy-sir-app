@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen_1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
@@ -71,6 +72,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.allergiesScreen,
         name: RouteNames.allergiesScreen,
         builder: (_, __) => const AllergiesScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.allergiesScreen1,
+        name: RouteNames.allergiesScreen1,
+        builder: (_, __) => const AllergiesScreen1(),
       ),
     ],
   );

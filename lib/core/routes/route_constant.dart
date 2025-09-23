@@ -7,6 +7,7 @@ class RouteNames {
   static const lifestyle = 'lifestyle_screen';
   static const lifestyleScreen1 = 'lifestyle_screen1';
   static const allergiesScreen = 'allergies_screen';
+  static const allergiesScreen1 = 'allergies_screen1';
 
   //----------------pramod sir----------
   static const signUp = 'signUp_screen';
@@ -25,6 +26,7 @@ class RoutePaths {
   static const lifestyle = '/lifestyle_screen';
   static const lifestyleScreen1 = '/lifestyle_screen1';
   static const allergiesScreen = '/allergies_screen';
+  static const allergiesScreen1 = '/allergies_screen1';
 
   //----------------pramod sir-----------
   static const signUp = '/signUp_screen';

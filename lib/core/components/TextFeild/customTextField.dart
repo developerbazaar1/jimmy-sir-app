@@ -6,6 +6,7 @@ class CommonTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final ValueChanged<String>? onChanged;
+  final Widget? suffixIcon;
 
   const CommonTextField({
     super.key,
@@ -14,6 +15,7 @@ class CommonTextField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.onChanged,
+    this.suffixIcon,
   });
 
   @override
@@ -88,6 +90,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
             borderRadius: BorderRadius.circular(width * 0.03),
             borderSide: const BorderSide(color: Colors.green, width: 1.5),
           ),
+          suffixIcon: widget.suffixIcon,
         ),
       ),
     );

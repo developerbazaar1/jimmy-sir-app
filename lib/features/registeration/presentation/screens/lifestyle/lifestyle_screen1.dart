@@ -71,7 +71,7 @@ class LifestyleScreen1 extends ConsumerWidget {
                   children: [
                     ...List.generate(currentStepData.options.length, (index) {
                       final option = currentStepData.options[index];
-                      return CommonSelectableContainer(
+                      return commonSelectableContainer(
                         title: option.label,
                         description: option.desc,
                         isSelected:
