@@ -8,6 +8,8 @@ import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_progressIndicator.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/aboutyourself_Provider.dart';
 
 class AboutYourselfScreen1 extends ConsumerWidget {
@@ -16,15 +18,24 @@ class AboutYourselfScreen1 extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
-    final selectedGender = ref.watch(genderProvider);
+    final state = ref.watch(aboutProvider);
+    final notifier = ref.read(aboutProvider.notifier);
+
     return Scaffold(
       backgroundColor: AppColor.white,
       appBar: CustomAppBar(
         title: AppText.welcome,
-        showBack: true,
+        showBack: state.step > 0 || state.step < 1,
+        onBackTap: () {
+          if (state.step > 0) {
+            notifier.prevStep();
+          } else {
+            context.pop();
+          }
+        },
         showSkip: true,
         onSkipTap: () {
-          // Handle skip tap
+          context.pushNamed(RouteNames.lifestyle);
         },
       ),
       body: SafeArea(
@@ -33,83 +44,14 @@ class AboutYourselfScreen1 extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: height * 0.02),
+              CommonProgressIndicator(step: state.step, totalSteps: 2),
               SizedBox(height: height * 0.03),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: height * 0.01,
-                  bottom: height * 0.02,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(width * 0.06),
-                        color: AppColor.ternaryColor,
-                      ),
-                      width: width * 0.2116,
-                      height: height * 0.00858,
-                    ),
-                    SizedBox(width: width * 0.02),
 
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(width * 0.06),
-                        color: AppColor.ternaryColor.withOpacity(0.2),
-                      ),
-                      width: width * 0.2116,
-                      height: height * 0.00858,
-                    ),
-                  ],
-                ),
-              ),
-              UrbanistApptext(
-                text: AppText.whatYourName,
-                fontSize: width * 0.050,
-                fontWeight: FontWeight.w400,
-                color: AppColor.textBrownColor,
-              ),
-              SizedBox(height: height * 0.02),
-              CommonTextField(
-                hintText: "Your name",
-                controller: TextEditingController(),
-                onChanged: (value) {},
-              ),
-              SizedBox(height: height * 0.02),
-              UrbanistApptext(
-                text: AppText.pleaseSelectYourGender,
-                fontSize: width * 0.050,
-                fontWeight: FontWeight.w400,
-                color: AppColor.textBrownColor,
-              ),
-              SizedBox(height: height * 0.02),
-              // Gender options
-              SelectableContainer(
-                label: "Male",
-                isSelected: selectedGender == "Male",
-                onTap: () => ref.read(genderProvider.notifier).state = "Male",
-              ),
-              SelectableContainer(
-                label: "Female",
-                isSelected: selectedGender == "Female",
-                onTap: () => ref.read(genderProvider.notifier).state = "Female",
-              ),
-              SelectableContainer(
-                label: "Others",
-                isSelected: selectedGender == "Others",
-                onTap: () => ref.read(genderProvider.notifier).state = "Others",
-              ),
+              if (state.step == 0) _StepOne(width: width, height: height),
+              if (state.step == 1) _StepTwo(width: width, height: height),
 
-              // Show extra TextField only if "Others"
-              if (selectedGender == "Others") ...[
-                SizedBox(height: height * 0.02),
-                CommonTextField(
-                  hintText: "Please specify",
-                  controller: TextEditingController(),
-                ),
-              ],
               const Spacer(),
-              // SizedBox(height: height * 0.2),
               CustomButton(
                 text: AppText.next,
                 color: AppColor.primaryColor,
@@ -121,8 +63,11 @@ class AboutYourselfScreen1 extends ConsumerWidget {
                 borderColor: AppColor.primaryColor,
                 fontWeight: FontWeight.w600,
                 onPressed: () {
-                  context.pushNamed(RouteNames.aboutYourselfScreen2);
-                  print("welcom brooo");
+                  if (state.step < 1) {
+                    notifier.nextStep();
+                  } else {
+                    context.pushNamed(RouteNames.lifestyle);
+                  }
                 },
               ),
             ],
@@ -133,63 +78,426 @@ class AboutYourselfScreen1 extends ConsumerWidget {
   }
 }
 
-class SelectableContainer extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
+// --------------------------------- Step One ----------------------------------/
 
-  const SelectableContainer({
-    super.key,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
+class _StepOne extends ConsumerWidget {
+  final double width, height;
+  const _StepOne({required this.width, required this.height});
 
   @override
-  Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(aboutProvider);
+    final notifier = ref.read(aboutProvider.notifier);
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.only(bottom: width * 0.03),
-        padding: EdgeInsets.symmetric(
-          vertical: width * 0.04,
-          horizontal: width * 0.05,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: height * 0.01),
+        UrbanistApptext(
+          text: AppText.whatYourName,
+          fontSize: width * 0.05,
+          fontWeight: FontWeight.w500,
+          color: AppColor.textBrownColor,
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(width * 0.03),
-          border: Border.all(
-            color: isSelected ? Colors.green : Colors.white,
-            width: 1.5,
+        SizedBox(height: height * 0.03),
+        CommonTextField(
+          hintText: "Your name",
+          controller: TextEditingController(),
+          keyboardType: TextInputType.name,
+        ),
+
+        SizedBox(height: height * 0.03),
+        UrbanistApptext(
+          text: AppText.pleaseSelectYourGender,
+          fontSize: width * 0.05,
+          fontWeight: FontWeight.w500,
+          color: AppColor.textBrownColor,
+        ),
+        SizedBox(height: height * 0.02),
+
+        CommonSelectableContainer(
+          title: AppText.male,
+          isSelected: state.gender == "Male",
+          onTap: () => notifier.updateGender("Male"),
+        ),
+        CommonSelectableContainer(
+          title: AppText.female,
+          isSelected: state.gender == "Female",
+          onTap: () => notifier.updateGender("Female"),
+        ),
+        CommonSelectableContainer(
+          title: AppText.others,
+          isSelected: state.gender == "Others",
+          onTap: () => notifier.updateGender("Others"),
+        ),
+
+        if (state.gender == "Others") ...[
+          SizedBox(height: height * 0.02),
+          CommonTextField(
+            hintText: AppText.pleaseSpecify,
+            controller: TextEditingController(),
           ),
-          color: Colors.white,
-          boxShadow: !isSelected
-              ? [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ]
-              : [],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            UrbanistApptext(
-              text: label,
-              fontSize: width * 0.04,
-              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
-              color: isSelected ? Colors.brown : Colors.black,
-            ),
-            Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: isSelected ? Colors.green : Colors.grey,
-            ),
-          ],
-        ),
-      ),
+        ],
+      ],
     );
   }
 }
+
+// --------------------------------- Step Two ----------------------------------/
+
+class _StepTwo extends ConsumerWidget {
+  final double width, height;
+  const _StepTwo({required this.width, required this.height});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(aboutProvider);
+    final notifier = ref.read(aboutProvider.notifier);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        UrbanistApptext(
+          text: AppText.howOldAreYou,
+          fontSize: width * 0.05,
+          fontWeight: FontWeight.w500,
+          color: AppColor.textBrownColor,
+        ),
+        SizedBox(height: height * 0.01),
+        CommonTextField(
+          hintText: "Your age",
+          controller: TextEditingController(),
+        ),
+
+        SizedBox(height: height * 0.03),
+        UrbanistApptext(
+          text: AppText.howTallAreYou,
+          fontSize: width * 0.05,
+          fontWeight: FontWeight.w500,
+          color: AppColor.textBrownColor,
+        ),
+        SizedBox(height: height * 0.02),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: [
+            Expanded(
+              child: CommonTextField(
+                hintText: AppText.height,
+                controller: TextEditingController(),
+              ),
+            ),
+            SizedBox(width: width * 0.02),
+            _AttachedDropdown(
+              value: state.heightUnit,
+              items: const ["cm", "ft/in"],
+              onChanged: (value) => notifier.updateHeightUnit(value),
+            ),
+          ],
+        ),
+
+        SizedBox(height: height * 0.03),
+        UrbanistApptext(
+          text: AppText.whatsYourWeight,
+          fontSize: width * 0.05,
+          fontWeight: FontWeight.w400,
+          color: AppColor.textBrownColor,
+        ),
+        SizedBox(height: height * 0.02),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: CommonTextField(
+                hintText: AppText.weight,
+                controller: TextEditingController(),
+              ),
+            ),
+            SizedBox(width: width * 0.02),
+            _AttachedDropdown(
+              value: state.weightUnit,
+              items: const ["kg", "lbs"],
+              onChanged: (value) => notifier.updateWeightUnit(value),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+// --------------------------------- Attached Dropdown ------------------------/
+
+class _AttachedDropdown extends StatefulWidget {
+  final String value;
+  final List<String> items;
+  final ValueChanged<String> onChanged;
+
+  const _AttachedDropdown({
+    required this.value,
+    required this.items,
+    required this.onChanged,
+  });
+
+  @override
+  State<_AttachedDropdown> createState() => _AttachedDropdownState();
+}
+
+class _AttachedDropdownState extends State<_AttachedDropdown> {
+  bool expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Main container
+        GestureDetector(
+          onTap: () => setState(() => expanded = !expanded),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: width * 0.03,
+              vertical: height * 0.018,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                UrbanistApptext(
+                  text: widget.value,
+                  fontSize: width * 0.04,
+                  fontWeight: FontWeight.w600,
+                  color: AppColor.textBrownColor,
+                ),
+                Icon(
+                  expanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: Colors.brown,
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: height * 0.01),
+
+        // Expanded list
+        if (expanded)
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              children: widget.items.map((item) {
+                return InkWell(
+                  onTap: () {
+                    widget.onChanged(item);
+                    setState(() => expanded = false);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: height * 0.01,
+                      horizontal: width * 0.02,
+                    ),
+                    child: UrbanistApptext(
+                      text: item,
+                      fontSize: width * 0.04,
+                      fontWeight: FontWeight.w600,
+                      color: AppColor.textBrownColor,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------wrough work--------------------------
+
+
+
+
+
+// final heightExpandedProvider = StateProvider<bool>((ref) => false);
+// final weightExpandedProvider = StateProvider<bool>((ref) => false);
+
+// class AttachedDropdown extends ConsumerWidget {
+//   final StateProvider<String> valueProvider;
+//   final StateProvider<bool> expandedProvider;
+//   final List<String> items;
+
+//   const AttachedDropdown({
+//     super.key,
+//     required this.valueProvider,
+//     required this.expandedProvider,
+//     required this.items,
+//   });
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final selectedValue = ref.watch(valueProvider);
+//     final expanded = ref.watch(expandedProvider);
+//     final height = MediaQuery.sizeOf(context).height;
+//     final width = MediaQuery.sizeOf(context).width;
+
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         // Main container
+//         GestureDetector(
+//           onTap: () => ref.read(expandedProvider.notifier).state = !expanded,
+//           child: Container(
+//             padding: EdgeInsets.symmetric(
+//               horizontal: width * 0.03,
+//               vertical: height * 0.018,
+//             ),
+//             decoration: BoxDecoration(
+//               color: Colors.white,
+//               borderRadius: BorderRadius.circular(12),
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.black.withOpacity(0.08),
+//                   blurRadius: 6,
+//                   offset: const Offset(0, 3),
+//                 ),
+//               ],
+//             ),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 UrbanistApptext(
+//                   text: selectedValue,
+//                   fontSize: width * 0.04,
+//                   fontWeight: FontWeight.w600,
+//                   color: AppColor.textBrownColor,
+//                 ),
+//                 Icon(
+//                   expanded
+//                       ? Icons.keyboard_arrow_up
+//                       : Icons.keyboard_arrow_down,
+//                   color: Colors.brown,
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//         SizedBox(height: height * 0.01),
+
+//         // Expanded list
+//         if (expanded)
+//           Container(
+//             padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+//             decoration: BoxDecoration(
+//               color: Colors.white,
+//               borderRadius: BorderRadius.circular(12),
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.black.withOpacity(0.08),
+//                   blurRadius: 6,
+//                   offset: const Offset(0, 3),
+//                 ),
+//               ],
+//             ),
+//             child: Column(
+//               children: items.map((item) {
+//                 return InkWell(
+//                   onTap: () {
+//                     ref.read(valueProvider.notifier).state = item;
+//                     ref.read(expandedProvider.notifier).state = false;
+//                   },
+//                   child: Padding(
+//                     padding: EdgeInsets.symmetric(
+//                       vertical: height * 0.01,
+//                       horizontal: width * 0.02,
+//                     ),
+//                     child: UrbanistApptext(
+//                       text: item,
+//                       fontSize: width * 0.04,
+//                       fontWeight: FontWeight.w600,
+//                       color: AppColor.textBrownColor,
+//                     ),
+//                   ),
+//                 );
+//               }).toList(),
+//             ),
+//           ),
+//       ],
+//     );
+//   }
+// }

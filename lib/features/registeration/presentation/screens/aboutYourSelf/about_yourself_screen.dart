@@ -8,6 +8,7 @@ import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_aboutfield_label.dart';
 
 class AboutYourselfScreen extends ConsumerWidget {
   const AboutYourselfScreen({super.key});
@@ -34,7 +35,7 @@ class AboutYourselfScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: height * 0.03),
+                SizedBox(height: height * 0.02),
                 UrbanistApptext(
                   text: AppText.welcome,
                   fontSize: width * 0.055,
@@ -91,13 +92,14 @@ class AboutYourselfScreen extends ConsumerWidget {
                   color: AppColor.textBrownColor,
                 ),
                 SizedBox(height: height * 0.01),
-                // Field labels
-                const AboutFieldLabel(text: AppText.name),
-                const AboutFieldLabel(text: AppText.gender),
-                const AboutFieldLabel(text: AppText.age),
-                const AboutFieldLabel(text: AppText.height),
-                const AboutFieldLabel(text: AppText.weight),
-                const Spacer(),
+
+                const commonAboutFieldLabel(text: AppText.name),
+                const commonAboutFieldLabel(text: AppText.gender),
+                const commonAboutFieldLabel(text: AppText.age),
+                const commonAboutFieldLabel(text: AppText.height),
+                const commonAboutFieldLabel(text: AppText.weight),
+                // const Spacer(),
+                SizedBox(height: height * 0.02),
                 CustomButton(
                   text: AppText.next,
                   color: AppColor.primaryColor,
@@ -113,6 +115,7 @@ class AboutYourselfScreen extends ConsumerWidget {
                     print("welcom brooo");
                   },
                 ),
+                const Spacer(),
                 SvgPicture.asset(
                   AppSvg.aboutYourScreenImage,
                   fit: BoxFit.contain,
@@ -123,26 +126,6 @@ class AboutYourselfScreen extends ConsumerWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class AboutFieldLabel extends StatelessWidget {
-  final String text;
-  const AboutFieldLabel({super.key, required this.text});
-  @override
-  Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.sizeOf(context).height * 0.01,
-      ),
-      child: UrbanistApptext(
-        text: text,
-        fontSize: width * 0.040,
-        fontWeight: FontWeight.w400,
-        color: AppColor.textBrownColor,
       ),
     );
   }

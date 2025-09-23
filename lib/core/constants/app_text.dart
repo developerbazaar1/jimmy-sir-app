@@ -23,7 +23,28 @@ class AppText {
   static const String whatYourName = 'What’s your name ?';
   static const String pleaseSelectYourGender =
       'Please select your gender to determine your daily calorie intake.';
-
+  static const String male = 'Male';
+  static const String female = 'Female';
+  static const String others = 'Others';
+  static const String pleaseSpecify = 'Please specify';
+  static const String howOldAreYou = 'How old are you?';
+  static const String howTallAreYou = 'How tall are you?';
+  static const String whatsYourWeight = 'What’s your weight?';
+  static const String currentLifeStyle = 'Current LifeStyle';
+  static const String dailyWorkStyle = 'Daily Work Style';
+  static const String dailyRoutine = 'Daily Routine';
+  static const String exerciseFrequency = 'Exercise Frequency';
+  static const String dietaryStyle = 'Dietary Style';
+  static const String stressLevel = 'Stress Level';
+  static const String skipForNow = 'Skip for now, Complete later';
+  static const String allergiesAndRestrictions = 'Allergies & Restrictions';
+  static const String foodAllergies = 'Food Allergies';
+  static const String foodIntolerances =
+      'Food Intolerances (Digestive Discomfort)';
+  static const String severity = 'Severity (Severe / Moderate / Mild)';
+  static const String medicationAndSupplementAllergies =
+      'Medication & Supplement Allergies';
+  static const String environmentalAllergies = 'Environmental Allergies';
   //----------pramod sir-----------
   static const String welcomeBackDescription =
       'We Exited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.';

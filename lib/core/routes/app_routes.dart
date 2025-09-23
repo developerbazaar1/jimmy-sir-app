@@ -1,12 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen.dart';
-
-import 'package:jimmy_sir_app/features/auth/login/screens/login_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen_1.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen_2.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
 import '../../features/auth/changePassword/screen/change_password_screen.dart';
 
 import 'route_import.dart';
@@ -36,11 +34,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.aboutYourselfScreen1,
         builder: (_, __) => const AboutYourselfScreen1(),
       ),
-      GoRoute(
-        path: RoutePaths.aboutYourselfScreen2,
-        name: RouteNames.aboutYourselfScreen2,
-        builder: (_, __) => const AboutYourselfScreen2(),
-      ),
+
       GoRoute(
         path: RoutePaths.lifestyle,
         name: RouteNames.lifestyle,
@@ -67,6 +61,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.changePassword,
         name: RouteNames.changePassword,
         builder: (_, __) => ChangePasswordScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.lifestyleScreen1,
+        name: RouteNames.lifestyleScreen1,
+        builder: (_, __) => const LifestyleScreen1(),
+      ),
+      GoRoute(
+        path: RoutePaths.allergiesScreen,
+        name: RouteNames.allergiesScreen,
+        builder: (_, __) => const AllergiesScreen(),
       ),
     ],
   );
