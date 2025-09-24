@@ -11,6 +11,8 @@ class SplashScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     // When splash completes, navigate.
     ref.listen(splashReadyProvider, (prev, next) {
       next.whenData((_) {
@@ -18,15 +20,15 @@ class SplashScreen extends ConsumerWidget {
       });
     });
     return Scaffold(
-      backgroundColor: AppColor.primaryColor,
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Center(
           child: Lottie.asset(
             'assets/lottie/splash_animation.json',
-            width: 200, // adjust size
-            height: 200,
+            width: width * 0.7, // adjust size
+            height: height * 0.6,
             fit: BoxFit.contain,
-            repeat: true, // set false if you want one-time play
+            // repeat: true, // set false if you want one-time play
           ),
         ),
 

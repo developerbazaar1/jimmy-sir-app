@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 
-import '../../constants/app_images.dart';
 
 class AppTextField extends StatefulWidget {
   final String? prefixIconImg;
@@ -111,6 +110,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: TextFormField(
+                    
                     key: _fieldKey,
                     onTap: widget.onTap,
                     focusNode: widget.focusNode,

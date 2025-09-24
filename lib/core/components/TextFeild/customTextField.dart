@@ -7,6 +7,9 @@ class CommonTextField extends StatefulWidget {
   final bool obscureText;
   final ValueChanged<String>? onChanged;
   final Widget? suffixIcon;
+  final int? maxLength;
+  final bool isNotesField;
+  final int? maxLines;
 
   const CommonTextField({
     super.key,
@@ -16,6 +19,9 @@ class CommonTextField extends StatefulWidget {
     this.obscureText = false,
     this.onChanged,
     this.suffixIcon,
+    this.maxLength,
+    this.isNotesField = false,
+    this.maxLines,
   });
 
   @override
@@ -60,6 +66,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
             : [],
       ),
       child: TextField(
+        maxLines: widget.isNotesField ? null : widget.maxLines ?? 1,
+        maxLength: widget.maxLength,
         focusNode: _focusNode,
         controller: widget.controller,
         keyboardType: widget.keyboardType,

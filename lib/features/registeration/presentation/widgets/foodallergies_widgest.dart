@@ -1,105 +1,638 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/components/TextFeild/customTextField.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/allergies_Provider.dart';
 
 class FoodAllergyWidget extends ConsumerWidget {
   FoodAllergyWidget({Key? key}) : super(key: key);
   final TextEditingController _newAllergyController = TextEditingController();
+  final TextEditingController _antibioticsController = TextEditingController();
+  final TextEditingController _painRelieversController =
+      TextEditingController();
+  final TextEditingController _vitaminsController = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allergies = ref.watch(allergyProvider);
-    final predefinedAllergies = allergies['predefined'] as List<String>;
-    final userAllergies = allergies['user'] as List<String>;
-    final selectedAllergies = allergies['selected'] as Set<String>;
+    final step = allergies['step'] as int;
+    final section = (allergies['sections'] as List)[step];
+
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: height * 0.02),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: predefinedAllergies
-              .map(
-                (allergy) => _AllergyChip(
-                  label: allergy,
-                  isSelected: selectedAllergies.contains(allergy),
-                  onTap: () => ref
-                      .read(allergyProvider.notifier)
-                      .toggleSelection(allergy),
-                ),
-              )
-              .toList(),
-        ),
+    Widget sectionWidget;
 
-        SizedBox(height: height * 0.02),
-
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: userAllergies
-              .map(
-                (allergy) => _AllergyChip(
-                  label: allergy,
-                  isSelected: selectedAllergies.contains(allergy),
-                  onTap: () => ref
-                      .read(allergyProvider.notifier)
-                      .toggleSelection(allergy),
-                ),
-              )
-              .toList(),
-        ),
-
-        SizedBox(height: height * 0.02),
-        UrbanistApptext(
-          text: AppText.others,
-          fontSize: width * 0.05,
-          color: AppColor.textBrownColor,
-          fontWeight: FontWeight.w600,
-        ),
-        SizedBox(height: height * 0.02),
-
-        // --- Add new allergy ---
-        CommonTextField(
-          hintText: "Mention your allergy...",
-          controller: _newAllergyController,
-          suffixIcon: GestureDetector(
-            onTap: () {
-              final newAllergy = _newAllergyController.text.trim();
-              if (newAllergy.isNotEmpty) {
-                ref.read(allergyProvider.notifier).addAllergy(newAllergy);
-                _newAllergyController.clear();
-              }
-            }, 
-            child: Icon(Icons.add, color: Colors.grey),
+    // ✅ First: Medication & Supplement Allergies
+    if (section is Map<String, dynamic> &&
+        section['title'] == 'Medication & Supplement Allergies') {
+      sectionWidget = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: height * 0.04),
+          UrbanistApptext(
+            text: 'Antibiotics (Penicillin, Sulfa Drugs etc.,)',
+            fontSize: width * 0.045,
+            color: AppColor.textBrownColor,
+            fontWeight: FontWeight.w600,
           ),
-        ),
-        SizedBox(height: height * 0.07),
-        CustomButton(
-          text: AppText.next,
-          color: AppColor.primaryColor,
-          textColor: AppColor.white,
-          fontSize: width * 0.046,
-          height: width * 0.13,
-          width: width,
-          borderRadius: 10,
-          borderColor: AppColor.primaryColor,
-          fontWeight: FontWeight.w600,
-          onPressed: () {
-            // context.pushNamed(RouteNames.allergiesScreen1);
-          },
-        ),
-        SizedBox(height: height * 0.01),
-      ],
-    );
+          SizedBox(height: height * 0.02),
+          CommonTextField(
+            hintText: "Mention antibiotics...",
+            controller: _antibioticsController,
+            keyboardType: TextInputType.name,
+            maxLines: 2,
+          ),
+          SizedBox(height: height * 0.02),
+          UrbanistApptext(
+            text: 'Pain relievers (NSAIDs: ibuprofen, aspirin)',
+            fontSize: width * 0.045,
+            color: AppColor.textBrownColor,
+            fontWeight: FontWeight.w600,
+          ),
+          SizedBox(height: height * 0.02),
+          CommonTextField(
+            hintText: "Mention pain relievers...",
+            controller: _painRelieversController,
+            keyboardType: TextInputType.name,
+            maxLines: 2,
+          ),
+          SizedBox(height: height * 0.02),
+          UrbanistApptext(
+            text: 'Vitamins / Minerals (e.g., Iron, Vitamin B12)',
+            fontSize: width * 0.045,
+            color: AppColor.textBrownColor,
+            fontWeight: FontWeight.w600,
+          ),
+          SizedBox(height: height * 0.02),
+          CommonTextField(
+            hintText: "Mention vitamins/minerals...",
+            controller: _vitaminsController,
+            keyboardType: TextInputType.name,
+            maxLines: 2,
+          ),
+        ],
+      );
+    }
+    // ✅ Second: Severity Step
+    else if (section is FoodAllergyStep) {
+      final selected = Set<String>.from(
+        allergies['severitySelection'] ?? <String>{},
+      );
+
+      sectionWidget = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: section.options
+            .map(
+              (option) => Padding(
+                padding: EdgeInsets.only(bottom: height * 0.015),
+                child: commonSelectableContainer(
+                  title: option.label,
+                  description: option.desc,
+                  isSelected: selected.contains(option.label),
+                  onTap: () => ref
+                      .read(allergyProvider.notifier)
+                      .toggleSelection(option.label),
+                ),
+              ),
+            )
+            .toList(),
+      );
+    }
+    // ✅ Third: Generic Allergy Step (Food, Environmental, etc.)
+    else if (section is Map<String, dynamic>) {
+      final predefinedAllergies =
+          (section['predefined'] as List<String>?) ?? <String>[];
+      final userAllergies = (section['user'] as List<String>?) ?? <String>[];
+      final selectedAllergies =
+          (section['selected'] as Set<String>?) ?? <String>{};
+
+      sectionWidget = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: height * 0.02),
+         
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: predefinedAllergies
+                .map(
+                  (allergy) => _AllergyChip(
+                    label: allergy,
+                    isSelected: selectedAllergies.contains(allergy),
+                    onTap: () => ref
+                        .read(allergyProvider.notifier)
+                        .toggleSelection(allergy),
+                  ),
+                )
+                .toList(),
+          ),
+          SizedBox(height: height * 0.02),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: userAllergies
+                .map(
+                  (allergy) => _AllergyChip(
+                    label: allergy,
+                    isSelected: selectedAllergies.contains(allergy),
+                    onTap: () => ref
+                        .read(allergyProvider.notifier)
+                        .toggleSelection(allergy),
+                  ),
+                )
+                .toList(),
+          ),
+          SizedBox(height: height * 0.02),
+          UrbanistApptext(
+            text: AppText.others,
+            fontSize: width * 0.045,
+            color: AppColor.textBrownColor,
+            fontWeight: FontWeight.w600,
+          ),
+          SizedBox(height: height * 0.01),
+          CommonTextField(
+            hintText: "Mention your allergy...",
+            controller: _newAllergyController,
+            suffixIcon: GestureDetector(
+              onTap: () {
+                final newAllergy = _newAllergyController.text.trim();
+                if (newAllergy.isNotEmpty) {
+                  ref.read(allergyProvider.notifier).addAllergy(newAllergy);
+                  _newAllergyController.clear();
+                }
+              },
+              child: Icon(Icons.add, color: Colors.grey),
+            ),
+          ),
+        ],
+      );
+    } else {
+      sectionWidget = const Text("Unknown section");
+    }
+
+    return sectionWidget;
   }
+
+  // @override
+  // Widget build(BuildContext context, WidgetRef ref) {
+  //   final allergies = ref.watch(allergyProvider);
+  //   final step = allergies['step'] as int;
+  //   final section = (allergies['sections'] as List)[step];
+
+  //   final height = MediaQuery.sizeOf(context).height;
+  //   final width = MediaQuery.sizeOf(context).width;
+
+  //   if (section is Map<String, dynamic> &&
+  //       section['title'] == 'Medication & Supplement Allergies') {
+  //     return Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         SizedBox(height: height * 0.04),
+
+  //         UrbanistApptext(
+  //           text: 'Antibiotics (Penicillin, Sulfa Drugs etc.,)',
+  //           fontSize: width * 0.045,
+  //           color: AppColor.textBrownColor,
+  //           fontWeight: FontWeight.w600,
+  //         ),
+  //         SizedBox(height: height * 0.02),
+  //         CommonTextField(
+  //           hintText: "Mention antibiotics...",
+  //           controller: _antibioticsController,
+  //           keyboardType: TextInputType.name,
+  //           maxLines: 2,
+  //         ),
+
+  //         SizedBox(height: height * 0.02),
+  //         UrbanistApptext(
+  //           text: 'Pain relievers (NSAIDs: ibuprofen, aspirin)',
+  //           fontSize: width * 0.045,
+  //           color: AppColor.textBrownColor,
+  //           fontWeight: FontWeight.w600,
+  //         ),
+  //         SizedBox(height: height * 0.02),
+  //         CommonTextField(
+  //           hintText: "Mention pain relievers...",
+  //           controller: _painRelieversController,
+  //           keyboardType: TextInputType.name,
+  //           maxLines: 2,
+  //         ),
+
+  //         SizedBox(height: height * 0.02),
+  //         UrbanistApptext(
+  //           text: 'Vitamins / Minerals (rare cases: e.g., Iron, Vitamin B12)',
+  //           fontSize: width * 0.045,
+  //           color: AppColor.textBrownColor,
+  //           fontWeight: FontWeight.w600,
+  //         ),
+  //         SizedBox(height: height * 0.02),
+  //         CommonTextField(
+  //           hintText: "Mention vitamins/minerals...",
+  //           controller: _vitaminsController,
+  //           keyboardType: TextInputType.name,
+  //           maxLines: 2,
+  //         ),
+
+  //         SizedBox(height: height * 0.02),
+  //       ],
+  //     );
+  //   } else if (section is FoodAllergyStep) {
+  //     final selected = Set<String>.from(
+  //       allergies['severitySelection'] ?? <String>{},
+  //     );
+
+  //     return Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         ...section.options.map(
+  //           (option) => Padding(
+  //             padding: EdgeInsets.only(bottom: height * 0.015),
+  //             child: commonSelectableContainer(
+  //               title: option.label,
+  //               description: option.desc,
+  //               isSelected: selected.contains(option.label),
+  //               onTap: () => ref
+  //                   .read(allergyProvider.notifier)
+  //                   .toggleSelection(option.label),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     );
+  //   } else if (section is Map<String, dynamic>) {
+  //     final predefinedAllergies =
+  //         (section['predefined'] as List<String>?) ?? <String>[];
+  //     final userAllergies = (section['user'] as List<String>?) ?? <String>[];
+  //     final selectedAllergies =
+  //         (section['selected'] as Set<String>?) ?? <String>{};
+
+  //     return Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         SizedBox(height: height * 0.02),
+  //         Wrap(
+  //           spacing: 8,
+  //           runSpacing: 8,
+  //           children: predefinedAllergies
+  //               .map(
+  //                 (allergy) => _AllergyChip(
+  //                   label: allergy,
+  //                   isSelected: selectedAllergies.contains(allergy),
+  //                   onTap: () => ref
+  //                       .read(allergyProvider.notifier)
+  //                       .toggleSelection(allergy),
+  //                 ),
+  //               )
+  //               .toList(),
+  //         ),
+  //         SizedBox(height: height * 0.02),
+  //         Wrap(
+  //           spacing: 8,
+  //           runSpacing: 8,
+  //           children: userAllergies
+  //               .map(
+  //                 (allergy) => _AllergyChip(
+  //                   label: allergy,
+  //                   isSelected: selectedAllergies.contains(allergy),
+  //                   onTap: () => ref
+  //                       .read(allergyProvider.notifier)
+  //                       .toggleSelection(allergy),
+  //                 ),
+  //               )
+  //               .toList(),
+  //         ),
+  //         SizedBox(height: height * 0.02),
+  //         UrbanistApptext(
+  //           text: AppText.others,
+  //           fontSize: width * 0.05,
+  //           color: AppColor.textBrownColor,
+  //           fontWeight: FontWeight.w600,
+  //         ),
+  //         SizedBox(height: height * 0.02),
+  //         CommonTextField(
+  //           hintText: "Mention your allergy...",
+  //           controller: _newAllergyController,
+  //           suffixIcon: GestureDetector(
+  //             onTap: () {
+  //               final newAllergy = _newAllergyController.text.trim();
+  //               if (newAllergy.isNotEmpty) {
+  //                 ref.read(allergyProvider.notifier).addAllergy(newAllergy);
+  //                 _newAllergyController.clear();
+  //               }
+  //             },
+  //             child: Icon(Icons.add, color: Colors.grey),
+  //           ),
+  //         ),
+  //         SizedBox(height: height * 0.01),
+  //       ],
+  //     );
+  //   }
+
+  //   return Container(
+  //     height: height * 0.1,
+  //     color: Colors.red,
+  //     child: const Center(child: Text('Unknown section type')),
+  //   );
+  // }
+
+  // @override
+  // Widget build(BuildContext context, WidgetRef ref) {
+  //   final allergies = ref.watch(allergyProvider);
+  //   final step = allergies['step'] as int;
+  //   final section = (allergies['sections'] as List)[step];
+
+  //   final height = MediaQuery.sizeOf(context).height;
+  //   final width = MediaQuery.sizeOf(context).width;
+  //   if (section is Map<String, dynamic>) {
+  //     final predefinedAllergies =
+  //         (section['predefined'] as List<String>?) ?? <String>[];
+  //     final userAllergies = (section['user'] as List<String>?) ?? <String>[];
+  //     final selectedAllergies =
+  //         (section['selected'] as Set<String>?) ?? <String>{};
+
+  //     return Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         SizedBox(height: height * 0.02),
+  //         Wrap(
+  //           spacing: 8,
+  //           runSpacing: 8,
+  //           children: predefinedAllergies
+  //               .map(
+  //                 (allergy) => _AllergyChip(
+  //                   label: allergy,
+  //                   isSelected: selectedAllergies.contains(allergy),
+  //                   onTap: () => ref
+  //                       .read(allergyProvider.notifier)
+  //                       .toggleSelection(allergy),
+  //                 ),
+  //               )
+  //               .toList(),
+  //         ),
+
+  //         SizedBox(height: height * 0.02),
+
+  //         Wrap(
+  //           spacing: 8,
+  //           runSpacing: 8,
+  //           children: userAllergies
+  //               .map(
+  //                 (allergy) => _AllergyChip(
+  //                   label: allergy,
+  //                   isSelected: selectedAllergies.contains(allergy),
+  //                   onTap: () => ref
+  //                       .read(allergyProvider.notifier)
+  //                       .toggleSelection(allergy),
+  //                 ),
+  //               )
+  //               .toList(),
+  //         ),
+
+  //         SizedBox(height: height * 0.02),
+  //         UrbanistApptext(
+  //           text: AppText.others,
+  //           fontSize: width * 0.05,
+  //           color: AppColor.textBrownColor,
+  //           fontWeight: FontWeight.w600,
+  //         ),
+  //         SizedBox(height: height * 0.02),
+
+  //         // --- Add new allergy ---
+  //         CommonTextField(
+  //           hintText: "Mention your allergy...",
+  //           controller: _newAllergyController,
+  //           suffixIcon: GestureDetector(
+  //             onTap: () {
+  //               final newAllergy = _newAllergyController.text.trim();
+  //               if (newAllergy.isNotEmpty) {
+  //                 ref.read(allergyProvider.notifier).addAllergy(newAllergy);
+  //                 _newAllergyController.clear();
+  //               }
+  //             },
+  //             child: Icon(Icons.add, color: Colors.grey),
+  //           ),
+  //         ),
+
+  //         SizedBox(height: height * 0.01),
+  //       ],
+  //     );
+  //   } else if (section is FoodAllergyStep) {
+  //     final selected = Set<String>.from(
+  //       allergies['severitySelection'] ?? <String>{},
+  //     );
+
+  //     return Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         ...section.options.map(
+  //           (option) => Padding(
+  //             padding: EdgeInsets.only(bottom: height * 0.015),
+  //             child: commonSelectableContainer(
+  //               title: option.label,
+  //               description: option.desc,
+  //               isSelected: selected.contains(option.label),
+  //               onTap: () => ref
+  //                   .read(allergyProvider.notifier)
+  //                   .toggleSelection(option.label),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     );
+  //   }
+  //   // Medication & Supplement Allergies
+  //   else if (section is Map<String, dynamic> &&
+  //       section['title'] == 'Medication & Supplement Allergies') {
+  //     return Container(
+  //       color: Colors.red,
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           SizedBox(height: height * 0.02),
+
+  //           UrbanistApptext(
+  //             text: 'Antibiotics (Penicillin, Sulfa Drugs etc.,)',
+  //             fontSize: width * 0.05,
+  //             color: AppColor.textBrownColor,
+  //             fontWeight: FontWeight.w600,
+  //           ),
+  //           SizedBox(height: height * 0.02),
+  //           CommonTextField(
+  //             hintText: "Mention antibiotics...",
+  //             controller: _antibioticsController,
+  //             keyboardType: TextInputType.name,
+  //           ),
+
+  //           SizedBox(height: height * 0.02),
+  //           UrbanistApptext(
+  //             text: 'Pain relievers (NSAIDs: ibuprofen, aspirin)',
+  //             fontSize: width * 0.05,
+  //             color: AppColor.textBrownColor,
+  //             fontWeight: FontWeight.w600,
+  //           ),
+  //           SizedBox(height: height * 0.02),
+  //           CommonTextField(
+  //             hintText: "Mention pain relievers...",
+  //             controller: _painRelieversController,
+  //             keyboardType: TextInputType.name,
+  //           ),
+
+  //           SizedBox(height: height * 0.02),
+  //           UrbanistApptext(
+  //             text: 'Vitamins / Minerals (rare cases: e.g., Iron, Vitamin B12)',
+  //             fontSize: width * 0.05,
+  //             color: AppColor.textBrownColor,
+  //             fontWeight: FontWeight.w600,
+  //           ),
+  //           SizedBox(height: height * 0.02),
+  //           CommonTextField(
+  //             hintText: "Mention vitamins/minerals...",
+  //             controller: _vitaminsController,
+  //             keyboardType: TextInputType.name,
+  //           ),
+
+  //           SizedBox(height: height * 0.02),
+  //         ],
+  //       ),
+  //     );
+  //   }
+
+  //   // else if (section is Map<String, dynamic> &&
+  //   //     section.containsKey('medications')) {
+  //   //   return Column(
+  //   //     crossAxisAlignment: CrossAxisAlignment.start,
+  //   //     children: [
+  //   //       SizedBox(height: height * 0.02),
+  //   //       ...section['medications'].keys.map((key) {
+  //   //         final controller = key == 'Antibiotics'
+  //   //             ? _antibioticsController
+  //   //             : key == 'Pain relievers'
+  //   //             ? _painRelieversController
+  //   //             : _vitaminsController;
+
+  //   //         return Column(
+  //   //           crossAxisAlignment: CrossAxisAlignment.start,
+  //   //           children: [
+  //   //             // UrbanistApptext(
+  //   //             //   text: key,
+  //   //             //   fontSize: width * 0.05,
+  //   //             //   color: AppColor.textBrownColor,
+  //   //             //   fontWeight: FontWeight.w600,
+  //   //             // ),
+  //   //             // SizedBox(height: height * 0.02),
+  //   //             // CommonTextField(
+  //   //             //   hintText: "Mention $key...",
+  //   //             //   controller: controller,
+  //   //             //   onChanged: (value) {
+  //   //             //     if (value.isNotEmpty) {
+  //   //             //       ref
+  //   //             //           .read(allergyProvider.notifier)
+  //   //             //           .addMedication(key, value);
+  //   //             //       controller.clear();
+  //   //             //     }
+  //   //             //   },
+  //   //             // ),
+  //   //             //----new
+  //   //             SizedBox(height: height * 0.02),
+  //   //             UrbanistApptext(
+  //   //               text: 'Antibiotics (Penicillin, Sulfa Drugs etc.,)',
+  //   //               fontSize: width * 0.05,
+  //   //               color: AppColor.textBrownColor,
+  //   //               fontWeight: FontWeight.w600,
+  //   //             ),
+  //   //             SizedBox(height: height * 0.02),
+  //   //             CommonTextField(
+  //   //               hintText: "Mention antibiotics...",
+  //   //               controller: TextEditingController(),
+  //   //               keyboardType: TextInputType.name,
+  //   //             ),
+  //   //             SizedBox(height: height * 0.02),
+  //   //             UrbanistApptext(
+  //   //               text: 'Pain relievers (NSAIDs: ibuprofen, aspirin)',
+  //   //               fontSize: width * 0.05,
+  //   //               color: AppColor.textBrownColor,
+  //   //               fontWeight: FontWeight.w600,
+  //   //             ),
+  //   //             SizedBox(height: height * 0.02),
+  //   //             CommonTextField(
+  //   //               hintText: "Mention pain relievers...",
+  //   //               controller: TextEditingController(),
+  //   //               keyboardType: TextInputType.name,
+  //   //             ),
+  //   //             SizedBox(height: height * 0.02),
+  //   //             UrbanistApptext(
+  //   //               text:
+  //   //                   'Vitamins / Minerals (rare cases: e.g., Iron, Vitamin B12)',
+  //   //               fontSize: width * 0.05,
+  //   //               color: AppColor.textBrownColor,
+  //   //               fontWeight: FontWeight.w600,
+  //   //             ),
+  //   //             SizedBox(height: height * 0.02),
+  //   //             CommonTextField(
+  //   //               hintText: "Mention vitamins/minerals...",
+  //   //               controller: TextEditingController(),
+  //   //               keyboardType: TextInputType.name,
+  //   //             ),
+  //   //             SizedBox(height: height * 0.02),
+  //   //           ],
+  //   //         );
+  //   //       }),
+  //   //     ],
+  //   //   );
+  //   // }
+
+  //   return Container(
+  //     height: height * 0.1,
+  //     color: Colors.red,
+  //     child: const Center(child: Text('something working')),
+  //   );
+  //   // return Column(
+  //   //   children: [
+  //   //     SizedBox(height: height * 0.02),
+  //   //     UrbanistApptext(
+  //   //       text: 'Antibiotics (Penicillin, Sulfa Drugs etc.,)',
+  //   //       fontSize: width * 0.05,
+  //   //       color: AppColor.textBrownColor,
+  //   //       fontWeight: FontWeight.w600,
+  //   //     ),
+  //   //     SizedBox(height: height * 0.02),
+  //   //     CommonTextField(
+  //   //       hintText: "Mention antibiotics...",
+  //   //       controller: TextEditingController(),
+  //   //       keyboardType: TextInputType.name,
+  //   //     ),
+  //   //     SizedBox(height: height * 0.02),
+  //   //     UrbanistApptext(
+  //   //       text: 'Pain relievers (NSAIDs: ibuprofen, aspirin)',
+  //   //       fontSize: width * 0.05,
+  //   //       color: AppColor.textBrownColor,
+  //   //       fontWeight: FontWeight.w600,
+  //   //     ),
+  //   //     SizedBox(height: height * 0.02),
+  //   //     CommonTextField(
+  //   //       hintText: "Mention pain relievers...",
+  //   //       controller: TextEditingController(),
+  //   //       keyboardType: TextInputType.name,
+  //   //     ),
+  //   //     SizedBox(height: height * 0.02),
+  //   //     UrbanistApptext(
+  //   //       text: 'Vitamins / Minerals (rare cases: e.g., Iron, Vitamin B12)',
+  //   //       fontSize: width * 0.05,
+  //   //       color: AppColor.textBrownColor,
+  //   //       fontWeight: FontWeight.w600,
+  //   //     ),
+  //   //     SizedBox(height: height * 0.02),
+  //   //     CommonTextField(
+  //   //       hintText: "Mention vitamins/minerals...",
+  //   //       controller: TextEditingController(),
+  //   //       keyboardType: TextInputType.name,
+  //   //     ),
+  //   //   ],
+  //   // );
+  // }
 }
 
 class _AllergyChip extends StatelessWidget {
