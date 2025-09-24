@@ -6,6 +6,9 @@ import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutY
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
 import '../../features/auth/changePassword/screen/change_password_screen.dart';
+import '../../features/auth/signup/screen/singup_screen.dart';
+import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
+import '../../features/tabbarcontroller/tabbar/screens/tab_bar_test_screen.dart';
 
 import 'route_import.dart';
 
@@ -63,6 +66,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, __) => ChangePasswordScreen(),
       ),
       GoRoute(
+        path: RoutePaths.signup,
+        name: RouteNames.signup,
+        builder: (_, __) => SingupScreen(),
+      ),
+      GoRoute(
         path: RoutePaths.lifestyleScreen1,
         name: RouteNames.lifestyleScreen1,
         builder: (_, __) => const LifestyleScreen1(),
@@ -71,6 +79,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.allergiesScreen,
         name: RouteNames.allergiesScreen,
         builder: (_, __) => const AllergiesScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.tabBar,
+        name: RouteNames.tabBar,
+        builder: (_, __) => const TabBarScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.tabBarTest,
+        name: RouteNames.tabBarTest,
+        builder: (_, __) => const TabBarTestScreen(),
       ),
     ],
   );

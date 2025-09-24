@@ -11,6 +11,8 @@ class InterApptext extends StatelessWidget {
   final int? maxLines;
   final TextAlign? textAlign;
   final TextDecoration? textDecoration;
+  final FontStyle? fontStyle;
+  //final UnderlineInputBorder? underlineInputBorder;
 
   const InterApptext({
     super.key,
@@ -22,6 +24,8 @@ class InterApptext extends StatelessWidget {
     this.maxLines,
     this.textAlign,
     this.textDecoration,
+    this.fontStyle,
+    //this.underlineInputBorder,
   });
 
   @override
@@ -33,10 +37,11 @@ class InterApptext extends StatelessWidget {
       style: GoogleFonts.inter(
         fontSize: fontSize ?? width * 0.065,
         fontWeight: fontWeight ?? FontWeight.w700,
-        fontStyle: FontStyle.normal,
+        fontStyle: fontStyle ?? FontStyle.normal,
         color: color ?? AppColor.textColor,
         height: height ?? (heights > 650 ? heights / 600 : heights / 600),
         decoration: textDecoration ?? TextDecoration.none,
+        decorationColor: color ?? AppColor.textColor,
       ),
       textAlign: textAlign ?? TextAlign.start,
       maxLines: maxLines ?? 2,

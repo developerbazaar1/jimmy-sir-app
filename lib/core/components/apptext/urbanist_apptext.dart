@@ -11,6 +11,7 @@ class UrbanistApptext extends StatelessWidget {
   final int? maxLines;
   final TextAlign? textAlign;
   final TextDecoration? textDecoration;
+  final FontStyle? fontStyle;
 
   const UrbanistApptext({
     super.key,
@@ -22,6 +23,7 @@ class UrbanistApptext extends StatelessWidget {
     this.maxLines,
     this.textAlign,
     this.textDecoration,
+    this.fontStyle,
   });
 
   @override
@@ -33,7 +35,7 @@ class UrbanistApptext extends StatelessWidget {
       style: GoogleFonts.urbanist(
         fontSize: fontSize ?? width * 0.065,
         fontWeight: fontWeight ?? FontWeight.w700,
-        fontStyle: FontStyle.normal,
+        fontStyle: fontStyle ?? FontStyle.normal,
         color: color ?? AppColor.textColor,
         height: height ?? (heights > 650 ? heights / 600 : heights / 600),
         decoration: textDecoration ?? TextDecoration.none,
