@@ -9,6 +9,8 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_svg.dart';
 import '../../../../core/constants/app_text.dart';
 import '../../../../core/components/TextFeild/text_feild.dart';
+import '../../../../core/constants/enum.dart';
+import '../../widget/updated_sheet_popup.dart';
 import '../providers/change_password_providers.dart';
 
 class ChangePasswordScreen extends ConsumerWidget {
@@ -21,6 +23,7 @@ class ChangePasswordScreen extends ConsumerWidget {
     final changePasswordNotifier = ref.watch(changePasswordProvider.notifier);
 
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
@@ -63,9 +66,16 @@ class ChangePasswordScreen extends ConsumerWidget {
                   fontWeight: FontWeight.w600,
                   borderRadius: 10,
                   borderColor: AppColor.primaryColor,
-                  onPressed: () => changePasswordNotifier.changePassword(
-                    changePasswordNotifier.newPassword,
-                  ),
+                  onPressed: () => {
+                    changePasswordNotifier.changePassword(
+                      changePasswordNotifier.newPassword,
+                    ),
+                    BottomSheetPopUp.show(
+                      context,
+                      VerifyOtpType.changePasswordOtp,
+                    ),
+                  },
+
                   color: AppColor.primaryColor,
                   textColor: AppColor.white,
                 ),

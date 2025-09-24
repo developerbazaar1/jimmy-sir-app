@@ -24,6 +24,7 @@ class VerifyOTPScreen extends ConsumerWidget {
     final height = MediaQuery.sizeOf(context).height;
     final verifyOtpNotifier = ref.watch(verifyOtpProvider.notifier);
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),

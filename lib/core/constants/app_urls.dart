@@ -6,9 +6,14 @@ class ApiConstant {
   static const String resendOtp = '$baseUrl/resend-otp';
   static const String changePassword = '$baseUrl/change-password';
   static const String forgotPassword = '$baseUrl/forgot-password';
+  static const String signup = '$baseUrl/signup';
+  static const String socialLogin = '$baseUrl/social_login';
 
   //ashu----
   static const String register = '$baseUrl/register';
   static const String lifestyle = '$baseUrl/lifestyle';
-
+  static const String dashboard = '$baseUrl/dashboard';
+  static const String logs = '$baseUrl/logs';
+  static const String myWins = '$baseUrl/my-wins';
+  static const String profile = '$baseUrl/profile';
 }

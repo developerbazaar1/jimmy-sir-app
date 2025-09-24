@@ -46,6 +46,7 @@ class AppText {
       'Medication & Supplement Allergies';
   static const String environmentalAllergies = 'Environmental Allergies';
   //----------pramod sir-----------
+  //------------login-----------
   static const String welcomeBackDescription =
       'We Exited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.';
   static const String emailOrPhone = 'Email Address / Phone Number';
@@ -56,6 +57,7 @@ class AppText {
   static const String signInWithGoogle = 'Sign In with Google';
   static const String signInWithApple = 'Sign In with Apple';
   static const String newHere = 'New Here? ';
+  //------------forgot password-----------
   static const String forgotPasswordTitle = 'Forgot Password';
   static const String verifyYourIdentity = 'Verify Your Identity';
   static const String verifyYourIdentityDescription =
@@ -65,11 +67,31 @@ class AppText {
 
   static const String forgotPasswordDescription =
       'Enter your registered email address/phone number, and we’ll send you a verification code (OTP).';
-
   static const String verifyOTP = 'Verify OTP';
   static const String didNotReceiveTheCode = 'Didn’t receive the code? ';
   static const String resend = 'Resend';
   static const String newPassword = 'New Password';
   static const String confirmPassword = 'Confirm Password';
   static const String updatePassword = 'Update Password';
+  static const String passwordUpdatedSuccessfully =
+      'Password Updated Successfully!';
+  static const String passwordUpdatedSuccessfullyDescription =
+      'Your password has been reset. Please log in with your new credentials';
+  //------------signup-----------
+  static const String createAccountTitle = 'Create Account';
+  static const String createAccountDescription =
+      'Sign up now and start exploring all that our app has to offer. We’re excited to welcome you to our app!';
+  static const String phoneNumber = 'Phone Number';
+  static const String emailAddress = 'Email Address';
+  static const String iAcceptThe = 'I accept the';
+  static const String iAcceptTheDescription =
+      'By logging in, you agree to our Terms & Conditions and Privacy Policy.';
+  static const String or = 'Or sign up using';
+  static const String alreadyHaveAnAccount = 'Already a member? ';
+  //------------verify otp-----------
+  static const String verifyYourEmailAddress = 'Verify Your Email Address';
+  static const String verify = 'Verify';
+  static const String emailVerified = 'Email Verified !';
+  static const String emailVerifiedDescription =
+      'You’re all set! Your email address has been successfully verified.';
 }

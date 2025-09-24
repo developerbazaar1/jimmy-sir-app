@@ -45,7 +45,7 @@ class HeaderWidget extends ConsumerWidget {
           fontWeight: FontWeight.w500,
           color: AppColor.textGreyColor2,
         ),
-        SizedBox(height: width * 0.0918),
+        SizedBox(height: width * 0.0418),
       ],
     );
   }
