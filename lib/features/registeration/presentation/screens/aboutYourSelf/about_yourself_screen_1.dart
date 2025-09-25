@@ -53,7 +53,7 @@ class AboutYourselfScreen1 extends ConsumerWidget {
 
               const Spacer(),
               CustomButton(
-                text: AppText.next,
+                text: state.isLoading ? "Loading..." : AppText.next,
                 color: AppColor.primaryColor,
                 textColor: AppColor.white,
                 fontSize: width * 0.046,
@@ -62,11 +62,14 @@ class AboutYourselfScreen1 extends ConsumerWidget {
                 borderRadius: 10,
                 borderColor: AppColor.primaryColor,
                 fontWeight: FontWeight.w600,
-                onPressed: () {
+                onPressed: () async {
                   if (state.step < 1) {
                     notifier.nextStep();
                   } else {
-                    context.pushNamed(RouteNames.lifestyle);
+                    await notifier.submitDetails();
+                    if (state.error == null) {
+                      context.pushNamed(RouteNames.lifestyle);
+                    }
                   }
                 },
               ),
@@ -115,17 +118,17 @@ class _StepOne extends ConsumerWidget {
         ),
         SizedBox(height: height * 0.02),
 
-        CommonSelectableContainer(
+        commonSelectableContainer1(
           title: AppText.male,
           isSelected: state.gender == "Male",
           onTap: () => notifier.updateGender("Male"),
         ),
-        CommonSelectableContainer(
+        commonSelectableContainer1(
           title: AppText.female,
           isSelected: state.gender == "Female",
           onTap: () => notifier.updateGender("Female"),
         ),
-        CommonSelectableContainer(
+        commonSelectableContainer1(
           title: AppText.others,
           isSelected: state.gender == "Others",
           onTap: () => notifier.updateGender("Others"),

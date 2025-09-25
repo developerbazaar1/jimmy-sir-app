@@ -9,7 +9,6 @@ import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/onbaording/providers/onboarding_provider.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../core/components/apptext/urbanist_apptext.dart';
 
@@ -25,7 +24,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   final List<_OnboardingPageModel> pages = [
     _OnboardingPageModel(
-      color: AppColor.primaryColor,
+      color: AppColor.primaryColor2,
       imagePath: AppImages.onboarding_11,
       title: AppText.onboardingHeading,
       description: AppText.onboardingDescription,
@@ -69,18 +68,32 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         child: Column(
           children: [
             SizedBox(height: height * 0.02),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: InterApptext(
-                  text: AppText.skip,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: width * 0.04,
+            if (currentPage == 0)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: InterApptext(
+                    text: AppText.skip,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: width * 0.04,
+                  ),
                 ),
               ),
-            ),
+            if (currentPage == 1 || currentPage == 2)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: InterApptext(
+                    text: "",
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: width * 0.04,
+                  ),
+                ),
+              ),
             Expanded(
               child: PageView.custom(
                 // physics: const NeverScrollableScrollPhysics(),
@@ -116,7 +129,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         effect: ExpandingDotsEffect(
                           dotHeight: 10,
                           dotWidth: 12,
-                          dotColor: Colors.grey.withOpacity(0.6),
+                          dotColor: Colors.white.withOpacity(0.2),
                           activeDotColor: Colors.white,
                         ),
                       );
@@ -180,21 +193,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 }
 
-// onTap: () async {
-//   final current = ref.read(onboardingPageProvider);
-//   if (!pageController.hasClients) return;
-//   if (current < pages.length - 1) {
-//     await pageController.nextPage(
-//       duration: const Duration(milliseconds: 380),
-//       curve: Curves.easeInOut,
-//     );
-//   } else {
-//     context.pushNamed(RouteNames.aboutYourself);
-//     print(
-//       "navigate-------------------------------------to nexttt screennnnnnn",
-//     );
-//   }
-// },
 class _OnboardingPageModel {
   final Color color;
   final String imagePath;

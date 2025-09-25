@@ -30,7 +30,6 @@ class LifestyleScreen1 extends ConsumerWidget {
         title: AppText.currentLifeStyle,
         showBack: true,
         onBackTap: () {
-          // context.pop();
           if (state.currentStep == 0) {
             context.pop();
           } else {
@@ -71,7 +70,7 @@ class LifestyleScreen1 extends ConsumerWidget {
                   children: [
                     ...List.generate(currentStepData.options.length, (index) {
                       final option = currentStepData.options[index];
-                      return CommonSelectableContainer(
+                      return commonSelectableContainer(
                         title: option.label,
                         description: option.desc,
                         isSelected:
@@ -90,17 +89,16 @@ class LifestyleScreen1 extends ConsumerWidget {
                 width: width,
                 borderRadius: 15,
                 text: state.currentStep == lifestyleSteps.length - 1
-                    ? "Finish"
+                    ? "Next"
                     : "Next",
                 onPressed: () {
                   if (state.currentStep < lifestyleSteps.length - 1) {
                     notifier.nextStep(lifestyleSteps.length);
                   } else {
-                    // notifier.submitLifestyle();
                     context.pushNamed(RouteNames.allergiesScreen);
                   }
                 },
-                color: Colors.orange,
+                color: AppColor.primaryColor,
                 textColor: Colors.white,
               ),
               SizedBox(height: height * 0.02),
