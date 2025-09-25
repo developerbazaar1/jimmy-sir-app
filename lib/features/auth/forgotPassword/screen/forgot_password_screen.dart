@@ -27,6 +27,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
     final forgotPasswordNotifier = ref.watch(forgotPasswordProvider.notifier);
 
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),

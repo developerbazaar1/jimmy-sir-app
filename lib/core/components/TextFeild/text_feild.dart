@@ -88,8 +88,8 @@ class _AppTextFieldState extends State<AppTextField> {
         // Outer bordered container that reacts to validation
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: borderColor, width: 1.4),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: borderColor, width: 1.5),
             color: Colors.transparent,
           ),
           child: Row(
@@ -97,7 +97,7 @@ class _AppTextFieldState extends State<AppTextField> {
             children: [
               if (widget.prefixIconImg != null) ...[
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(10),
                   child: SvgPicture.asset(
                     widget.prefixIconImg!,
                     height: 22,

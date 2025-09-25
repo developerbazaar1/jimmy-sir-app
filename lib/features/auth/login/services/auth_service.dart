@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import '../../../../core/constants/app_urls.dart';
 import '../../../../core/constants/enum.dart';
 import '../../../../data/data sources/remote/network_api_service.dart';
 import '../models/login_request.dart';
+import '../../signup/models/signup_response.dart';
 
 class AuthService {
   NetworkApiServices services = NetworkApiServices();
@@ -18,6 +18,15 @@ class AuthService {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<MapSD> signup(SignupRequest request) async {
+    Map<String, dynamic> body = request.toJson();
+    return await services.sendHttpRequest(
+      url: Uri.parse(ApiConstant.signup),
+      method: HttpMethod.post,
+      body: body as Map<String, String>?,
+    );
   }
 
   /// Returns true on success, throws on failure.
@@ -57,6 +66,50 @@ class AuthService {
     Map<String, dynamic> body = {'password': password};
     return await services.sendHttpRequest(
       url: Uri.parse(ApiConstant.changePassword),
+      method: HttpMethod.post,
+      body: body as Map<String, String>?,
+    );
+  }
+
+  Future<MapSD> googleSignup(
+    String token,
+    String email,
+    String name,
+    String phone,
+    String deviceToken,
+  ) async {
+    Map<String, dynamic> body = {
+      'socialToken': token,
+      'socialType': 'google',
+      'email': email,
+      'name': name,
+      'phone': phone,
+      'deviceToken': deviceToken,
+    };
+    return await services.sendHttpRequest(
+      url: Uri.parse(ApiConstant.socialLogin),
+      method: HttpMethod.post,
+      body: body as Map<String, String>?,
+    );
+  }
+
+  Future<MapSD> appleSignup(
+    String token,
+    String email,
+    String name,
+    String phone,
+    String deviceToken,
+  ) async {
+    Map<String, dynamic> body = {
+      'socialToken': token,
+      'socialType': 'apple',
+      'email': email,
+      'name': name,
+      'phone': phone,
+      'deviceToken': deviceToken,
+    };
+    return await services.sendHttpRequest(
+      url: Uri.parse(ApiConstant.socialLogin),
       method: HttpMethod.post,
       body: body as Map<String, String>?,
     );

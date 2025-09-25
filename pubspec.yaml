@@ -75,7 +75,12 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+
     - assets/lottie/splash_animation.json
+
+    - assets/svgs/selected/
+    - assets/svgs/unSelected/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

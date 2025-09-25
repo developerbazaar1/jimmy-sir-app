@@ -33,6 +33,7 @@ class LoginScreen extends ConsumerWidget {
     final authNotifier = ref.watch(authProvider.notifier);
 
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
@@ -127,14 +128,20 @@ class LoginScreen extends ConsumerWidget {
                         color: AppColor.textGreyColor2,
                       ),
                       children: [
-                        TextSpan(
-                          text: AppText.signUp,
-                          style: GoogleFonts.inter(
-                            fontSize: width * 0.032,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.primaryColor3,
+                        WidgetSpan(
+                          child: GestureDetector(
+                            onTap: () {
+                              context.goNamed(RouteNames.signup);
+                            },
+                            child: Text(
+                              AppText.signUp,
+                              style: GoogleFonts.inter(
+                                fontSize: width * 0.032,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.primaryColor3,
+                              ),
+                            ),
                           ),
-                          // Tap action
                         ),
                       ],
                     ),

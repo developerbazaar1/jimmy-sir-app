@@ -11,11 +11,12 @@ class ChangePasswordState {
 }
 
 class ChangePasswordNotifier extends StateNotifier<ChangePasswordState> {
-  final AuthService authService;
+   final AuthService authService;
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   String newPassword = '';
   String confirmPassword = '';
+
   String? validateNewPassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your new password';
@@ -29,6 +30,7 @@ class ChangePasswordNotifier extends StateNotifier<ChangePasswordState> {
     }
     return null;
   }
+  
 
 
   ChangePasswordNotifier({required this.authService})

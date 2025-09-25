@@ -15,7 +15,25 @@ class AppSvg {
   static String password = '$basePath/imgPassword.svg';
   static String lockIcon = '$basePath/imgPasswordShowAndHide.svg';
   static String lockOpenIcon = '$basePath/lock_open.svg';
-  static String googleIcon = '$basePath/google.svg';
-  static String appleIcon = '$basePath/apple.svg';
+  static String googleIcon = '$basePath/imgGoogle.svg';
+  static String appleIcon = '$basePath/imgApple.svg';
   static String logo = '$basePath/imgLogo.svg';
+  static String imgChangePSfully = '$basePath/imgChangePSfully.svg';
+  static String phoneIcon = '$basePath/imgPhoneNumberIcons.svg';
+  //static String googleIcon = '$basePath/imgGoogle.svg';
+
+  static String homeUnSelectedIcon =
+      '$basePath/unselected/imgHomeUnSelected.svg';
+  static String logsUnSelectedIcon =
+      '$basePath/unselected/imgLogUnSelected.svg';
+  static String myWinsUnSelectedIcon =
+      '$basePath/unselected/imgWinUnSelected.svg';
+  static String profileUnSelectedIcon =
+      '$basePath/unselected/imgProfileUnSelected.svg';
+
+  static String homeIconSelected = '$basePath/selected/imgHomeSelected.svg';
+  static String logsIconSelected = '$basePath/selected/imgLogSelected.svg';
+  static String myWinsIconSelected = '$basePath/selected/imgWinSelected.svg';
+  static String profileIconSelected =
+      '$basePath/selected/imgProfileSelected.svg';
 }
