@@ -36,6 +36,14 @@ class PersonalGoalScreen extends ConsumerWidget {
       'title': 'Improve Fitness',
       'description': 'Enhance strength, endurance, and overall fitness.',
     },
+    {
+      'title': 'Boost ',
+      'description': 'Feel more active and alert throughout your day.',
+    },
+    {
+      'title': ' Fitness',
+      'description': 'Enhance strength, endurance, and overall fitness.',
+    },
   ];
 
   @override
@@ -114,10 +122,10 @@ class PersonalGoalScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: height * 0.02),
+                  SizedBox(height: height * 0.01),
 
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: height * 0.01),
+                    padding: EdgeInsets.symmetric(vertical: height * 0.00),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -165,24 +173,29 @@ class PersonalGoalScreen extends ConsumerWidget {
                     fontWeight: FontWeight.w500,
                   ),
                   SizedBox(height: height * 0.02),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: goals.map((goal) {
+                          final selectedGoals = ref.watch(personalGoalProvider);
+                          final isSelected = selectedGoals.contains(
+                            goal['title']!,
+                          );
 
-                  Column(
-                    children: goals.map((goal) {
-                      final isSelected = ref
-                          .read(personalGoalProvider.notifier)
-                          .isSelected(goal['title']!);
-                      return commonSelectableContainer(
-                        title: goal['title']!,
-                        description: goal['description'],
-                        isSelected: isSelected,
-                        onTap: () => ref
-                            .read(personalGoalProvider.notifier)
-                            .toggleGoal(goal['title']!),
-                      );
-                    }).toList(),
+                          return commonSelectableContainer(
+                            title: goal['title']!,
+                            description: goal['description'],
+                            isSelected: isSelected,
+                            onTap: () => ref
+                                .read(personalGoalProvider.notifier)
+                                .toggleGoal(goal['title']!),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                   ),
+                  SizedBox(height: height * 0.02),
 
-                  Spacer(),
                   CustomButton(
                     text: AppText.next,
                     color: AppColor.primaryColor,
@@ -194,7 +207,7 @@ class PersonalGoalScreen extends ConsumerWidget {
                     borderColor: AppColor.primaryColor,
                     fontWeight: FontWeight.w600,
                     onPressed: () {
-                      context.pushNamed(RouteNames.allergiesScreen1);
+                      context.pushNamed(RouteNames.membershipscreen);
                     },
                   ),
                 ],

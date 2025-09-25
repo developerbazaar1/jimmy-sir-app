@@ -73,24 +73,6 @@ class AboutYourselfScreen1 extends ConsumerWidget {
                   }
                 },
               ),
-              // CustomButton(
-              //   text: AppText.next,
-              //   color: AppColor.primaryColor,
-              //   textColor: AppColor.white,
-              //   fontSize: width * 0.046,
-              //   height: width * 0.13,
-              //   width: width,
-              //   borderRadius: 10,
-              //   borderColor: AppColor.primaryColor,
-              //   fontWeight: FontWeight.w600,
-              //   onPressed: () {
-              //     if (state.step < 1) {
-              //       notifier.nextStep();
-              //     } else {
-              //       context.pushNamed(RouteNames.lifestyle);
-              //     }
-              //   },
-              // ),
             ],
           ),
         ),

@@ -7,6 +7,7 @@ import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutY
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen_1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/membership/membership_screen.dart';
 import '../../features/auth/changePassword/screen/change_password_screen.dart';
 
 import 'route_import.dart';
@@ -41,6 +42,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.lifestyle,
         name: RouteNames.lifestyle,
         builder: (_, __) => const LifestyleScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.membershipscreen,
+        name: RouteNames.membershipscreen,
+        builder: (_, __) => const MembershipScreen(),
       ),
 
       //----------------pramod sir----------------

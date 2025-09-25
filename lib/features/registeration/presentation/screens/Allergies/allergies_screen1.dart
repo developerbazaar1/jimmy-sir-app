@@ -23,7 +23,6 @@ class AllergiesScreen1 extends ConsumerWidget {
     final sections = allergies['sections'] as List;
     final section = sections[step];
 
-    // Resolve title depending on type
     String title = '';
     if (section is Map<String, dynamic>) {
       title = section['title'] as String;
@@ -109,7 +108,6 @@ class AllergiesScreen1 extends ConsumerWidget {
                 }
               },
             ),
-            SizedBox(height: height * 0.05),
           ],
         ),
       ),
