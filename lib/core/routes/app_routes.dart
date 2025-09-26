@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/PersonalGoal/personalgoal_screen.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/Quiz/quiz_screens.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/Quiz/welcome_quiz_scree.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen_1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
@@ -50,6 +52,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.membershipscreen,
         name: RouteNames.membershipscreen,
         builder: (_, __) => const MembershipScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.welcomeQuiz,
+        name: RouteNames.welcomeQuiz,
+        builder: (_, __) => const WelcomeQuizScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.quizScreens,
+        name: RouteNames.quizScreens,
+        builder: (_, __) => const QuizScreens(),
       ),
 
       //----------------pramod sir----------------

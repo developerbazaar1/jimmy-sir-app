@@ -42,7 +42,6 @@ class LifestyleOption {
   LifestyleOption({required this.label, required this.desc});
 }
 
-
 // lifestyle_steps_data.dart
 
 final lifestyleSteps = [
@@ -51,7 +50,10 @@ final lifestyleSteps = [
     options: [
       LifestyleOption(label: "Sedentary", desc: "<5,000 steps/day"),
       LifestyleOption(label: "Lightly Active", desc: "5,000–7,500 steps/day"),
-      LifestyleOption(label: "Moderately Active", desc: "7,500–10,000 steps/day"),
+      LifestyleOption(
+        label: "Moderately Active",
+        desc: "7,500–10,000 steps/day",
+      ),
       LifestyleOption(label: "Highly Active", desc: ">10,000 steps/day"),
     ],
   ),
@@ -87,7 +89,10 @@ final lifestyleSteps = [
   LifestyleStep(
     title: "Stress Level",
     options: [
-      LifestyleOption(label: "Low", desc: "Calm, stress rarely affects daily life"),
+      LifestyleOption(
+        label: "Low",
+        desc: "Calm, stress rarely affects daily life",
+      ),
       LifestyleOption(label: "Moderate", desc: "Occasional, manageable"),
       LifestyleOption(label: "High", desc: "Frequent stress affecting energy"),
     ],
