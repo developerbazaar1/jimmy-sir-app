@@ -42,15 +42,15 @@ class TabBarStyleManager {
       style: TabBarStyle.floating,
       name: 'Floating',
       description: 'Floating design with elevated appearance',
-      builder: () => const FloatingTabBar(
+      builder: () => FloatingTabBar(
         selectedColor: Colors.white,
         unselectedColor: Colors.white,
-        backgroundColor: Color(0xFF3E3E3E),
+        backgroundColor: AppColor.bottomBarColor,
         elevation: 20.0,
         showLabels: false,
         iconSize: 25.0,
         borderRadius: 40.0,
-        margin: EdgeInsets.all(40),
+        margin: const EdgeInsets.all(40),
       ),
     ),
     TabBarStyleConfig(

@@ -35,4 +35,5 @@ class AppSvg {
   static String myWinsIconSelected = '$basePath/selected/imgWinSelected.svg';
   static String profileIconSelected =
       '$basePath/selected/imgProfileSelected.svg';
+  static String imgFloat = '$basePath/imgFloat.svg';
 }
