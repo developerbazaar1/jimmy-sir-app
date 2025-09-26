@@ -101,7 +101,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, __) => const AllergiesScreen(),
       ),
       GoRoute(
-
         path: RoutePaths.allergiesScreen1,
         name: RouteNames.allergiesScreen1,
         builder: (_, __) => const AllergiesScreen1(),
@@ -110,16 +109,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.personalGoal,
         name: RouteNames.personalGoal,
         builder: (_, __) => PersonalGoalScreen(),
-
-        path: RoutePaths.tabBar,
-        name: RouteNames.tabBar,
-        builder: (_, __) => const TabBarScreen(),
       ),
       GoRoute(
         path: RoutePaths.tabBarTest,
         name: RouteNames.tabBarTest,
         builder: (_, __) => const TabBarTestScreen(),
-
       ),
     ],
   );
