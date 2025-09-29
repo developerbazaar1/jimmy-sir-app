@@ -1,6 +1,5 @@
 class AppText {
   //------------ashu-------------
-
   static const String splashTitle = 'Splash';
   static const String welcomeBack = 'Welcome Back';
   static const String skip = 'Skip';
@@ -127,4 +126,14 @@ class AppText {
   static const String save = 'Save';
   static const String profileInfoUpdatedSuccessfully =
       'Profile Info Updated Successfully!';
+
+  //------------delete account-----------
+  static const String deleteAccountDescription =
+      'Are you sure you want to delete your profile?';
+  static const String deleteAccountDescription2 =
+      'Permanently delete your account. This cannot be undone.';
+  static const String deleteAccountButton = 'Delete';
+  static const String cancelButton = 'Cancel';
+  static const String deleteAccountTitle = 'Delete Account !';
+  static const String deleteAccountnnnnnnnn = 'Delete Account !';
 }
