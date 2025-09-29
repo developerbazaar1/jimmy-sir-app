@@ -40,13 +40,23 @@ enum TabBarItem {
 class TabBarModel {
   final TabBarItem currentTab;
   final bool isVisible;
+  final bool isFullScreen;
 
-  const TabBarModel({required this.currentTab, this.isVisible = true});
+  const TabBarModel({
+    required this.currentTab,
+    this.isVisible = true,
+    this.isFullScreen = false,
+  });
 
-  TabBarModel copyWith({TabBarItem? currentTab, bool? isVisible}) {
+  TabBarModel copyWith({
+    TabBarItem? currentTab,
+    bool? isVisible,
+    bool? isFullScreen,
+  }) {
     return TabBarModel(
       currentTab: currentTab ?? this.currentTab,
       isVisible: isVisible ?? this.isVisible,
+      isFullScreen: isFullScreen ?? this.isFullScreen,
     );
   }
 }

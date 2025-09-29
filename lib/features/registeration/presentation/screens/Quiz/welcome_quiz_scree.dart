@@ -5,7 +5,9 @@ import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/components/Button/custom_outline_border_button.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
+import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/freezelottie_widget.dart';
 import 'package:lottie/lottie.dart';
 
 class WelcomeQuizScreen extends ConsumerWidget {
@@ -44,7 +46,7 @@ class WelcomeQuizScreen extends ConsumerWidget {
                 SizedBox(height: height * 0.06),
                 Center(
                   child: UrbanistApptext(
-                    text: "Welcome to Elite Quiz, Jamie!",
+                    text: AppText.welcomeToEliteQuiz + " Jamie!",
                     fontSize: width * 0.06,
                     color: AppColor.textBrownColor,
                     fontWeight: FontWeight.w700,
@@ -52,8 +54,7 @@ class WelcomeQuizScreen extends ConsumerWidget {
                 ),
                 SizedBox(height: height * 0.01),
                 UrbanistApptext(
-                  text:
-                      "This short quiz helps us understand your sleep, stress, fitness, and nutrition habits. In just a few minutes, you’ll get personalized insights and tips tailored to your lifestyle.",
+                  text: AppText.welcomeToEliteQuizDescription,
                   fontSize: width * 0.04,
                   textAlign: TextAlign.center,
                   color: AppColor.textGreyColor2,
@@ -66,7 +67,7 @@ class WelcomeQuizScreen extends ConsumerWidget {
                     context.pushNamed(RouteNames.quizScreens);
                   },
                   borderRadius: width * 0.03,
-                  text: "Start Quiz",
+                  text: AppText.startQuiz,
                   fontSize: width * 0.04,
                   textColor: AppColor.white,
                   fontWeight: FontWeight.w600,
@@ -74,8 +75,10 @@ class WelcomeQuizScreen extends ConsumerWidget {
                 ),
                 SizedBox(height: height * 0.02),
                 CustomOutlineBorderButton(
-                  text: "Skip for now, complete later",
-                  onPressed: () {},
+                  text: AppText.skipForNow,
+                  onPressed: () {
+                    context.pushNamed(RouteNames.welcomeScreen);
+                  },
                   borderRadius: width * 0.03,
                   fontSize: width * 0.04,
                   fontWeight: FontWeight.w600,
@@ -85,54 +88,6 @@ class WelcomeQuizScreen extends ConsumerWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class FreezedLottie extends StatefulWidget {
-  const FreezedLottie({super.key});
-
-  @override
-  State<FreezedLottie> createState() => _FreezedLottieState();
-}
-
-class _FreezedLottieState extends State<FreezedLottie>
-    with TickerProviderStateMixin {
-  late final AnimationController _lottieController;
-  bool _lottieFinished = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _lottieController = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _lottieController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
-
-    return SizedBox(
-      height: height * 0.3,
-      width: width * 0.5,
-      child: Lottie.asset(
-        'assets/lottie/splash_animation.json',
-        controller: _lottieController,
-        fit: BoxFit.contain,
-        onLoaded: (composition) {
-          _lottieController.duration = composition.duration;
-          _lottieController.forward().whenComplete(() {
-            _lottieController.stop(); // freeze at last frame
-            setState(() => _lottieFinished = true);
-          });
-        },
       ),
     );
   }

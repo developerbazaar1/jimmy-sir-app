@@ -119,10 +119,7 @@ class VerifyOtpSingupPop {
                   }
                   context.pop();
 
-                  BottomSheetPopUp.show(
-                    context,
-                    VerifyOtpType.signup,
-                  );
+                  BottomSheetPopUp.show(context, VerifyOtpType.signup);
                 },
               ),
               SizedBox(height: width * 0.0612),

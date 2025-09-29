@@ -11,6 +11,7 @@ class RouteNames {
   static const membershipscreen = 'membership_screen';
   static const welcomeQuiz = 'welcome_quiz_screen';
   static const quizScreens = 'quiz_screens';
+  static const welcomeScreen = 'welcome_screen';
 
   //----------------pramod sir----------
   static const signup = 'signup_screen';
@@ -22,7 +23,7 @@ class RouteNames {
   static const personalGoal = 'personalgoal_screen';
 
   static const dashboard = 'dashboard_screen';
-  static const tabBar = 'tab_bar_screen';
+  static const String tabBar = 'tab_bar_screen';
   static const tabBarTest = 'tab_bar_test_screen';
 }
 
@@ -40,6 +41,7 @@ class RoutePaths {
   static const membershipscreen = '/membership_screen';
   static const welcomeQuiz = '/welcome_quiz_screen';
   static const quizScreens = '/quiz_screens';
+  static const welcomeScreen = '/welcome_screen';
 
   //----------------pramod sir-----------
   static const signup = '/signup_screen';

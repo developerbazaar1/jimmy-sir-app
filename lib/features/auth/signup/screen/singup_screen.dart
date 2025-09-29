@@ -118,11 +118,12 @@ class SingupScreen extends ConsumerWidget {
                     if (signupNotifier.formKey.currentState!.validate()) {
                       signupNotifier.formKey.currentState!.save();
                     }
+                    context.pushNamed(RouteNames.aboutYourself);
                     //signupNotifier.signup();
-                    VerifyOtpSingupPop.show(
-                      context,
-                      signupNotifier.otpController,
-                    );
+                    // VerifyOtpSingupPop.show(
+                    //   context,
+                    //   signupNotifier.otpController,
+                    // );
                   },
                 ),
 

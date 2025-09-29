@@ -44,6 +44,9 @@ class AllergiesScreen1 extends ConsumerWidget {
         },
 
         showSkip: true,
+        onSkipTap: () {
+          context.pushNamed(RouteNames.personalGoal);
+        },
         // onSkipTap: () => ref.read(allergyProvider.notifier).nextStep(),
       ),
       body: SafeArea(

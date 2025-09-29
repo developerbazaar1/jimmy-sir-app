@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
     return MaterialApp.router(
       routerConfig: router,
-      
+
       debugShowCheckedModeBanner: false,
       title: 'Jimmy Sir App',
       // theme: ThemeData(
