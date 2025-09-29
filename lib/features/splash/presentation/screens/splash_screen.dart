@@ -18,6 +18,7 @@ class SplashScreen extends ConsumerWidget {
       next.whenData((_) {
         context.pushNamed(RouteNames.onboarding);
         // context.pushReplacementNamed(RouteNames.tabBar);
+        context.pushNamed(RouteNames.tabBar);
       });
     });
     return Scaffold(

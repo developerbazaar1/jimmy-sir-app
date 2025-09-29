@@ -121,11 +121,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.tabBar,
         builder: (_, __) => const TabBarScreen(),
       ),
-      // GoRoute(
-      //   path: RoutePaths.profileInfo,
-      //   name: RouteNames.profileInfo,
-      //   builder: (_, __) => const ProfileInfoScreen(),
-      // ),
+      GoRoute(
+        path: RoutePaths.profileInfo,
+        name: RouteNames.profileInfo,
+        builder: (_, __) => const ProfileInfoScreen(),
+      ),
     ],
   );
 });
