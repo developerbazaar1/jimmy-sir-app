@@ -1,10 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen1.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/PersonalGoal/personalgoal_screen.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/Quiz/quiz_screens.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/Quiz/welcome_quiz_scree.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen_1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/membership/membership_screen.dart';
 import '../../features/auth/changePassword/screen/change_password_screen.dart';
 import '../../features/auth/signup/screen/singup_screen.dart';
 import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
@@ -42,6 +47,21 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.lifestyle,
         name: RouteNames.lifestyle,
         builder: (_, __) => const LifestyleScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.membershipscreen,
+        name: RouteNames.membershipscreen,
+        builder: (_, __) => const MembershipScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.welcomeQuiz,
+        name: RouteNames.welcomeQuiz,
+        builder: (_, __) => const WelcomeQuizScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.quizScreens,
+        name: RouteNames.quizScreens,
+        builder: (_, __) => const QuizScreens(),
       ),
 
       //----------------pramod sir----------------
@@ -81,9 +101,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, __) => const AllergiesScreen(),
       ),
       GoRoute(
-        path: RoutePaths.tabBar,
-        name: RouteNames.tabBar,
-        builder: (_, __) => const TabBarScreen(),
+        path: RoutePaths.allergiesScreen1,
+        name: RouteNames.allergiesScreen1,
+        builder: (_, __) => const AllergiesScreen1(),
+      ),
+      GoRoute(
+        path: RoutePaths.personalGoal,
+        name: RouteNames.personalGoal,
+        builder: (_, __) => PersonalGoalScreen(),
       ),
       GoRoute(
         path: RoutePaths.tabBarTest,

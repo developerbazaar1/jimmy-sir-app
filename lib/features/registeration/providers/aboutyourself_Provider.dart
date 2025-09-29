@@ -62,11 +62,9 @@ class AboutNotifier extends StateNotifier<AboutState> {
   final RegistrationServices service;
   AboutNotifier(this.service) : super(AboutState());
 
-  /// Step Navigation
   void nextStep() => state = state.copyWith(step: state.step + 1);
   void prevStep() => state = state.copyWith(step: state.step - 1);
 
-  /// Field Updates
   void updateName(String v) => state = state.copyWith(name: v);
   void updateGender(String v) => state = state.copyWith(gender: v);
   void updateOtherGender(String v) => state = state.copyWith(otherGender: v);
@@ -78,7 +76,6 @@ class AboutNotifier extends StateNotifier<AboutState> {
       state = state.copyWith(weight: double.tryParse(v));
   void updateWeightUnit(String v) => state = state.copyWith(weightUnit: v);
 
-  /// API Call
   Future<void> submitDetails() async {
     state = state.copyWith(isLoading: true, error: null);
     try {
@@ -91,6 +88,7 @@ class AboutNotifier extends StateNotifier<AboutState> {
         heightUnit: state.heightUnit,
         weight: state.weight,
         weightUnit: state.weightUnit,
+        currentStep: state.step,
       );
       final response = await service.submitAboutUser(request);
 
