@@ -7,6 +7,7 @@ class AboutUserRequest {
   final String heightUnit;
   final double? weight;
   final String weightUnit;
+  final int currentStep;
 
   AboutUserRequest({
     required this.name,
@@ -17,6 +18,7 @@ class AboutUserRequest {
     this.heightUnit = "cm",
     this.weight,
     this.weightUnit = "kg",
+    this.currentStep = 0,
   });
 
   Map<String, dynamic> toJson() => {
@@ -28,6 +30,7 @@ class AboutUserRequest {
     "height_unit": heightUnit,
     "weight": weight,
     "weight_unit": weightUnit,
+    "current_step": currentStep,
   };
 }
 
