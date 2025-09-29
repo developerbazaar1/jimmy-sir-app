@@ -20,4 +20,5 @@ class AppColor {
   static Color textGreyColor2 = Color(0XFF8E8E93);
   static Color border = Color(0XFFCDCDCD);
   static Color placeholderColor = Color(0XFFA4A4A4);
+  static Color black = Color(0XFF000000);
 }

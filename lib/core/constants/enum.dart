@@ -3,4 +3,4 @@ enum HttpMethod { get, post, put, delete }
 
 enum SnackbarType { success, error, warning, info }
 
-enum VerifyOtpType { signup, changePasswordOtp }
+enum VerifyOtpType { signup, changePasswordOtp, profileInfo }

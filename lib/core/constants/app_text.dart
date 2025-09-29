@@ -121,4 +121,10 @@ class AppText {
   static const String logOut = 'Log Out';
   static const String deleteAccount = 'Delete Account';
   static const String bankAccountDetails = 'Bank Account Details';
+
+  static const String email = 'Email Address';
+  static const String phone = 'Phone Number';
+  static const String save = 'Save';
+  static const String profileInfoUpdatedSuccessfully =
+      'Profile Info Updated Successfully!';
 }
