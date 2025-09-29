@@ -41,7 +41,7 @@ class ProfileScreen extends ConsumerWidget {
                       title: AppText.personalInfo,
                       icon: AppSvg.personalInfoIcon,
                       onTap: () {
-                        context.push(RoutePaths.profileInfo);
+                        // context.push(RoutePaths.profileInfo);
                       },
                     ),
                     ProfileSections(

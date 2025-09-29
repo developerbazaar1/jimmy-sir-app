@@ -124,7 +124,7 @@ class AllergiesScreen extends ConsumerWidget {
                   fontWeight: FontWeight.w600,
 
                   onPressed: () {
-                    // context.pushNamed(RouteNames.aboutYourselfScreen1);
+                    context.pushNamed(RouteNames.personalGoal);
                   },
                 ),
                 const Spacer(),

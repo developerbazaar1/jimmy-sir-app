@@ -10,6 +10,7 @@ import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutY
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/membership/membership_screen.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/welcomeScreen/welcome_screen.dart';
 import '../../features/auth/changePassword/screen/change_password_screen.dart';
 import '../../features/auth/signup/screen/singup_screen.dart';
 import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
@@ -63,6 +64,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.quizScreens,
         builder: (_, __) => const QuizScreens(),
       ),
+      GoRoute(
+        path: RoutePaths.welcomeScreen,
+        name: RouteNames.welcomeScreen,
+        builder: (_, __) => const WelcomeScreen(),
+      ),
 
       //----------------pramod sir----------------
       GoRoute(
@@ -111,15 +117,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (_, __) => PersonalGoalScreen(),
       ),
       GoRoute(
-        path: RoutePaths.tabBarTest,
-        name: RouteNames.tabBarTest,
-        builder: (_, __) => const TabBarTestScreen(),
+        path: RoutePaths.tabBar,
+        name: RouteNames.tabBar,
+        builder: (_, __) => const TabBarScreen(),
       ),
-      GoRoute(
-        path: RoutePaths.profileInfo,
-        name: RouteNames.profileInfo,
-        builder: (_, __) => const ProfileInfoScreen(),
-      ),
+      // GoRoute(
+      //   path: RoutePaths.profileInfo,
+      //   name: RouteNames.profileInfo,
+      //   builder: (_, __) => const ProfileInfoScreen(),
+      // ),
     ],
   );
 });

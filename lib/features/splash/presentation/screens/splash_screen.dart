@@ -16,8 +16,8 @@ class SplashScreen extends ConsumerWidget {
     // When splash completes, navigate.
     ref.listen(splashReadyProvider, (prev, next) {
       next.whenData((_) {
-        // context.pushNamed(RouteNames.signup);
-        context.pushReplacementNamed(RouteNames.tabBar);
+        context.pushNamed(RouteNames.onboarding);
+        // context.pushReplacementNamed(RouteNames.tabBar);
       });
     });
     return Scaffold(
@@ -29,27 +29,8 @@ class SplashScreen extends ConsumerWidget {
             width: width * 0.7, // adjust size
             height: height * 0.6,
             fit: BoxFit.contain,
-            // repeat: true, // set false if you want one-time play
           ),
         ),
-
-        // child: Column(
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Center(
-        //           child: Text(
-        //             "Splash Screen",
-        //             style: TextStyle(fontSize: 20, color: AppColor.textColor),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }

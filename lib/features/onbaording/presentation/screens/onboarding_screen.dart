@@ -157,7 +157,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           ref.read(animateImageProvider.notifier).state = false;
                         });
                       } else {
-                        context.pushNamed(RouteNames.aboutYourself);
+                        context.pushNamed(RouteNames.signup);
                       }
                     },
 

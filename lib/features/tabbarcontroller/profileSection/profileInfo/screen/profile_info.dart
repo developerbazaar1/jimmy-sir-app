@@ -8,8 +8,8 @@ class ProfileInfoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(profileInfoProvider);
-    final notifier = ref.read(profileInfoProvider.notifier);
+    // final state = ref.watch(profileInfoProvider);
+    // final notifier = ref.read(profileInfoProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text('Profile Info')),
       body: Center(child: Text('Profile Info')),

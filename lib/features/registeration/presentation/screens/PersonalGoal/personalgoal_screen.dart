@@ -101,7 +101,7 @@ class PersonalGoalScreen extends ConsumerWidget {
                           SizedBox(width: width * 0.01),
                           UrbanistApptext(
                             textAlign: TextAlign.center,
-                            text: "Personal Goal",
+                            text: AppText.personalGoal,
                             fontWeight: FontWeight.w700,
                             color: AppColor.textBrownColor,
                             fontSize: width * 0.055,
@@ -111,7 +111,9 @@ class PersonalGoalScreen extends ConsumerWidget {
 
                       /// Skip Button
                       GestureDetector(
-                        // onTap: () => context.pop(),
+                        onTap: () {
+                          context.pushNamed(RouteNames.membershipscreen);
+                        },
                         child: UrbanistApptext(
                           textAlign: TextAlign.center,
                           text: AppText.skip,
