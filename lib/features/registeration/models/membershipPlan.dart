@@ -5,6 +5,7 @@ class MembershipPlan {
   final String period;
   final List<String> features;
   final String buttonText;
+  final String? bestoffer;
 
   MembershipPlan({
     required this.title,
@@ -13,5 +14,6 @@ class MembershipPlan {
     required this.period,
     required this.features,
     required this.buttonText,
+    this.bestoffer,
   });
 }
