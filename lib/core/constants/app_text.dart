@@ -94,4 +94,18 @@ class AppText {
   static const String emailVerified = 'Email Verified !';
   static const String emailVerifiedDescription =
       'You’re all set! Your email address has been successfully verified.';
+
+  //------------profile-----------
+  static const String personalInfo = 'Personal Info';
+  static const String myGoals = 'My Goals';
+  static const String wellnessPreferences = 'Wellness Preferences';
+  static const String mySubscriptions = 'My Subscriptions';
+  static const String changePassword = 'Change Password';
+  static const String notificationSettings = 'Notification Settings';
+  static const String helpAndSupport = 'Help & Support';
+  static const String termsAndConditions = 'Terms & Conditions';
+  static const String privacyPolicy = 'Privacy Policy';
+  static const String logOut = 'Log Out';
+  static const String deleteAccount = 'Delete Account';
+  static const String bankAccountDetails = 'Bank Account Details';
 }

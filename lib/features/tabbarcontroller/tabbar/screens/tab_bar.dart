@@ -14,19 +14,33 @@ class TabBarScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tabBarState = ref.watch(tabBarProvider);
 
-    return Scaffold(
-      body: IndexedStack(
-        index: tabBarState.currentTab.tabIndex,
-        children: const [
-          HomeScreen(),
-          LogsScreen(),
-          MyWinsScreen(),
-          ProfileScreen(),
-        ],
-      ),
-      bottomNavigationBar: tabBarState.isVisible
-          ? TabBarStyleManager.getStyleConfig(TabBarStyle.floating).builder()
-          : null,
+    return Stack(
+      children: [
+        // Main content upside down
+        Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationZ(0.0), // 90 degrees rotation
+          child: IndexedStack(
+            index: tabBarState.currentTab.tabIndex,
+            children: [
+              HomeScreen(),
+              LogsScreen(),
+              MyWinsScreen(),
+              ProfileScreen(),
+            ],
+          ),
+        ),
+        // Bottom tab bar at the top (since content is flipped)
+        if (tabBarState.isVisible)
+          Positioned(
+            bottom: 8,
+            left: 0,
+            right: 0,
+            child: TabBarStyleManager.getStyleConfig(
+              TabBarStyle.floating,
+            ).builder(),
+          ),
+      ],
     );
   }
 }

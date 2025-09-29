@@ -36,4 +36,21 @@ class AppSvg {
   static String myWinsIconSelected = '$basePath/selected/imgWinSelected.svg';
   static String profileIconSelected =
       '$basePath/selected/imgProfileSelected.svg';
+  static String imgFloat = '$basePath/imgFloat.svg';
+
+  //----------------ashu--------------
+  static String personalInfoIcon = '$basePath/imgPersonalInfo.svg';
+  static String myGoalsIcon = '$basePath/imgMyGoal.svg';
+  static String wellnessPreferencesIcon =
+      '$basePath/imgWellnessPreferences.svg';
+  static String mySubscriptionsIcon = '$basePath/imgMySubscriptions.svg';
+  static String bankAccountDetailsIcon = '$basePath/imgBankAccountDetail.svg';
+  static String changePasswordIcon = '$basePath/imgChangePassword.svg';
+  static String notificationSettingsIcon =
+      '$basePath/imgNotificationSettings.svg';
+  static String helpAndSupportIcon = '$basePath/imgHelpSupport.svg';
+  static String termsAndConditionsIcon = '$basePath/imgTermsConditions.svg';
+  static String privacyPolicyIcon = '$basePath/imgPrivacyPolicy.svg';
+  static String deleteAccountIcon = '$basePath/imgDeleteAccount.svg';
+  static String logOutIcon = '$basePath/imgLogout.svg';
 }

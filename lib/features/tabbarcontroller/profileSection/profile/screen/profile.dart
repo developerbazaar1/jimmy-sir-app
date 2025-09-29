@@ -1,14 +1,118 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../../../core/constants/app_colors.dart';
+import '../../../../../core/constants/app_svg.dart';
+import '../../../../../core/constants/app_text.dart';
+import '../../../../../core/routes/route_constant.dart';
+import 'widget/profile_header.dart';
 import '../provider/profile_provider.dart';
+import 'widget/profile_sections.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final width = MediaQuery.sizeOf(context).width;
+    final state = ref.watch(profileProvider);
+    final notifier = ref.read(profileProvider.notifier);
+
     final profileNotifier = ref.watch(profileProvider.notifier);
     final profileState = ref.watch(profileProvider);
-    return Scaffold(body: Center(child: Text('Profile Screen')));
+    return Scaffold(
+      backgroundColor: AppColor.white,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            children: [
+              SizedBox(height: width * (16 / width)),
+              ProfileSettingsHeader(),
+              SizedBox(height: width * (16 / width)),
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  children: [
+                    ProfileSections(
+                      title: AppText.personalInfo,
+                      icon: AppSvg.personalInfoIcon,
+                      onTap: () {
+                        context.push(RoutePaths.profileInfo);
+                      },
+                    ),
+                    ProfileSections(
+                      title: AppText.myGoals,
+                      icon: AppSvg.myGoalsIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.wellnessPreferences,
+                      icon: AppSvg.wellnessPreferencesIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.mySubscriptions,
+                      icon: AppSvg.mySubscriptionsIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.bankAccountDetails,
+                      icon: AppSvg.bankAccountDetailsIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.changePassword,
+                      icon: AppSvg.changePasswordIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.notificationSettings,
+                      icon: AppSvg.notificationSettingsIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.helpAndSupport,
+                      icon: AppSvg.helpAndSupportIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.termsAndConditions,
+                      icon: AppSvg.termsAndConditionsIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.privacyPolicy,
+                      icon: AppSvg.privacyPolicyIcon,
+                      onTap: () {},
+                    ),
+
+                    ProfileSections(
+                      title: AppText.logOut,
+                      icon: AppSvg.logOutIcon,
+                      color: AppColor.primaryColor,
+                      onTap: () {},
+                    ),
+
+                    SizedBox(height: width * (60 / width)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

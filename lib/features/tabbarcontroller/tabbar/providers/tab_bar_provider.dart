@@ -14,6 +14,14 @@ class TabBarNotifier extends StateNotifier<TabBarModel> {
     state = state.copyWith(isVisible: isVisible);
   }
 
+  void setFullScreenMode(bool isFullScreen) {
+    state = state.copyWith(isFullScreen: isFullScreen);
+  }
+
+  void toggleFullScreenMode() {
+    state = state.copyWith(isFullScreen: !state.isFullScreen);
+  }
+
   void resetToHome() {
     state = state.copyWith(currentTab: TabBarItem.home);
   }
