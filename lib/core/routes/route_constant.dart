@@ -24,7 +24,6 @@ class RouteNames {
   static const dashboard = 'dashboard_screen';
   static const tabBar = 'tab_bar_screen';
   static const tabBarTest = 'tab_bar_test_screen';
-
 }
 
 class RoutePaths {
