@@ -1,5 +1,6 @@
 class AppText {
   //------------ashu-------------
+
   static const String splashTitle = 'Splash';
   static const String welcomeBack = 'Welcome Back';
   static const String skip = 'Skip';
@@ -45,6 +46,18 @@ class AppText {
   static const String medicationAndSupplementAllergies =
       'Medication & Supplement Allergies';
   static const String environmentalAllergies = 'Environmental Allergies';
+  static const String welcomeToEliteQuiz = 'Welcome to Elite Quiz';
+  static const String welcomeToEliteQuizDescription =
+      "This short quiz helps us understand your sleep, stress, fitness, and nutrition habits. In just a few minutes, you’ll get personalized insights and tips tailored to your lifestyle.";
+  static const String startQuiz = "Start Quiz";
+  static const String membershipTierSelection = "Membership Tier Selection";
+  static const String selectMembership = "Select membership";
+  static const String personalGoal = "Personal Goal";
+  static const String welcomeAboard = "Welcome Aboard";
+  static const String welcomeAboardDescription =
+      "Your health journey starts here. We've set up your profile and personalized preferences. Let's dive in!";
+  static const String goToDashboard = "Go to Dashboard";
+
   //----------pramod sir-----------
   //------------login-----------
   static const String welcomeBackDescription =

@@ -5,6 +5,7 @@ import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
+import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/registeration/models/quid_model.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/quiz_screen_provider.dart';
@@ -37,19 +38,6 @@ class QuizScreens extends ConsumerWidget {
         onSkipTap: () {},
       ),
 
-      // appBar: CustomAppBar(
-      //   title: "",
-      //   showBack: state.currentStep == 0,
-      //   onBackTap: () {
-      //     if (state.currentStep == 0) {
-      //       context.pop();
-      //     } else {
-      //       notifier.previousStep();
-      //     }
-      //   },
-      //   showSkip: false,
-      //   onSkipTap: () {},
-      // ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.06),
@@ -143,6 +131,8 @@ class QuizScreens extends ConsumerWidget {
                     notifier.nextStep();
                   } else {
                     print("All Selections: ${state.selections}");
+
+                    context.pushNamed(RouteNames.welcomeScreen);
                   }
                 },
               ),

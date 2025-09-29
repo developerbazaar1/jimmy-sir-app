@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
+import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/registeration/models/membershipPlan.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/membershipCard.dart';
@@ -71,7 +72,7 @@ class MembershipScreen extends ConsumerWidget {
               children: [
                 SizedBox(height: height * 0.03),
                 UrbanistApptext(
-                  text: "Membership Tier Selection",
+                  text: AppText.membershipTierSelection,
                   fontSize: width * 0.06,
                   fontWeight: FontWeight.w700,
                   color: AppColor.textBrownColor,
@@ -80,7 +81,7 @@ class MembershipScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     UrbanistApptext(
-                      text: "Select membership",
+                      text: AppText.selectMembership,
                       fontSize: width * 0.05,
                       fontWeight: FontWeight.w500,
                       color: AppColor.textBrownColor,
@@ -90,7 +91,7 @@ class MembershipScreen extends ConsumerWidget {
                         context.pushNamed(RouteNames.welcomeQuiz);
                       },
                       child: UrbanistApptext(
-                        text: "Skip",
+                        text: AppText.skip,
                         fontSize: width * 0.04,
                         fontWeight: FontWeight.w500,
                         color: AppColor.textGreyColor3,

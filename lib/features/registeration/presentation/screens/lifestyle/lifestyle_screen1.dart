@@ -38,6 +38,7 @@ class LifestyleScreen1 extends ConsumerWidget {
         },
         showSkip: true,
         onSkipTap: () {
+          context.pushNamed(RouteNames.allergiesScreen);
           // handle
         },
       ),
