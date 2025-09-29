@@ -11,6 +11,8 @@ class PoppinsApptext extends StatelessWidget {
   final int? maxLines;
   final TextAlign? textAlign;
   final TextDecoration? textDecoration;
+  final Color? textDecorationColor;
+  final double? textDecorationThickness;
   final FontStyle? fontStyle;
 
   const PoppinsApptext({
@@ -23,7 +25,9 @@ class PoppinsApptext extends StatelessWidget {
     this.maxLines,
     this.textAlign,
     this.textDecoration,
+    this.textDecorationColor,
     this.fontStyle,
+    this.textDecorationThickness,
   });
 
   @override
@@ -39,6 +43,8 @@ class PoppinsApptext extends StatelessWidget {
         color: color ?? AppColor.textColor,
         height: height ?? (heights > 650 ? heights / 600 : heights / 600),
         decoration: textDecoration ?? TextDecoration.none,
+        decorationColor: textDecorationColor ?? AppColor.textColor,
+        decorationThickness: textDecorationThickness ?? 1.0,
       ),
       textAlign: textAlign ?? TextAlign.start,
       maxLines: maxLines ?? 2,

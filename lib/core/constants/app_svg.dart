@@ -52,4 +52,5 @@ class AppSvg {
   static String privacyPolicyIcon = '$basePath/imgPrivacyPolicy.svg';
   static String deleteAccountIcon = '$basePath/imgDeleteAccount.svg';
   static String logOutIcon = '$basePath/imgLogout.svg';
+  static String profilePicIcon = '$basePath/imgProfilePic.svg';
 }
