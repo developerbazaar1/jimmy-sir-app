@@ -6,6 +6,15 @@ class LogsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: Center(child: Text('Logs Screen')));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Logs'),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      body: Column(children: []),
+    );
   }
 }
