@@ -158,7 +158,10 @@ class ProfileInfoScreen extends ConsumerWidget {
                           notifier.formKey.currentState!.save();
                         }
                         notifier.submitProfileInfoData();
-                        ProfileSavePopUp.show(context);
+                        ProfileSavePopUp.show(
+                          context,
+                          AppText.profileInfoUpdatedSuccessfully,
+                        );
                       },
                     ),
 

@@ -13,7 +13,7 @@ import '../../../../../../core/constants/app_svg.dart';
 class ProfileSavePopUp {
   static Timer? _timer;
 
-  static void show(BuildContext context) {
+  static void show(BuildContext context, String title) {
     // Cancel any existing timer
     _timer?.cancel();
 
@@ -58,7 +58,7 @@ class ProfileSavePopUp {
 
               // Subtitle
               InterApptext(
-                text: AppText.profileInfoUpdatedSuccessfully,
+                text: title,
                 fontSize: width * (20 / width),
                 color: AppColor.textColor,
                 fontWeight: FontWeight.w600,

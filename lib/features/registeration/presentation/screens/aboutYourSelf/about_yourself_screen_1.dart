@@ -8,6 +8,7 @@ import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/attached_drop_down.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_progressIndicator.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/aboutyourself_Provider.dart';
@@ -191,7 +192,7 @@ class _StepTwo extends ConsumerWidget {
               ),
             ),
             SizedBox(width: width * 0.02),
-            _AttachedDropdown(
+            AttachedDropdown(
               value: state.heightUnit,
               items: const ["cm", "ft/in"],
               onChanged: (value) => notifier.updateHeightUnit(value),
@@ -217,7 +218,7 @@ class _StepTwo extends ConsumerWidget {
               ),
             ),
             SizedBox(width: width * 0.02),
-            _AttachedDropdown(
+            AttachedDropdown(
               value: state.weightUnit,
               items: const ["kg", "lbs"],
               onChanged: (value) => notifier.updateWeightUnit(value),
@@ -228,120 +229,6 @@ class _StepTwo extends ConsumerWidget {
     );
   }
 }
-
-// --------------------------------- Attached Dropdown ------------------------/
-
-class _AttachedDropdown extends StatefulWidget {
-  final String value;
-  final List<String> items;
-  final ValueChanged<String> onChanged;
-
-  const _AttachedDropdown({
-    required this.value,
-    required this.items,
-    required this.onChanged,
-  });
-
-  @override
-  State<_AttachedDropdown> createState() => _AttachedDropdownState();
-}
-
-class _AttachedDropdownState extends State<_AttachedDropdown> {
-  bool expanded = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Main container
-        GestureDetector(
-          onTap: () => setState(() => expanded = !expanded),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: width * 0.03,
-              vertical: height * 0.018,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                UrbanistApptext(
-                  text: widget.value,
-                  fontSize: width * 0.04,
-                  fontWeight: FontWeight.w600,
-                  color: AppColor.textBrownColor,
-                ),
-                Icon(
-                  expanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  color: Colors.brown,
-                ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(height: height * 0.01),
-
-        // Expanded list
-        if (expanded)
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: width * 0.03),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Column(
-              children: widget.items.map((item) {
-                return InkWell(
-                  onTap: () {
-                    widget.onChanged(item);
-                    setState(() => expanded = false);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: height * 0.01,
-                      horizontal: width * 0.02,
-                    ),
-                    child: UrbanistApptext(
-                      text: item,
-                      fontSize: width * 0.04,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.textBrownColor,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-      ],
-    );
-  }
-}
-
-
-
 
 
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../../core/constants/app_colors.dart';
+import '../../My Subscription/screen/my_subscription_screen.dart';
 import '../../../../../core/constants/app_svg.dart';
 import '../../../../../core/constants/app_text.dart';
 import '../../../../../core/routes/route_constant.dart';
@@ -41,25 +41,31 @@ class ProfileScreen extends ConsumerWidget {
                       title: AppText.personalInfo,
                       icon: AppSvg.personalInfoIcon,
                       onTap: () {
-                        // context.push(RoutePaths.profileInfo);
+                        context.push(RoutePaths.profileInfo);
                       },
                     ),
                     ProfileSections(
                       title: AppText.myGoals,
                       icon: AppSvg.myGoalsIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.myGoals);
+                      },
                     ),
 
                     ProfileSections(
                       title: AppText.wellnessPreferences,
                       icon: AppSvg.wellnessPreferencesIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.wellnessPreferences);
+                      },
                     ),
 
                     ProfileSections(
                       title: AppText.mySubscriptions,
                       icon: AppSvg.mySubscriptionsIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.mySubscription);
+                      },
                     ),
 
                     ProfileSections(
