@@ -17,4 +17,7 @@ class ApiConstant {
   static const String myWins = '$baseUrl/my-wins';
   static const String profile = '$baseUrl/profile';
   static const String profileInfo = '$baseUrl/profile-info';
+  static const String myGoals = '$baseUrl/my-goals';
+  static const String bodyMetrics = '$baseUrl/body-metrics';
+  static const String mySubscription = '$baseUrl/my-subscription';
 }

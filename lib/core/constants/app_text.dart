@@ -136,4 +136,22 @@ class AppText {
   static const String cancelButton = 'Cancel';
   static const String deleteAccountTitle = 'Delete Account !';
   static const String deleteAccountnnnnnnnn = 'Delete Account !';
+  static const String myGoalsTitle = 'My Goals';
+  static const String myGoalsUpdatedSuccessfully =
+      'Goals Updated Successfully!';
+  static const String bodyMetricsMsg =
+      'Update your wellness preferences to align with your goals';
+  static const String whatIsYourGender = 'What is your gender?';
+  static const String bodyMetricsTitle = 'Body Metrics';
+  static const String bodyMetricsUpdatedSuccessfully =
+      'Body metrics updated successfully.';
+  static const String lifeStyle = 'Life Style';
+  static const String lifeStyleUpdatedSuccessfully =
+      'Life Style updated successfully.';
+  static const String allergiesRestrictions = 'Allergies & Restrictions';
+  static const String allergiesRestrictionsUpdatedSuccessfully =
+      'Allergies & Restrictions updated successfully.';
+  static const String retakeQuizUpdatedSuccessfully =
+      'Quiz updated successfully.';
+  static const String mySubscription = 'My Subscription';
 }

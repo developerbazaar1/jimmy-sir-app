@@ -16,8 +16,8 @@ class SplashScreen extends ConsumerWidget {
     // When splash completes, navigate.
     ref.listen(splashReadyProvider, (prev, next) {
       next.whenData((_) {
-        context.pushNamed(RouteNames.onboarding);
-        // context.pushReplacementNamed(RouteNames.tabBar);
+        // context.pushNamed(RouteNames.onboarding);
+        context.pushReplacementNamed(RouteNames.tabBar);
       });
     });
     return Scaffold(

@@ -26,6 +26,14 @@ class RouteNames {
   static const String tabBar = 'tab_bar_screen';
   static const tabBarTest = 'tab_bar_test_screen';
   static const profileInfo = 'profile_info_screen';
+  static const myGoals = 'my_goals_screen';
+  static const wellnessPreferences = 'wellness_preferences_screen';
+  static const bodyMetrics = 'body_metrics_screen';
+  static const lifeStyle = 'life_style_screen';
+  static const allergiesRestrictions = 'allergies_restrictions_screen';
+  static const retakeQuizWelcome = 'retake_quiz_welcome_screen';
+  static const retakeQuizScreen = 'retake_quiz_screen';
+  static const mySubscription = 'my_subscription_screen';
 }
 
 class RoutePaths {
@@ -54,4 +62,12 @@ class RoutePaths {
   static const tabBar = '/tab_bar_screen';
   static const tabBarTest = '/tab_bar_test_screen';
   static const profileInfo = '/profile_info_screen';
+  static const myGoals = '/my_goals_screen';
+  static const wellnessPreferences = '/wellness_preferences_screen';
+  static const bodyMetrics = '/body_metrics_screen';
+  static const lifeStyle = '/life_style_screen';
+  static const allergiesRestrictions = '/allergies_restrictions_screen';
+  static const retakeQuizWelcome = '/retake_quiz_welcome_screen';
+  static const retakeQuizScreen = '/retake_quiz_screen';
+  static const mySubscription = '/my_subscription_screen';
 }

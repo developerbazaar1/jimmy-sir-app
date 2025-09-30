@@ -107,14 +107,16 @@ class LoginScreen extends ConsumerWidget {
                   borderColor: AppColor.primaryColor,
                   fontWeight: FontWeight.w600,
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      authNotifier.login(
-                        _emailController.text,
-                        _passwordController.text,
-                      );
-                      // TODO: Call login logic here
-                    }
+                    // if (_formKey.currentState!.validate()) {
+                    //   _formKey.currentState!.save();
+                    //   authNotifier.login(
+                    //     _emailController.text,
+                    //     _passwordController.text,
+                    //   );
+                    //   // TODO: Call login logic here
+                    // }
+
+                    context.pushNamed(RouteNames.tabBar);
                   },
                 ),
                 SizedBox(height: width * 0.0204),
