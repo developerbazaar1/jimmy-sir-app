@@ -12,6 +12,7 @@ class RouteNames {
   static const welcomeQuiz = 'welcome_quiz_screen';
   static const quizScreens = 'quiz_screens';
   static const welcomeScreen = 'welcome_screen';
+  static const addGoalScreen = 'add_goal_screen';
 
   //----------------pramod sir----------
   static const signup = 'signup_screen';
@@ -51,6 +52,7 @@ class RoutePaths {
   static const welcomeQuiz = '/welcome_quiz_screen';
   static const quizScreens = '/quiz_screens';
   static const welcomeScreen = '/welcome_screen';
+  static const addGoalScreen = '/add_goal_screen';
 
   //----------------pramod sir-----------
   static const signup = '/signup_screen';

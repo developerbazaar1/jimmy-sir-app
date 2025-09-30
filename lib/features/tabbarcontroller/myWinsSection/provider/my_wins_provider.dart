@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../services/my_wins_services.dart';
-import '../../../../../data/data sources/remote/network_api_service.dart';
+import '../../../../data/data sources/remote/network_api_service.dart';
 
+//data holder.
 class MyWinsState {
   final MapSD myWinsData;
   final bool isLoading;
@@ -15,14 +16,25 @@ class MyWinsState {
   });
 }
 
+//business logic.
 class MyWinsNotifier extends StateNotifier<MyWinsState> {
   final MyWinsServices myWinsServices;
 
   MyWinsNotifier({required this.myWinsServices})
     : super(MyWinsState(myWinsData: {}, isLoading: false, error: ''));
 
-  Future<MapSD> getMyWinsData() async {
-    return await myWinsServices.getMyWinsData();
+  Future<void> fetchMyWins() async {
+    try {
+      state = MyWinsState(myWinsData: {}, isLoading: true, error: '');
+      final data = await myWinsServices.getMyWinsData();
+      state = MyWinsState(myWinsData: data, isLoading: false, error: '');
+    } catch (e) {
+      state = MyWinsState(
+        myWinsData: {},
+        isLoading: false,
+        error: e.toString(),
+      );
+    }
   }
 }
 

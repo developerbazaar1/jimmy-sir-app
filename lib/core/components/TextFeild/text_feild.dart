@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 
-
 class AppTextField extends StatefulWidget {
   final String? prefixIconImg;
   final String? suffixIcon;
@@ -85,12 +84,11 @@ class _AppTextFieldState extends State<AppTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Outer bordered container that reacts to validation
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: borderColor, width: 1.5),
-            color: Colors.transparent,
+            color: Colors.white,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,7 +108,6 @@ class _AppTextFieldState extends State<AppTextField> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: TextFormField(
-                    
                     key: _fieldKey,
                     onTap: widget.onTap,
                     focusNode: widget.focusNode,
@@ -126,7 +123,6 @@ class _AppTextFieldState extends State<AppTextField> {
                       color: AppColor.placeholderColor,
                     ),
                     decoration: InputDecoration(
-                      // Label floats inside field per your screenshot
                       labelText: widget.labelText,
                       labelStyle: TextStyle(
                         fontSize: widget.labelFontSize ?? width * 0.046,
@@ -135,8 +131,13 @@ class _AppTextFieldState extends State<AppTextField> {
                         color: AppColor.placeholderColor,
                       ),
                       hintText: widget.hint ?? widget.defaultText,
+                      hintStyle: TextStyle(
+                        fontSize: widget.labelFontSize ?? width * 0.040,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'urbanist',
+                        color: AppColor.placeholderColor,
+                      ),
                       isDense: true,
-                      // remove internal borders; we use the outer container border
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -147,12 +148,10 @@ class _AppTextFieldState extends State<AppTextField> {
                         left: 12,
                         right: 0,
                       ),
-                      // trailing icons
                       suffixIcon: _buildSuffix(),
                     ),
                     validator: (value) {
                       final res = widget.validator?.call(value);
-                      // update your outer border + external error text
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         if (mounted && _errorText != res)
                           setState(() => _errorText = res);

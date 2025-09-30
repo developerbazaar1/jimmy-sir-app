@@ -8,6 +8,9 @@ class AppImages {
   static String onboarding_22 = '$basePath/onboarding_22.png';
   static String onboarding_33 = '$basePath/onboarding_33.png';
   static String aboutYourself = '$basePath/about_your_screen_image.png';
-  static String eyeToggleIcon = '$basePath/eye_toggle.svg';
-  static String eyeToggle2Icon = '$basePath/eye_toggle2.svg';
+  static String myspinnBanner = '$basePath/wheel_spin_image.png';
+
+  //----------temp----------------
+  static String basePathTemp = 'assets/temp';
+  static String personTemp = '$basePathTemp/person_temp.png';
 }

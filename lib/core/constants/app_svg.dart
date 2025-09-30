@@ -2,9 +2,6 @@ class AppSvg {
   //-------------------ashu--------------
   static String basePath = 'assets/svgs';
   // static String example = "$basePath/example.svg";
-  // static String logo1 = "$basePath/onboarding_1.svg";
-  // static String logo2 = "$basePath/onboarding_2.svg";
-  // static String logo3 = "$basePath/onboarding_3.svg";
   static String roundNextIcon = "$basePath/roundNextIcon.svg";
   static String arrowLeftIcon = "$basePath/arrowLeftIcon.svg";
   static String aboutYourScreenImage = "$basePath/about_your_screenImage.svg";
@@ -21,7 +18,6 @@ class AppSvg {
   static String imgChangePSfully = '$basePath/imgChangePSfully.svg';
   static String phoneIcon = '$basePath/imgPhoneNumberIcons.svg';
   //static String googleIcon = '$basePath/imgGoogle.svg';
-
   static String homeUnSelectedIcon =
       '$basePath/unselected/imgHomeUnSelected.svg';
   static String logsUnSelectedIcon =
@@ -30,7 +26,6 @@ class AppSvg {
       '$basePath/unselected/imgWinUnSelected.svg';
   static String profileUnSelectedIcon =
       '$basePath/unselected/imgProfileUnSelected.svg';
-
   static String homeIconSelected = '$basePath/selected/imgHomeSelected.svg';
   static String logsIconSelected = '$basePath/selected/imgLogSelected.svg';
   static String myWinsIconSelected = '$basePath/selected/imgWinSelected.svg';
@@ -54,4 +49,9 @@ class AppSvg {
   static String deleteAccountIcon = '$basePath/imgDeleteAccount.svg';
   static String logOutIcon = '$basePath/imgLogout.svg';
   static String profilePicIcon = '$basePath/imgProfilePic.svg';
+  static String dollarIcon = '$basePath/dollar_icon.svg';
+  static String goalIcon = '$basePath/goal_icon.svg';
+  static String myWinsTextIcon = '$basePath/my_win_text_img.svg';
+  static String myWinBanner = '$basePath/myWinBanner.svg';
+  static String goalIcon2 = '$basePath/goal_icon2.svg';
 }

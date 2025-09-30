@@ -77,11 +77,10 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-
     - assets/lottie/splash_animation.json
-
     - assets/svgs/selected/
     - assets/svgs/unSelected/
+    - assets/temp/
 
   #   - images/a_dot_ham.jpeg
 

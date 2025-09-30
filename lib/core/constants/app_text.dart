@@ -1,5 +1,5 @@
 class AppText {
-  //------------ashu-------------
+  //--------------------------------------------ashu-------------------------------------------------------
   static const String splashTitle = 'Splash';
   static const String welcomeBack = 'Welcome Back';
   static const String skip = 'Skip';

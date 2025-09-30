@@ -11,6 +11,11 @@ import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifest
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/membership/membership_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/welcomeScreen/welcome_screen.dart';
+
+import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/add_goal_screen.dart';
+import '../../features/auth/changePassword/screen/change_password_screen.dart';
+import '../../features/auth/signup/screen/singup_screen.dart';
+
 import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
 import 'route_import.dart';
 
@@ -64,6 +69,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.welcomeScreen,
         name: RouteNames.welcomeScreen,
         builder: (_, __) => const WelcomeScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.addGoalScreen,
+        name: RouteNames.addGoalScreen,
+        builder: (_, __) => const AddGoalScreen(),
       ),
 
       //----------------pramod sir----------------
@@ -122,6 +132,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.profileInfo,
         builder: (_, __) => const ProfileInfoScreen(),
       ),
+
       GoRoute(
         path: RoutePaths.myGoals,
         name: RouteNames.myGoals,
@@ -162,6 +173,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.mySubscription,
         builder: (_, __) => MySubscriptionScreen(),
       ),
+
     ],
   );
 });
