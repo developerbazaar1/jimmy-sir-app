@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColor {
   //------------------ashu------------
-  static Color white = Color(0XFFFFFFFF);
+  static Color white = Color(0XFFFFFDFB);
+
   static Color primaryColor = Color(0XFFEE953D);
   static Color primaryColor2 = Color(0XFFEE6975E);
   static Color primaryColor3 = Color(0XFFAA621A);
@@ -24,4 +25,5 @@ class AppColor {
   static Color border = Color(0XFFCDCDCD);
   static Color placeholderColor = Color(0XFFA4A4A4);
   static Color black = Color(0XFF000000);
+  static Color shadowColor = Color(0X838BB41F).withOpacity(0.12);
 }

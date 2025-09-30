@@ -11,12 +11,12 @@ import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifest
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/membership/membership_screen.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/welcomeScreen/welcome_screen.dart';
+
 import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/add_goal_screen.dart';
 import '../../features/auth/changePassword/screen/change_password_screen.dart';
 import '../../features/auth/signup/screen/singup_screen.dart';
-import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
-import '../../features/tabbarcontroller/tabbar/screens/tab_bar_test_screen.dart';
 
+import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
 import 'route_import.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -132,6 +132,48 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.profileInfo,
         builder: (_, __) => const ProfileInfoScreen(),
       ),
+
+      GoRoute(
+        path: RoutePaths.myGoals,
+        name: RouteNames.myGoals,
+        builder: (_, __) => MyGoalsScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.wellnessPreferences,
+        name: RouteNames.wellnessPreferences,
+        builder: (_, __) => WellnessPreferences(),
+      ),
+      GoRoute(
+        path: RoutePaths.bodyMetrics,
+        name: RouteNames.bodyMetrics,
+        builder: (_, __) => BodyMetricsScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.lifeStyle,
+        name: RouteNames.lifeStyle,
+        builder: (_, __) => LifeStyleScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.allergiesRestrictions,
+        name: RouteNames.allergiesRestrictions,
+        builder: (_, __) => AllergiesRestrictionsScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.retakeQuizWelcome,
+        name: RouteNames.retakeQuizWelcome,
+        builder: (_, __) => RetakeQuizWelcomeScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.retakeQuizScreen,
+        name: RouteNames.retakeQuizScreen,
+        builder: (_, __) => RetakeQuizScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.mySubscription,
+        name: RouteNames.mySubscription,
+        builder: (_, __) => MySubscriptionScreen(),
+      ),
+
     ],
   );
 });

@@ -6,3 +6,12 @@ export 'package:jimmy_sir_app/features/auth/forgotPassword/screen/forgot_passwor
 export 'package:jimmy_sir_app/features/auth/verifyOTP/screen/verify_otp_screen.dart';
 export 'package:jimmy_sir_app/features/auth/signup/screen/singup_screen.dart';
 export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/profileInfo/screen/profile_info.dart';
+export 'package:jimmy_sir_app/features/auth/changePassword/screen/change_password_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/MyGoals/screen/my_goals_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness Preferences/wellness_preferences.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%20Preferences/Body%20Metrics/body_metrics_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%20Preferences/Life%20Style/life_style_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%20Preferences/Allergies%20Restrictions/allergies_restrictions_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%20Preferences/Retake%20Quiz/retake_quiz_welcome.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%20Preferences/Retake%20Quiz/retake_quiz_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/My%20Subscription/screen/my_subscription_screen.dart';

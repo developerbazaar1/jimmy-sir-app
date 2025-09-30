@@ -292,9 +292,7 @@ class commonSelectableContainer extends StatelessWidget {
             ),
             SizedBox(width: width * 0.02),
             Icon(
-              isSelected
-                  ? Icons.check_box_rounded
-                  : Icons.check_box_outline_blank_rounded,
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
               color: isSelected ? Colors.green : Colors.grey,
             ),
           ],
