@@ -14,6 +14,9 @@ class AppColor {
   static Color textGreyColor3 = Color(0XFF7B7B7B);
   static Color borderGreenLight = Color(0XFF9bb168);
   static Color bottomBarColor = Color(0XFF3E3E3E);
+  static Color pinkColor = Color(0XFFF43F5E);
+  static Color yellowColor = Color(0XFFF59E0B);
+  static Color greenColor = Color(0XFF2BA300);
 
   //-------------------pramod sir----------------
   static Color textBrownColor = Color(0XFF442200);

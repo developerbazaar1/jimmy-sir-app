@@ -1,7 +1,6 @@
-import '../../../../../../core/constants/app_urls.dart';
-import '../../../../../../core/constants/enum.dart';
-import '../../../../../../data/data sources/remote/network_api_service.dart';
-
+import '../../../../../core/constants/app_urls.dart';
+import '../../../../../core/constants/enum.dart';
+import '../../../../../data/data sources/remote/network_api_service.dart';
 
 class MyWinsServices {
   Future<MapSD> getMyWinsData() async {
@@ -10,4 +9,4 @@ class MyWinsServices {
       method: HttpMethod.get,
     );
   }
-}   
+}

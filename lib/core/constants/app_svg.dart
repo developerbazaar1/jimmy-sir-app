@@ -53,4 +53,5 @@ class AppSvg {
   static String goalIcon = '$basePath/goal_icon.svg';
   static String myWinsTextIcon = '$basePath/my_win_text_img.svg';
   static String myWinBanner = '$basePath/myWinBanner.svg';
+  static String goalIcon2 = '$basePath/goal_icon2.svg';
 }

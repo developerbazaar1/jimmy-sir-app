@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_images.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
+import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import '../provider/my_wins_provider.dart';
 
 class MyWinsScreen extends ConsumerWidget {
@@ -15,8 +17,8 @@ class MyWinsScreen extends ConsumerWidget {
     final size = MediaQuery.sizeOf(context);
     final height = size.height;
     final width = size.width;
-    final myWinsNotifier = ref.watch(myWinsProvider.notifier);
-    final myWinsState = ref.watch(myWinsProvider);
+    //  final myWinsState = ref.watch(myWinsProvider);
+    //   final myWinsNotifier = ref.read(myWinsProvider.notifier);
     return Scaffold(
       backgroundColor: AppColor.white,
       body: SingleChildScrollView(
@@ -65,11 +67,16 @@ class MyWinsScreen extends ConsumerWidget {
                   vertical: height * 0.01,
                 ),
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(width * 0.02),
-                  border: Border.all(
-                    color: AppColor.primaryColor.withOpacity(0.2),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColor.border.withOpacity(0.2)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,10 +127,16 @@ class MyWinsScreen extends ConsumerWidget {
                   vertical: height * 0.01,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColor.primaryColor.withOpacity(0.1),
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColor.border.withOpacity(0.2)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,58 +156,28 @@ class MyWinsScreen extends ConsumerWidget {
             ),
             SizedBox(height: height * 0.02),
 
-            // Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-            //   child: Container(
-            //     padding: EdgeInsets.symmetric(
-            //       horizontal: width * 0.05,
-            //       vertical: height * 0.01,
-            //     ),
-            //     decoration: BoxDecoration(
-            //       color: Colors.white,
-            //       borderRadius: BorderRadius.circular(width * 0.02),
-            //       border: Border.all(
-            //         color: AppColor.primaryColor.withOpacity(0.2),
-            //       ),
-            //     ),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             UrbanistApptext(
-            //               text: "Goals & Milestones",
-            //               fontSize: width * 0.04,
-            //               fontWeight: FontWeight.w700,
-            //             ),
-            //             SizedBox(width: width * 0.02),
-            //           ],
-            //         ),
-            //         Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [],
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.05),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // --- Goals & Milestones Section ---
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: width * 0.05,
                       vertical: height * 0.015,
                     ),
                     decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(width * 0.04),
+                      borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: AppColor.primaryColor.withOpacity(0.2),
+                        color: AppColor.border.withOpacity(0.2),
                       ),
                     ),
                     child: Column(
@@ -208,44 +191,46 @@ class MyWinsScreen extends ConsumerWidget {
                               fontSize: width * 0.045,
                               fontWeight: FontWeight.w700,
                             ),
-                            Container(
-                              height: height * 0.05,
-                              width: height * 0.05,
-                              decoration: BoxDecoration(
-                                color: AppColor.primaryColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.add,
-                                size: height * 0.03,
-                                color: Colors.white,
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(RouteNames.addGoalScreen);
+                              },
+                              child: Container(
+                                height: height * 0.04,
+                                width: height * 0.04,
+                                decoration: BoxDecoration(
+                                  color: AppColor.primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  size: height * 0.03,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
                         ),
                         SizedBox(height: height * 0.01),
-
-                        // Goal 1 - Weight Loss
                         _buildGoalItem(
                           context,
                           width,
                           svg: AppSvg.goalIcon,
-                          iconColor: Colors.pinkAccent,
+                          iconColor: AppColor.pinkColor,
                           title: "Weight Loss Goal",
                           progress: 0.75,
-                          progressColor: Colors.pinkAccent,
+                          progressColor: AppColor.pinkColor,
                         ),
                         SizedBox(height: height * 0.02),
 
-                        // Goal 2 - Monthly Step
                         _buildGoalItem(
                           context,
                           width,
-                          svg: AppSvg.goalIcon,
-                          iconColor: Colors.orange,
+                          svg: AppSvg.goalIcon2,
+                          iconColor: AppColor.yellowColor,
                           title: "Monthly Step",
                           progress: 0.9,
-                          progressColor: Colors.orange,
+                          progressColor: AppColor.yellowColor,
                         ),
                       ],
                     ),
@@ -258,15 +243,15 @@ class MyWinsScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: AppColor.border.withOpacity(0.2),
+                          color: Colors.grey.withOpacity(0.2),
                           blurRadius: 8,
-                          offset: Offset(0, 6),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(width * 0.04),
+                      borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: AppColor.primaryColor.withOpacity(0.2),
+                        color: AppColor.border.withOpacity(0.2),
                       ),
                     ),
                     child: Column(
@@ -281,7 +266,7 @@ class MyWinsScreen extends ConsumerWidget {
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: width * 0.03,
-                            vertical: height * 0.01,
+                            vertical: height * 0.011,
                           ),
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -301,17 +286,13 @@ class MyWinsScreen extends ConsumerWidget {
                             children: [
                               Container(
                                 height: height * 0.04,
-                                width: height * 0.04,
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  Icons.attach_money,
-                                  size: height * 0.03,
-                                  color: Colors.white,
+                                width: width * 0.08,
+
+                                child: Center(
+                                  child: SvgPicture.asset(AppSvg.dollarIcon),
                                 ),
                               ),
+
                               SizedBox(width: width * 0.02),
                               Expanded(
                                 child: UrbanistApptext(
@@ -348,7 +329,6 @@ Widget _buildGoalItem(
   BuildContext context,
   double width, {
 
-  // required IconData icon,
   required String svg,
   required Color iconColor,
   required String title,
@@ -360,59 +340,69 @@ Widget _buildGoalItem(
   return Container(
     padding: EdgeInsets.symmetric(
       horizontal: width * 0.03,
-      vertical: height * 0.02,
+      vertical: height * 0.018,
     ),
     decoration: BoxDecoration(
       boxShadow: [
         BoxShadow(
-          color: AppColor.border.withOpacity(0.2),
+          color: Colors.grey.withOpacity(0.2),
           blurRadius: 8,
-          offset: Offset(0, 6),
+          offset: const Offset(0, 2),
         ),
       ],
-      color: iconColor.withOpacity(0.05),
+      color: Colors.white,
       borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: AppColor.border.withOpacity(0.2)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: height * 0.04,
-              width: width * 0.04,
+              width: width * 0.08,
               decoration: BoxDecoration(
                 color: iconColor.withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
-              child: SvgPicture.asset(svg),
-              //Icon(icon, size: 16, color: iconColor),
+              child: Center(child: SvgPicture.asset(svg)),
             ),
-            SizedBox(width: width * 0.02),
+            SizedBox(width: width * 0.03),
             Expanded(
-              child: UrbanistApptext(
-                text: title,
-                fontSize: width * 0.04,
-                fontWeight: FontWeight.w600,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      UrbanistApptext(
+                        text: title,
+                        fontSize: width * 0.03,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      UrbanistApptext(
+                        text: "${(progress * 100).toInt()}%",
+                        fontSize: width * 0.03,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: height * 0.008),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: LinearProgressIndicator(
+                      value: progress,
+                      minHeight: height * 0.007,
+                      backgroundColor: Colors.grey[200],
+                      color: progressColor,
+                    ),
+                  ),
+                ],
               ),
             ),
-            UrbanistApptext(
-              text: "${(progress * 100).toInt()}%",
-              fontSize: width * 0.04,
-              fontWeight: FontWeight.w500,
-              color: AppColor.textColor.withOpacity(0.7),
-            ),
           ],
-        ),
-        SizedBox(height: height * 0.02),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: LinearProgressIndicator(
-            value: progress,
-            minHeight: height * 0.01,
-            backgroundColor: Colors.grey[200],
-            color: progressColor,
-          ),
         ),
       ],
     ),
