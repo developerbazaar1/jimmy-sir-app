@@ -9,6 +9,11 @@ class AppImages {
   static String onboarding_33 = '$basePath/onboarding_33.png';
   static String aboutYourself = '$basePath/about_your_screen_image.png';
   static String myspinnBanner = '$basePath/wheel_spin_image.png';
+  static String spinWheelBackground = '$basePath/spinwheel_background.png';
+  static String spinTextImage = '$basePath/spinText_image.png';
+  static String spinToImage = '$basePath/spinTo_image.png';
+  static String spinWinImage = '$basePath/spinWin_image.png';
+  static String backRoundButtonIcon = '$basePath/back_round_button_icon.png';
 
   //----------temp----------------
   static String basePathTemp = 'assets/temp';

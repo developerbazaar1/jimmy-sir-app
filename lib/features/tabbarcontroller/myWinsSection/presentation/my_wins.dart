@@ -149,7 +149,12 @@ class MyWinsScreen extends ConsumerWidget {
                       fontWeight: FontWeight.w700,
                     ),
                     SizedBox(height: height * 0.01),
-                    Image.asset(AppImages.myspinnBanner),
+                    GestureDetector(
+                      onTap: () {
+                        context.pushNamed(RouteNames.spinWheelScreen);
+                      },
+                      child: Image.asset(AppImages.myspinnBanner),
+                    ),
                   ],
                 ),
               ),

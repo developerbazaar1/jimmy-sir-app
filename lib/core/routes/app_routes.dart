@@ -13,6 +13,7 @@ import 'package:jimmy_sir_app/features/registeration/presentation/screens/member
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/welcomeScreen/welcome_screen.dart';
 
 import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/add_goal_screen.dart';
+import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/spinwheel_screen.dart';
 import '../../features/auth/changePassword/screen/change_password_screen.dart';
 import '../../features/auth/signup/screen/singup_screen.dart';
 
@@ -74,6 +75,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.addGoalScreen,
         name: RouteNames.addGoalScreen,
         builder: (_, __) => const AddGoalScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.spinWheelScreen,
+        name: RouteNames.spinWheelScreen,
+        builder: (_, __) => const SpinWheelScreen(),
       ),
 
       //----------------pramod sir----------------
@@ -173,7 +179,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.mySubscription,
         builder: (_, __) => MySubscriptionScreen(),
       ),
-
     ],
   );
 });

@@ -81,7 +81,7 @@ class AddGoalScreen extends ConsumerWidget {
               CustomButton(
                 text: "Add Goal",
                 onPressed: () {
-                  ProfileSavePopUp.show(context);
+                  ProfileSavePopUp.show(context, "Goal Added Sucessfully");
                 },
                 color: AppColor.primaryColor,
                 textColor: AppColor.white,
