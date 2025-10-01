@@ -71,7 +71,6 @@ class MyGoalsScreen extends ConsumerWidget {
           onTap: () => context.pop(),
           child: Icon(
             Icons.arrow_back_ios_new,
-            fontWeight: FontWeight.w700,
             color: AppColor.black,
             size: width * 0.05,
           ),
