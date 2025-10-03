@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/components/TextFeild/text_feild.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
+import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/provider/add_goals_provider.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/profileInfo/screen/widget/profile_save_pop.dart';
 
@@ -17,7 +19,7 @@ class AddGoalScreen extends ConsumerWidget {
     final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: AppColor.white,
-      appBar: CustomAppBar2(title: "Add Goal"),
+      appBar: CustomAppBar2(title: AppText.addGoal),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.05),
@@ -26,7 +28,7 @@ class AddGoalScreen extends ConsumerWidget {
             children: [
               SizedBox(height: height * 0.04),
               UrbanistApptext(
-                text: "Goal Name",
+                text: AppText.goalName,
                 fontSize: width * 0.04,
                 fontWeight: FontWeight.w600,
                 color: AppColor.black,
@@ -35,20 +37,20 @@ class AddGoalScreen extends ConsumerWidget {
 
               AppTextField(
                 controller: TextEditingController(),
-                hint: "Enter Goal Name",
+                hint: AppText.enterGoalName,
               ),
               SizedBox(height: height * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   UrbanistApptext(
-                    text: "Duration",
+                    text: AppText.duration,
                     fontSize: width * 0.04,
                     fontWeight: FontWeight.w600,
                     color: AppColor.black,
                   ),
                   UrbanistApptext(
-                    text: "in days",
+                    text: AppText.inDays,
                     fontSize: width * 0.04,
                     fontWeight: FontWeight.w600,
                     color: AppColor.primaryColor,
@@ -58,11 +60,11 @@ class AddGoalScreen extends ConsumerWidget {
               SizedBox(height: height * 0.01),
               AppTextField(
                 controller: TextEditingController(),
-                hint: "Enter Duration",
+                hint: AppText.enterDuration,
               ),
               SizedBox(height: height * 0.02),
               UrbanistApptext(
-                text: "What do you want to focus on?",
+                text: AppText.whatDoYouWantToFocusOn,
                 fontSize: width * 0.04,
                 fontWeight: FontWeight.w600,
                 color: AppColor.black,
@@ -79,9 +81,9 @@ class AddGoalScreen extends ConsumerWidget {
               ),
               SizedBox(height: height * 0.25),
               CustomButton(
-                text: "Add Goal",
+                text: AppText.addGoal,
                 onPressed: () {
-                  ProfileSavePopUp.show(context, "Goal Added Sucessfully");
+                  ProfileSavePopUp.show(context, AppText.goalAddedSucessfully);
                 },
                 color: AppColor.primaryColor,
                 textColor: AppColor.white,
@@ -107,6 +109,8 @@ class FocusOption extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
     final selectedSet = ref.watch(selectedFocusProvider);
     final isSelected = selectedSet.contains(label);
 
@@ -121,11 +125,17 @@ class FocusOption extends ConsumerWidget {
           current.add(label);
         }
 
-        notifier.state = current; // update state
+        notifier.state = current;
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        margin: EdgeInsets.symmetric(
+          horizontal: width * 0.01,
+          vertical: height * 0.01,
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.02,
+          vertical: height * 0.01,
+        ),
         decoration: BoxDecoration(
           color: isSelected ? AppColor.primaryColor : AppColor.white,
           borderRadius: BorderRadius.circular(8),
@@ -135,8 +145,8 @@ class FocusOption extends ConsumerWidget {
         ),
         child: Text(
           label,
-          style: TextStyle(
-            fontSize: 14,
+          style: GoogleFonts.montserrat(
+            fontSize: width * 0.04,
             fontWeight: FontWeight.w500,
             color: isSelected ? AppColor.white : AppColor.black,
           ),

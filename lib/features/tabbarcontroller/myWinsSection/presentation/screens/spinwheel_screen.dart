@@ -2,17 +2,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_images.dart';
-import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/provider/spin_provider.dart';
 import 'package:stroke_text/stroke_text.dart';
 
-/// StateProvider for selected index
 final spinSelectedProvider = StateProvider<int?>((ref) => null);
 
 class SpinWheelScreen extends ConsumerStatefulWidget {
@@ -38,14 +35,7 @@ class _SpinWheelScreenState extends ConsumerState<SpinWheelScreen> {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
 
-    final items = [
-      "50 points",
-      "100 points",
-      "200 points",
-      "10 points",
-      "30 points",
-      "1000 points",
-    ];
+    final items = ["50", "100", "200", "10", "30", "1000"];
 
     final spinController = ref.watch(spinControllerProvider);
     final selected = ref.watch(selectedIndexProvider);
@@ -98,7 +88,7 @@ class _SpinWheelScreenState extends ConsumerState<SpinWheelScreen> {
                 SizedBox(height: height * 0.04),
 
                 AnimatedSwitcher(
-                  duration: Duration(milliseconds: 2000),
+                  duration: Duration(milliseconds: 3800),
                   transitionBuilder: (child, animation) {
                     final scaleAnimation = Tween<double>(
                       begin: 0.0,
@@ -173,36 +163,40 @@ class _SpinWheelScreenState extends ConsumerState<SpinWheelScreen> {
                             padding: EdgeInsets.all(width * 0.015),
 
                             child: Transform.rotate(
-                              angle: pi, // 180° rotation
+                              angle: pi,
                               child: FortuneWheel(
                                 selected: ref
                                     .watch(spinControllerProvider)
                                     .stream,
-                                onAnimationEnd: () {
-                                  final idx = ref.read(selectedIndexProvider);
-                                  // Now show the "You won" text (AnimatedSwitcher)
-                                  // Optionally, reset after a delay
-                                },
+                                onAnimationEnd: () {},
                                 items: [
                                   for (int i = 0; i < items.length; i++)
                                     FortuneItem(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Container(),
-                                          UrbanistApptext(
-                                            textAlign: TextAlign.center,
-                                            text: items[i],
-                                            fontSize: width * 0.039,
-                                            fontWeight: FontWeight.w900,
-                                            color: AppColor.blackgrey,
-                                          ),
-                                        ],
+                                      child: Transform.rotate(
+                                        angle: pi / 2,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: height * 0.01),
+                                            UrbanistApptext(
+                                              text: items[i],
+                                              fontSize: width * 0.048,
+                                              fontWeight: FontWeight.w900,
+                                              color: AppColor.blackgrey,
+                                            ),
+                                            UrbanistApptext(
+                                              text: "points",
+                                              fontSize: width * 0.043,
+                                              fontWeight: FontWeight.w900,
+                                              color: AppColor.blackgrey,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       style: FortuneItemStyle(
                                         color: i.isOdd
-                                            ? AppColor.primaryColor
+                                            ? AppColor.primarylight
                                             : AppColor.greyColor2,
                                         borderColor: AppColor.white,
                                         borderWidth: width * 0.0,

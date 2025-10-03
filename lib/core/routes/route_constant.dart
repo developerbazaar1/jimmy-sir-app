@@ -14,6 +14,10 @@ class RouteNames {
   static const welcomeScreen = 'welcome_screen';
   static const addGoalScreen = 'add_goal_screen';
   static const spinWheelScreen = 'spinwheel_screen';
+  static const availableBalanceScreen = 'available_balance_screen';
+  static const bankAccountDetailScreen = 'bank_account_detail_screen';
+  static const paypalDetailsScreen = 'paypal_details_screen';
+  static const walletDetailScreen = 'wallet_detail_screen';
 
   //----------------pramod sir----------
   static const signup = 'signup_screen';
@@ -55,6 +59,10 @@ class RoutePaths {
   static const welcomeScreen = '/welcome_screen';
   static const addGoalScreen = '/add_goal_screen';
   static const spinWheelScreen = '/spinwheel_screen';
+  static const availableBalanceScreen = '/available_balance_screen';
+  static const bankAccountDetailScreen = '/bank_account_detail_screen';
+  static const paypalDetailsScreen = '/paypal_details_screen';
+  static const walletDetailScreen = '/wallet_detail_screen';
 
   //----------------pramod sir-----------
   static const signup = '/signup_screen';

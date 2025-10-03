@@ -22,6 +22,8 @@ class AppColor {
   static Color greyColor2 = Color(0XFFF9F5F2);
   static Color blackgrey = Color(0XFF192229);
   static Color yellowColor2 = Color(0XFFF1E76D);
+  static Color primarylight = Color(0XFFFEB56C);
+
   //-------------------pramod sir----------------
   static Color textBrownColor = Color(0XFF442200);
   static Color textGreyColor2 = Color(0XFF8E8E93);

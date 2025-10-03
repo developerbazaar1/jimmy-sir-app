@@ -7,6 +7,10 @@ class AppSvg {
   static String aboutYourScreenImage = "$basePath/about_your_screenImage.svg";
   static String lifestyleImage = "$basePath/lifestyle_image.svg";
   static String allergiesImage = "$basePath/allergies_image.svg";
+  static String bankIcon = "$basePath/bank_icon.svg";
+  static String walletIcon = "$basePath/wallet_icon.svg";
+  static String paypalIcon = "$basePath/paypal_icon.svg";
+  static String homeBannerImage = "$basePath/home_banner_image.svg";
   //----------------pramod sir----------------
   static String emailIcon = '$basePath/imgEmail.svg';
   static String password = '$basePath/imgPassword.svg';

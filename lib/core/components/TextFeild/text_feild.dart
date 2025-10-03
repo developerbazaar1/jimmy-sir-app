@@ -5,7 +5,7 @@ import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 class AppTextField extends StatefulWidget {
   final String? prefixIconImg;
   final String? suffixIcon;
-  final String? labelText; // label INSIDE field (Material style)
+  final String? labelText;
   final String? Function(String?)? validator;
   final bool isPassword;
   final bool readOnly;
@@ -71,6 +71,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     Color borderColor;
     if (_errorText != null) {
@@ -120,7 +121,7 @@ class _AppTextFieldState extends State<AppTextField> {
                       fontWeight: FontWeight.w500,
                       fontFamily: 'urbanist',
                       fontSize: widget.fontSize ?? width * 0.046,
-                      color: AppColor.placeholderColor,
+                      color: AppColor.black,
                     ),
                     decoration: InputDecoration(
                       labelText: widget.labelText,

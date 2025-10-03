@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
-import 'package:jimmy_sir_app/core/constants/app_text.dart';
-import 'package:jimmy_sir_app/core/constants/enum.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 
 import '../../../../../../core/components/apptext/inter_apptext.dart';

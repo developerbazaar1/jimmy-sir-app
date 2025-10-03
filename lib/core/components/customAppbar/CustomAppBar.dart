@@ -127,7 +127,7 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
                 textAlign: TextAlign.center,
                 text: title,
                 fontWeight: FontWeight.w700,
-                color: AppColor.textBrownColor,
+                color: AppColor.black,
                 fontSize: width * 0.055,
               ),
               Container(),
