@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jimmy_sir_app/core/routes/app_routes.dart';
+import 'package:jimmy_sir_app/data/data%20sources/local/storage_utility.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await AppLocalStorage.init('jimmy_sir_app');
   runApp(const ProviderScope(child: MyApp()));
 }
 
