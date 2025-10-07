@@ -62,4 +62,9 @@ class AppSvg {
   static String arrowRightIcon = '$basePath/arrow_right.svg';
   static String tadaCelebrateIcon = '$basePath/tada_celebrate_icon.svg';
   static String dragIcon = '$basePath/drag_icon.svg';
+  static String bedIcon = '$basePath/bed_icon.svg';
+  static String dropIcon = '$basePath/drop_icon.svg';
+  static String leafIcon = '$basePath/leaf_icon.svg';
+  static String runIcon = '$basePath/run_icon.svg';
+  static String smileIcon = '$basePath/smile_icon.svg';
 }

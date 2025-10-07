@@ -95,6 +95,12 @@ class AppText {
   static const String goalsMilestones = "Goals & Milestones";
   static const String recentWins = "Recent Wins";
   static const String cashbackEarned = "Cashback Earned";
+  static const String sleepQuality = "Sleep Quality";
+  static const String hydrationAwareness = "Hydration Awareness";
+  static const String nutritionBalance = "Nutrition Balance";
+  static const String activityLevel = "Activity Level";
+  static const String mood = "Mood Balace";
+
   //----------pramod sir-----------
   //------------login-----------
   static const String welcomeBackDescription =
