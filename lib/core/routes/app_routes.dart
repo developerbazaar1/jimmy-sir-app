@@ -1,21 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen1.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/PersonalGoal/personalgoal_screen.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/Quiz/quiz_screens.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/Quiz/welcome_quiz_scree.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/about_yourself_screen_1.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/lifestyle/lifestyle_screen1.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/membership/membership_screen.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/screens/welcomeScreen/welcome_screen.dart';
-
-import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/add_goal_screen.dart';
-import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/spinwheel_screen.dart';
-import '../../features/auth/changePassword/screen/change_password_screen.dart';
-import '../../features/auth/signup/screen/singup_screen.dart';
 
 import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
 import 'route_import.dart';
@@ -80,6 +64,26 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.spinWheelScreen,
         name: RouteNames.spinWheelScreen,
         builder: (_, __) => const SpinWheelScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.availableBalanceScreen,
+        name: RouteNames.availableBalanceScreen,
+        builder: (_, __) => const AvailableBalanceScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.bankAccountDetailScreen,
+        name: RouteNames.bankAccountDetailScreen,
+        builder: (_, __) => const BankAccountDetailScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.paypalDetailsScreen,
+        name: RouteNames.paypalDetailsScreen,
+        builder: (_, __) => const PayPalDetailsScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.walletDetailScreen,
+        name: RouteNames.walletDetailScreen,
+        builder: (_, __) => const WalletDetailScreen(),
       ),
 
       //----------------pramod sir----------------

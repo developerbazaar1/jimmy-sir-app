@@ -56,6 +56,50 @@ class AppText {
   static const String welcomeAboardDescription =
       "Your health journey starts here. We've set up your profile and personalized preferences. Let's dive in!";
   static const String goToDashboard = "Go to Dashboard";
+  static const String availableBalance = "Available Balance";
+  static const String cashpoints = "Cashpoints";
+  static const String bank = "Bank";
+  static const String bankDescription = "Direct transfer to your bank account.";
+  static const String paypal = "PayPal";
+  static const String paypalDescription =
+      "Transfer instantly to your PayPal account.";
+  static const String wallet = "Wallet";
+  static const String otherUPI = "Other UPI";
+  static const String addGoal = "Add Goal";
+  static const String goalName = "Goal Name";
+  static const String enterGoalName = "Enter Goal Name";
+  static const String duration = "Duration";
+  static const String inDays = "in days";
+  static const String enterDuration = "Enter Duration";
+  static const String whatDoYouWantToFocusOn = "What do you want to focus on?";
+  static const String goalAddedSucessfully = "Goal Added Sucessfully";
+  static const String bankAccountDetail = "Bank Account Detail";
+  static const String accountHolderName = "Account Holder Name";
+  static const String enterAccountHolderName = "Enter account holder name...";
+  static const String bankName = "Bank Name";
+  static const String enterBankName = "Enter bank name...";
+  static const String accountNumber = "Account Number";
+  static const String enterAccountNumber = "Enter account number...";
+  static const String paypalDetails = "PayPal Details";
+  static const String withdrawNow = "Withdraw Now";
+  static const String withdraw = "Withdraw";
+  static const String paypalEmailAddress = "PayPal Email Address";
+  static const String enterPaypalEmailAddress = "Enter PayPal Email Address";
+  static const String enterWithdrawalAmount = "Enter Withdrawal Amount";
+  static const String walletDetails = "Wallet Details";
+  static const String idtext = "ID";
+  static const String enterId = "Enter ID";
+  static const String cashbackPoints = "Cashback Points";
+  static const String redeemPoints = "Redeem Points";
+  static const String weeklySpins = "Weekly Spins";
+  static const String goalsMilestones = "Goals & Milestones";
+  static const String recentWins = "Recent Wins";
+  static const String cashbackEarned = "Cashback Earned";
+  static const String sleepQuality = "Sleep Quality";
+  static const String hydrationAwareness = "Hydration Awareness";
+  static const String nutritionBalance = "Nutrition Balance";
+  static const String activityLevel = "Activity Level";
+  static const String mood = "Mood Balace";
 
   //----------pramod sir-----------
   //------------login-----------

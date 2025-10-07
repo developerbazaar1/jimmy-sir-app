@@ -43,7 +43,7 @@ class AppLocalStorage {
 
   // Generic method to read data
   T? readData<T>(String key) {
-    return _storage.read<T>(key);
+    return _storage.read<T>(key); 
   }
 
   // Generic method to remove data

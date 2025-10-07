@@ -6,8 +6,8 @@ import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_images.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
+import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
-import '../provider/my_wins_provider.dart';
 
 class MyWinsScreen extends ConsumerWidget {
   const MyWinsScreen({super.key});
@@ -90,27 +90,32 @@ class MyWinsScreen extends ConsumerWidget {
                         ),
                         SizedBox(width: width * 0.02),
                         UrbanistApptext(
-                          text: "Cashback Points",
+                          text: AppText.cashbackPoints,
                           fontSize: width * 0.04,
                           fontWeight: FontWeight.w500,
                         ),
                       ],
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        UrbanistApptext(
-                          text: "1250 pts",
-                          fontSize: width * 0.06,
-                          fontWeight: FontWeight.w800,
-                          color: AppColor.primaryColor,
-                        ),
-                        UrbanistApptext(
-                          text: "Redeem Points",
-                          fontSize: width * 0.04,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        context.pushNamed(RouteNames.availableBalanceScreen);
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          UrbanistApptext(
+                            text: "1250 pts",
+                            fontSize: width * 0.05,
+                            fontWeight: FontWeight.w900,
+                            color: AppColor.primaryColor,
+                          ),
+                          UrbanistApptext(
+                            text: AppText.redeemPoints,
+                            fontSize: width * 0.03,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -144,7 +149,7 @@ class MyWinsScreen extends ConsumerWidget {
                   children: [
                     SizedBox(height: height * 0.01),
                     UrbanistApptext(
-                      text: "Weekly Spins",
+                      text: AppText.weeklySpins,
                       fontSize: width * 0.05,
                       fontWeight: FontWeight.w700,
                     ),
@@ -192,7 +197,7 @@ class MyWinsScreen extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             UrbanistApptext(
-                              text: "Goals & Milestones",
+                              text: AppText.goalsMilestones,
                               fontSize: width * 0.045,
                               fontWeight: FontWeight.w700,
                             ),
@@ -263,7 +268,7 @@ class MyWinsScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         UrbanistApptext(
-                          text: "Recent Wins",
+                          text: AppText.recentWins,
                           fontSize: width * 0.045,
                           fontWeight: FontWeight.w700,
                         ),
@@ -301,7 +306,7 @@ class MyWinsScreen extends ConsumerWidget {
                               SizedBox(width: width * 0.02),
                               Expanded(
                                 child: UrbanistApptext(
-                                  text: "Cashback Earned",
+                                  text: AppText.cashbackEarned,
                                   fontSize: width * 0.04,
                                   fontWeight: FontWeight.w600,
                                 ),
