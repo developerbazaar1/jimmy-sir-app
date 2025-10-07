@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/historical_trends_sreen.dart';
+import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/sleep_quality_screen.dart';
 
 import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
 import 'route_import.dart';
@@ -85,7 +87,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.walletDetailScreen,
         builder: (_, __) => const WalletDetailScreen(),
       ),
-
+      GoRoute(
+        path: RoutePaths.sleepQualityScreen,
+        name: RouteNames.sleepQualityScreen,
+        builder: (_, __) => const SleepQualityScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.historicalTrendsScreen,
+        name: RouteNames.historicalTrendsScreen,
+        builder: (_, __) => const HistoricalTrendsScreen(),
+      ),
       //----------------pramod sir----------------
       GoRoute(
         path: RoutePaths.login,
