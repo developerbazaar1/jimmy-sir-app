@@ -26,3 +26,6 @@ final logsServiceProvider = Provider<LogsServices>((ref) => LogsServices());
 final logsProvider = StateNotifierProvider<LogsNotifier, LogsState>(
   (ref) => LogsNotifier(logsServices: ref.read(logsServiceProvider)),
 );
+
+final expandedIndexProvider = StateProvider<int?>((ref) => null);
+final selectedLogTabProvider = StateProvider<int>((ref) => 0);

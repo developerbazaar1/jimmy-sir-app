@@ -40,6 +40,9 @@ class RouteNames {
   static const retakeQuizWelcome = 'retake_quiz_welcome_screen';
   static const retakeQuizScreen = 'retake_quiz_screen';
   static const mySubscription = 'my_subscription_screen';
+
+  //----------------Prashant PK----------------
+  static const mealLogScreen = 'meal_log_screen';
 }
 
 class RoutePaths {
@@ -84,4 +87,7 @@ class RoutePaths {
   static const retakeQuizWelcome = '/retake_quiz_welcome_screen';
   static const retakeQuizScreen = '/retake_quiz_screen';
   static const mySubscription = '/my_subscription_screen';
+
+  //----------------Prashant PK----------------
+  static const mealLogScreen = '/meal_log_screen';
 }
