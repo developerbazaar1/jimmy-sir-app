@@ -223,7 +223,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       backgroundColor: AppColor.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -283,6 +285,113 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
       ),
+      // floatingActionButton: Padding(
+      //   padding: EdgeInsets.only(bottom: height * 0.1),
+      //   child: FloatingActionButton(
+      //     backgroundColor: AppColor.bottomBarColor,
+      //     child: SvgPicture.asset(AppSvg.imgFloat),
+      //     shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(width * (40 / width)),
+      //     ),
+      //     elevation: 5,
+      //     onPressed: () {},
+      //   ),
+      // ),
+      floatingActionButton: const ChatExpandFAB(),
+      //  floatingActionButton: SpeedDial(
+      //   animatedIcon: AnimatedIcons.menu_close,
+      //   backgroundColor: AppColors.primary,
+      //   activeForegroundColor: Colors.white,
+      //   overlayColor: Colors.transparent,
+      //   overlayOpacity: 0,
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(100),
+      //   ),
+      //   childrenButtonSize: Size(width * 0.15, width * 0.16),
+      //   spaceBetweenChildren: height * 0.00,
+      //   children: [
+      //     // Add Generator button
+      //     SpeedDialChild(
+      //       shape: RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.circular(100),
+      //       ),
+      //       child: null,
+      //       backgroundColor: Colors.transparent,
+      //       labelWidget: IntrinsicWidth(
+      //         child: Container(
+      //           padding: EdgeInsets.symmetric(
+      //               horizontal: width * 0.04, vertical: height * 0.015),
+      //           decoration: BoxDecoration(
+      //             color: AppColors.primary,
+      //             borderRadius: BorderRadius.circular(width * 0.09),
+      //           ),
+      //           child: Row(
+      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //             mainAxisSize: MainAxisSize.min,
+      //             children: [
+      //               AppTextLato(
+      //                 text: AppText.addGenerator,
+      //                 fontSize: AppSizer.fontSize15,
+      //                 fontWeight: FontWeight.w600,
+      //                 color: AppColors.white,
+      //               ),
+      //               SizedBox(width: width * 0.02),
+      //               SvgPicture.asset(
+      //                 AppSvgs.dualProfileIcon,
+      //                 height: height * 0.028,
+      //                 color: Colors.white,
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //       onTap: () => context.push(AppRouter.driverInviteGeneratorScreen),
+      //     ),
+
+      //     // Create Job button
+      //     SpeedDialChild(
+      //       shape: RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.circular(width * 0.09),
+      //       ),
+      //       child: null,
+      //       backgroundColor: Colors.transparent,
+      //       labelWidget: IntrinsicWidth(
+      //         child: Container(
+      //           padding: EdgeInsets.symmetric(
+      //               horizontal: width * 0.04, vertical: height * 0.015),
+      //           decoration: BoxDecoration(
+      //             color: AppColors.primary,
+      //             borderRadius: BorderRadius.circular(width * 0.09),
+      //           ),
+      //           child: Row(
+      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //             mainAxisSize: MainAxisSize.min,
+      //             children: [
+      //               AppTextLato(
+      //                 text: AppText.createJob,
+      //                 fontSize: AppSizer.fontSize15,
+      //                 fontWeight: FontWeight.w600,
+      //                 color: AppColors.white,
+      //               ),
+      //               SizedBox(width: width * 0.02),
+      //               SvgPicture.asset(
+      //                 AppSvgs.truck_unfilled,
+      //                 height: height * 0.028,
+      //                 colorFilter: ColorFilter.mode(
+      //                   AppColors.white,
+      //                   BlendMode.srcIn,
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //       onTap: () {
+
+      //       },
+      //     ),
+      //   ],
+      // ),
     );
   }
 
@@ -696,11 +805,130 @@ class healthOverviewtile extends StatelessWidget {
   }
 }
 
+class ChatExpandFAB extends StatefulWidget {
+  const ChatExpandFAB({super.key});
 
+  @override
+  State<ChatExpandFAB> createState() => _ChatExpandFABState();
+}
 
+class _ChatExpandFABState extends State<ChatExpandFAB>
+    with SingleTickerProviderStateMixin {
+  bool _isOpen = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+  }
 
+  void _toggleContainer() {
+    setState(() {
+      _isOpen = !_isOpen;
+      if (_isOpen) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        /// Animated expanding chat container
+        AnimatedPositioned(
+          duration: const Duration(milliseconds: 300),
+          bottom: _isOpen ? height * 0.16 : height * 0.2,
+          right: width * 0.01,
+          child: ScaleTransition(
+            scale: _animation,
+            child: AnimatedOpacity(
+              opacity: _isOpen ? 1 : 0,
+              duration: const Duration(milliseconds: 300),
+              child: Container(
+                width: width * 0.7,
+                padding: EdgeInsets.all(width * 0.04),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _chatItem(Icons.chat_bubble, "Start Chat"),
+                    const Divider(),
+                    _chatItem(Icons.people, "Invite Friend"),
+                    const Divider(),
+                    _chatItem(Icons.add, "Create Job"),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        // SizedBox(height: height * 0.5),
+
+        /// Floating Action Button
+        Padding(
+          padding: EdgeInsets.only(bottom: height * 0.09),
+          child: FloatingActionButton(
+            backgroundColor: Colors.deepPurple,
+            elevation: 6,
+            onPressed: _toggleContainer,
+            child: AnimatedRotation(
+              duration: const Duration(milliseconds: 300),
+              turns: _isOpen ? 0.125 : 0.0, // rotate + icon
+              child: Icon(
+                _isOpen ? Icons.close : Icons.message_rounded,
+                color: Colors.white,
+                size: 28,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _chatItem(IconData icon, String text) {
+    return GestureDetector(
+      onTap: () {
+        // handle each option click here
+        debugPrint("$text clicked");
+        _toggleContainer(); // close after click
+      },
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.deepPurple),
+          const SizedBox(width: 10),
+          Text(
+            text,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 
 

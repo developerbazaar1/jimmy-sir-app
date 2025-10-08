@@ -111,6 +111,14 @@ class ProfileScreen extends ConsumerWidget {
                       onTap: () {},
                     ),
 
+                    ProfileSections(
+                      title: AppText.deleteAccount,
+                      icon: AppSvg.deleteAccountIcon,
+                      color: AppColor.redColor,
+
+                      onTap: () {},
+                    ),
+
                     SizedBox(height: width * (60 / width)),
                   ],
                 ),
