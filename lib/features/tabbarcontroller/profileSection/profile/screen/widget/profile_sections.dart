@@ -71,6 +71,7 @@ class ProfileSections extends StatelessWidget {
                   fontWeight: color == AppColor.primaryColor || color == AppColor.redColor
                       ? FontWeight.w700
                       : FontWeight.w500,
+
                   fontStyle: FontStyle.normal,
                   color: color == AppColor.primaryColor || color == AppColor.redColor
                       ? AppColor.white
