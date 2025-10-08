@@ -9,6 +9,7 @@ class ProfileNotifier extends StateNotifier<ProfileState> {
 
   Future<MapSD> getProfileData() async {
     return await profileServices.getProfileData();
+    
   }
 }
 

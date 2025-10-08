@@ -100,7 +100,12 @@ class AppText {
   static const String nutritionBalance = "Nutrition Balance";
   static const String activityLevel = "Activity Level";
   static const String mood = "Mood Balace";
-
+  static const String sleepQualityQuestion =
+      "How would you rate your overall sleep quality in the past week?";
+  static const String sleepQualityQuestion2 =
+      "How would you rate your overall sleep quality in the past week?";
+  static const String sleepQualityQuestion3 =
+      "How would you rate your overall sleep quality in the past week?";
   //----------pramod sir-----------
   //------------login-----------
   static const String welcomeBackDescription =

@@ -18,6 +18,8 @@ class RouteNames {
   static const bankAccountDetailScreen = 'bank_account_detail_screen';
   static const paypalDetailsScreen = 'paypal_details_screen';
   static const walletDetailScreen = 'wallet_detail_screen';
+  static const sleepQualityScreen = 'sleep_quality_screen';
+  static const historicalTrendsScreen = 'historical_trends_sreen';
 
   //----------------pramod sir----------
   static const signup = 'signup_screen';
@@ -25,9 +27,7 @@ class RouteNames {
   static const forgotPassword = 'forgot_password_screen';
   static const verifyOTP = 'verify_otp_screen';
   static const changePassword = 'change_password_screen';
-
   static const personalGoal = 'personalgoal_screen';
-
   static const dashboard = 'dashboard_screen';
   static const String tabBar = 'tab_bar_screen';
   static const tabBarTest = 'tab_bar_test_screen';
@@ -63,6 +63,8 @@ class RoutePaths {
   static const bankAccountDetailScreen = '/bank_account_detail_screen';
   static const paypalDetailsScreen = '/paypal_details_screen';
   static const walletDetailScreen = '/wallet_detail_screen';
+  static const sleepQualityScreen = '/sleep_quality_screen';
+  static const historicalTrendsScreen = '/historical_trends_sreen';
 
   //----------------pramod sir-----------
   static const signup = '/signup_screen';
