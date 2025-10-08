@@ -54,6 +54,7 @@ dependencies:
   stroke_text: ^1.0.0
   flutter_radar_chart: ^0.2.1
   dotted_line: ^3.2.3
+  flutter_html: ^3.0.0
 
 
 dev_dependencies:

@@ -40,6 +40,12 @@ class RouteNames {
   static const retakeQuizWelcome = 'retake_quiz_welcome_screen';
   static const retakeQuizScreen = 'retake_quiz_screen';
   static const mySubscription = 'my_subscription_screen';
+
+  //---------------Abhijeet-------------
+  static const changePassword2 = 'change_password_screen2';
+  static const notificationSettings = 'notification_settings_screen';
+  static const privacyPolicy = 'privacy_policy_screen';
+  static const termsAndConditions = 'terms_and_condition_screen';
 }
 
 class RoutePaths {
@@ -84,4 +90,11 @@ class RoutePaths {
   static const retakeQuizWelcome = '/retake_quiz_welcome_screen';
   static const retakeQuizScreen = '/retake_quiz_screen';
   static const mySubscription = '/my_subscription_screen';
+
+
+  //-------------Abhijeet----------
+  static const changePassword2 = '/change_password_screen2';
+  static const notificationSettings = '/notification_settings_screen';
+  static const privacyPolicy = '/privacy_policy_screen';
+  static const termsAndConditions = '/terms_and_condition_screen';
 }

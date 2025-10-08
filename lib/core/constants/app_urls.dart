@@ -20,4 +20,5 @@ class ApiConstant {
   static const String myGoals = '$baseUrl/my-goals';
   static const String bodyMetrics = '$baseUrl/body-metrics';
   static const String mySubscription = '$baseUrl/my-subscription';
+  static const String changePassword2 = '$baseUrl/change-password';
 }

@@ -68,22 +68,26 @@ class ProfileScreen extends ConsumerWidget {
                       },
                     ),
 
-                    ProfileSections(
-                      title: AppText.bankAccountDetails,
-                      icon: AppSvg.bankAccountDetailsIcon,
-                      onTap: () {},
-                    ),
+                    // ProfileSections(
+                    //   title: AppText.bankAccountDetails,
+                    //   icon: AppSvg.bankAccountDetailsIcon,
+                    //   onTap: () {},
+                    // ),
 
                     ProfileSections(
                       title: AppText.changePassword,
                       icon: AppSvg.changePasswordIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.changePassword2);
+                      },
                     ),
 
                     ProfileSections(
                       title: AppText.notificationSettings,
                       icon: AppSvg.notificationSettingsIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.notificationSettings);
+                      },
                     ),
 
                     ProfileSections(
@@ -95,13 +99,17 @@ class ProfileScreen extends ConsumerWidget {
                     ProfileSections(
                       title: AppText.termsAndConditions,
                       icon: AppSvg.termsAndConditionsIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.termsAndConditions);
+                      },
                     ),
 
                     ProfileSections(
                       title: AppText.privacyPolicy,
                       icon: AppSvg.privacyPolicyIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.privacyPolicy);
+                      },
                     ),
 
                     ProfileSections(
