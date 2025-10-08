@@ -115,6 +115,7 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              onBackTap != null ?
               GestureDetector(
                 onTap: onBackTap ?? () => context.pop(),
                 child: SvgPicture.asset(
@@ -122,7 +123,7 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
                   height: height * 0.03,
                   width: width * 0.02,
                 ),
-              ),
+              ) : SizedBox.shrink(),
               UrbanistApptext(
                 textAlign: TextAlign.center,
                 text: title,
