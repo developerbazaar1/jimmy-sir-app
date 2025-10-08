@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/home.dart';
-import 'package:jimmy_sir_app/features/tabbarcontroller/logsSecton/logs/screen/Logs.dart';
+import 'package:jimmy_sir_app/features/tabbarcontroller/logsSecton/logs/presentation/screen/logs.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/screens/my_wins.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/profile/screen/profile.dart';
 import '../providers/tab_bar_provider.dart';

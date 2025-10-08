@@ -69,4 +69,9 @@ class AppSvg {
   static String smileIcon = '$basePath/smile_icon.svg';
   static String helpStateIcon = '$basePath/imgHelpAndSupport.svg';
   
+
+
+  //----------------prashant--------------
+  static String arrowDown = '$basePath/arrow_down.svg';
+
 }

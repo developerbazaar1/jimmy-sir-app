@@ -1,8 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/historical_trends_sreen.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/sleep_quality_screen.dart';
-
 import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
 import 'route_import.dart';
 
@@ -194,6 +192,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.mySubscription,
         builder: (_, __) => MySubscriptionScreen(),
       ),
+
       GoRoute(
         path: RoutePaths.helpAndSupport,
         name: RouteNames.helpAndSupport,
@@ -203,6 +202,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.mySubscriptionList,
         name: RouteNames.mySubscriptionList,
         builder: (_, __) => MySubscriptionListScreen(),
+
+
+      //----------------Prashant PK----------------
+       GoRoute(
+        path: RoutePaths.mealLogScreen,
+        name: RouteNames.mealLogScreen,
+        builder: (_, __) => MealLogScreen(),
+
       ),
     ],
   );
