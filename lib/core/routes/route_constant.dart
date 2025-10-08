@@ -41,9 +41,17 @@ class RouteNames {
   static const retakeQuizScreen = 'retake_quiz_screen';
   static const mySubscription = 'my_subscription_screen';
 
+
   static const helpAndSupport = 'help_and_support_screen';
   static const mySubscriptionList = 'my_subscription_list_screen';
 
+
+
+  //---------------Abhijeet-------------
+  static const changePassword2 = 'change_password_screen2';
+  static const notificationSettings = 'notification_settings_screen';
+  static const privacyPolicy = 'privacy_policy_screen';
+  static const termsAndConditions = 'terms_and_condition_screen';
 
   //----------------Prashant PK----------------
   static const mealLogScreen = 'meal_log_screen';
@@ -96,6 +104,13 @@ class RoutePaths {
   static const mySubscriptionList = '/my_subscription_list_screen';
 
 
+
+
+  //-------------Abhijeet----------
+  static const changePassword2 = '/change_password_screen2';
+  static const notificationSettings = '/notification_settings_screen';
+  static const privacyPolicy = '/privacy_policy_screen';
+  static const termsAndConditions = '/terms_and_condition_screen';
   //----------------Prashant PK----------------
   static const mealLogScreen = '/meal_log_screen';
 
