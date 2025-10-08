@@ -1,6 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/historical_trends_sreen.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/sleep_quality_screen.dart';
+import 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/CMS_Pages/screen/privacy_policy_screen.dart';
+
+import '../../features/tabbarcontroller/profileSection/CMS_Pages/screen/terms_and_condition_screen.dart';
+import '../../features/tabbarcontroller/profileSection/change_password/screen/change_password_screen2.dart';
+import '../../features/tabbarcontroller/profileSection/notificationSetting/screen/notification_settings.dart';
 import '../../features/tabbarcontroller/tabbar/screens/tab_bar.dart';
 import 'route_import.dart';
 
@@ -192,6 +197,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.mySubscription,
         builder: (_, __) => MySubscriptionScreen(),
       ),
+      GoRoute(
+        path: RoutePaths.changePassword2,
+        name: RouteNames.changePassword2,
+        builder: (_, __) => ChangePasswordScreen2(),
+      ),
+      GoRoute(
+        path: RoutePaths.notificationSettings,
+        name: RouteNames.notificationSettings,
+        builder: (_, __) => NotificationSettings(),
+      ),
+      GoRoute(
+        path: RoutePaths.privacyPolicy,
+        name: RouteNames.privacyPolicy,
+        builder: (_, __) => PrivacyPolicyScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.termsAndConditions,
+        name: RouteNames.termsAndConditions,
+        builder: (_, __) => TermsConditionsScreen(),
 
       //----------------Prashant PK----------------
        GoRoute(

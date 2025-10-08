@@ -12,10 +12,26 @@ class AppRes {
   }
 }
 
+
+
 class AppSizer {
-  static final width = AppRes.width;
-  static final height = AppRes.height;
-  static final context = AppRes.appContext;
+  // static final width = AppRes.width;
+  // static final height = AppRes.height;
+  // static final context = AppRes.appContext;
+
+  static late double width;
+  static late double height;
+
+  AppSizer(BuildContext context){
+    width = MediaQuery.sizeOf(context).width;
+    height = MediaQuery.sizeOf(context).height;
+  }
+  double w(double inputWidth) =>
+      width * (inputWidth / 430);
+
+  double h(double inputHeight) =>
+      height * (inputHeight / 932);
+
 
   static double horizontal22 = width * 0.06;
   static double horizontal20 = width * 0.05;
