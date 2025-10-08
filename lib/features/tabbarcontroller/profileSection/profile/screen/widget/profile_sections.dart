@@ -56,10 +56,10 @@ class ProfileSections extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   icon,
-                  height: color == AppColor.primaryColor
+                  height: color == AppColor.primaryColor || color == AppColor.redColor
                       ? width * (30 / width)
                       : width * (35 / width),
-                  width: color == AppColor.primaryColor
+                  width: color == AppColor.primaryColor || color == AppColor.redColor
                       ? width * (30 / width)
                       : width * (35 / width),
                 ),
@@ -68,16 +68,16 @@ class ProfileSections extends StatelessWidget {
                 PoppinsApptext(
                   text: title,
                   fontSize: width * (16 / width),
-                  fontWeight: color == AppColor.primaryColor
+                  fontWeight: color == AppColor.primaryColor || color == AppColor.redColor
                       ? FontWeight.w700
                       : FontWeight.w500,
                   fontStyle: FontStyle.normal,
-                  color: color == AppColor.primaryColor
+                  color: color == AppColor.primaryColor || color == AppColor.redColor
                       ? AppColor.white
                       : AppColor.textColor,
                 ),
                 Spacer(),
-                if (color != AppColor.primaryColor)
+                if (color != AppColor.primaryColor && color != AppColor.redColor)
                   Icon(Icons.arrow_forward_ios, size: width * (18 / width)),
               ],
             ),
