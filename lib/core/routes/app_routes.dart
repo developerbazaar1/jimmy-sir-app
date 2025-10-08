@@ -194,6 +194,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.mySubscription,
         builder: (_, __) => MySubscriptionScreen(),
       ),
+      GoRoute(
+        path: RoutePaths.helpAndSupport,
+        name: RouteNames.helpAndSupport,
+        builder: (_, __) => const HelpScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.mySubscriptionList,
+        name: RouteNames.mySubscriptionList,
+        builder: (_, __) => MySubscriptionListScreen(),
+      ),
     ],
   );
 });

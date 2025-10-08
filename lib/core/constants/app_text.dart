@@ -203,4 +203,25 @@ class AppText {
   static const String retakeQuizUpdatedSuccessfully =
       'Quiz updated successfully.';
   static const String mySubscription = 'My Subscription';
+  static const String renewalDate = 'Renewal Date :';
+  static const String yourPlanIncludes = 'Your Plan Includes :';
+  static const String needHelp = 'Need Help?';
+  static const String contactUs = 'Contact Us';
+  static const String cancelSubscription = 'Cancel Subscription';
+  static const String upgradeNow = 'Upgrade Now';
+  static const String subscriptionWillRemainActive =
+      'Your subscription will remain active until the end of the current billing cycle.';
+  static const String ifYouAreFacingIssues =
+      'If you\'re facing issues or have questions about your subscription, our support team is here to help.';
+  static const String yourSubscriptionWillRemainActive =
+      'Your subscription will remain active until the end of the current billing cycle.';
+  static const String membershipList = 'Membership List';
+  static const String howCanWeHelpYou = 'How can we help you ?';
+  static const String writeUs = 'Write Us:';
+  static const String haveAQuestionOrNeedAssistance =
+      'Have a question or need assistance? Our friendly support team is here to help.';
+  static const String pleaseEnterYourMessage = 'Please enter your message';
+  static const String submit = 'Submit';
+  static const String yourMessageHasBeenSentSuccessfullyToYou =
+      'Your message has been sent successfully!';
 }

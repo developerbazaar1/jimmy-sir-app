@@ -19,8 +19,12 @@ class OnboardingScreen extends ConsumerStatefulWidget {
   ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
+class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
+    with TickerProviderStateMixin {
   late PageController pageController;
+  late AnimationController _buttonAnimationController;
+  late AnimationController _swipeAnimationController;
+  late Animation<double> _buttonScaleAnimation;
 
   final List<_OnboardingPageModel> pages = [
     _OnboardingPageModel(
@@ -47,11 +51,32 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   void initState() {
     super.initState();
     pageController = PageController(initialPage: 0);
+
+    // Initialize animation controllers
+    _buttonAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 150),
+      vsync: this,
+    );
+
+    _swipeAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    // Initialize animations
+    _buttonScaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(
+        parent: _buttonAnimationController,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
   void dispose() {
     pageController.dispose();
+    _buttonAnimationController.dispose();
+    _swipeAnimationController.dispose();
     super.dispose();
   }
 
@@ -73,11 +98,22 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 padding: EdgeInsets.symmetric(horizontal: width * 0.05),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: InterApptext(
-                    text: AppText.skip,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: width * 0.04,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.pushNamed(RouteNames.signup);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      child: InterApptext(
+                        text: AppText.skip,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: width * 0.04,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -95,19 +131,45 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ),
               ),
             Expanded(
-              child: PageView.custom(
-                // physics: const NeverScrollableScrollPhysics(),
-                controller: pageController,
-                onPageChanged: (index) =>
-                    ref.read(onboardingPageProvider.notifier).state = index,
-                childrenDelegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return _OnboardingPage(pages[index], key: ValueKey(index));
+              child: GestureDetector(
+                onPanUpdate: (details) {
+                  // Add haptic feedback during swipe
+                  if (details.delta.dx.abs() > 5) {
+                    // HapticFeedback.lightImpact();
+                  }
+                },
+                onPanEnd: (details) {
+                  // Handle swipe gestures
+                  if (details.velocity.pixelsPerSecond.dx > 500) {
+                    // Swipe right - go to previous page
+                    _goToPreviousPage();
+                  } else if (details.velocity.pixelsPerSecond.dx < -500) {
+                    // Swipe left - go to next page
+                    _goToNextPage();
+                  }
+                },
+                child: PageView.custom(
+                  controller: pageController,
+                  physics: const BouncingScrollPhysics(),
+                  onPageChanged: (index) {
+                    ref.read(onboardingPageProvider.notifier).state = index;
+                    // Trigger swipe animation
+                    _swipeAnimationController.forward().then((_) {
+                      _swipeAnimationController.reset();
+                    });
                   },
-                  childCount: pages.length,
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  addSemanticIndexes: false,
+                  childrenDelegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return _OnboardingPage(
+                        pages[index],
+                        key: ValueKey(index),
+                      );
+                    },
+                    childCount: pages.length,
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
+                    addSemanticIndexes: false,
+                  ),
                 ),
               ),
             ),
@@ -136,50 +198,75 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     },
                   ),
                   GestureDetector(
+                    onTapDown: (_) {
+                      // Button press animation
+                      _buttonAnimationController.forward();
+                    },
+                    onTapUp: (_) {
+                      // Button release animation
+                      _buttonAnimationController.reverse();
+                    },
+                    onTapCancel: () {
+                      // Button cancel animation
+                      _buttonAnimationController.reverse();
+                    },
                     onTap: () async {
                       final current = ref.read(onboardingPageProvider);
 
                       if (!pageController.hasClients) return;
 
+                      // Add haptic feedback
+                      // HapticFeedback.mediumImpact();
+
                       if (current < pages.length - 1) {
                         // Trigger animation manually
                         ref.read(animateImageProvider.notifier).state = true;
 
-                        // Thoda delay do taaki animation visible ho
-                        await Future.delayed(const Duration(milliseconds: 50));
-
-                        pageController.jumpToPage(current + 1);
-                        ref.read(onboardingPageProvider.notifier).state =
-                            current + 1;
+                        // Animate to next page
+                        await pageController.animateToPage(
+                          current + 1,
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+                        );
 
                         // Reset flag
-                        Future.delayed(const Duration(milliseconds: 800), () {
+                        Future.delayed(const Duration(milliseconds: 100), () {
                           ref.read(animateImageProvider.notifier).state = false;
                         });
                       } else {
-                        context.pushNamed(RouteNames.signup);
+                        // Animate button before navigation
+                        await _buttonAnimationController.forward();
+                        await _buttonAnimationController.reverse();
+
+                        if (mounted) {
+                          context.pushNamed(RouteNames.signup);
+                        }
                       }
                     },
-
-                    // onTap: () async {
-                    //   final current = ref.read(onboardingPageProvider);
-                    //   if (!pageController.hasClients) return;
-
-                    //   if (current < pages.length - 1) {
-                    //     // remove sliding effect
-                    //     pageController.jumpToPage(current + 1);
-
-                    //     // update provider manually (since jumpToPage is instant)
-                    //     ref.read(onboardingPageProvider.notifier).state =
-                    //         current + 1;
-                    //   } else {
-                    //     context.pushNamed(RouteNames.aboutYourself);
-                    //   }
-                    // },
-                    child: SvgPicture.asset(
-                      AppSvg.roundNextIcon,
-                      height: height * 0.06,
-                      width: width * 0.06,
+                    child: AnimatedBuilder(
+                      animation: _buttonScaleAnimation,
+                      builder: (context, child) {
+                        return Transform.scale(
+                          scale: _buttonScaleAnimation.value,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white.withOpacity(0.3),
+                                  blurRadius: 10,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            child: SvgPicture.asset(
+                              AppSvg.roundNextIcon,
+                              height: height * 0.06,
+                              width: width * 0.06,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -190,6 +277,51 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         ),
       ),
     );
+  }
+
+  // Helper methods for navigation
+  Future<void> _goToNextPage() async {
+    final current = ref.read(onboardingPageProvider);
+    if (!pageController.hasClients) return;
+
+    if (current < pages.length - 1) {
+      // Trigger animation manually
+      ref.read(animateImageProvider.notifier).state = true;
+
+      // Animate to next page
+      await pageController.animateToPage(
+        current + 1,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+
+      // Reset flag
+      Future.delayed(const Duration(milliseconds: 800), () {
+        ref.read(animateImageProvider.notifier).state = false;
+      });
+    }
+  }
+
+  Future<void> _goToPreviousPage() async {
+    final current = ref.read(onboardingPageProvider);
+    if (!pageController.hasClients) return;
+
+    if (current > 0) {
+      // Trigger animation manually
+      ref.read(animateImageProvider.notifier).state = true;
+
+      // Animate to previous page
+      await pageController.animateToPage(
+        current - 1,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+
+      // Reset flag
+      Future.delayed(const Duration(milliseconds: 800), () {
+        ref.read(animateImageProvider.notifier).state = false;
+      });
+    }
   }
 }
 
@@ -207,10 +339,56 @@ class _OnboardingPageModel {
   });
 }
 
-class _OnboardingPage extends ConsumerWidget {
+class _OnboardingPage extends ConsumerStatefulWidget {
   final _OnboardingPageModel model;
 
   const _OnboardingPage(this.model, {super.key});
+
+  @override
+  ConsumerState<_OnboardingPage> createState() => _OnboardingPageState();
+}
+
+class _OnboardingPageState extends ConsumerState<_OnboardingPage>
+    with TickerProviderStateMixin {
+  late AnimationController _fadeController;
+  late AnimationController _slideController;
+  late Animation<double> _fadeAnimation;
+  late Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+
+    _slideController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
+    );
+
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+        );
+
+    // Start animations
+    _fadeController.forward();
+    _slideController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    _slideController.dispose();
+    super.dispose();
+  }
 
   int _pageIndexFor(String path) {
     if (path == AppImages.onboarding_11) return 0;
@@ -219,12 +397,12 @@ class _OnboardingPage extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
     final currentPage = ref.watch(onboardingPageProvider);
 
-    final pageIndex = _pageIndexFor(model.imagePath);
+    final pageIndex = _pageIndexFor(widget.model.imagePath);
     final isCurrent = currentPage == pageIndex;
 
     final double targetOpacity = isCurrent ? 1.0 : 0.0;
@@ -285,7 +463,7 @@ class _OnboardingPage extends ConsumerWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
-                                model.imagePath,
+                                widget.model.imagePath,
                                 width: height * 0.38,
                                 height: height * 0.40,
                                 fit: BoxFit.cover,
@@ -302,28 +480,34 @@ class _OnboardingPage extends ConsumerWidget {
           ],
         ),
         SizedBox(height: height * 0.09),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              UrbanistApptext(
-                text: model.title,
-                textAlign: TextAlign.start,
-                fontSize: width * 0.08,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
+        FadeTransition(
+          opacity: _fadeAnimation,
+          child: SlideTransition(
+            position: _slideAnimation,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  UrbanistApptext(
+                    text: widget.model.title,
+                    textAlign: TextAlign.start,
+                    fontSize: width * 0.08,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                  SizedBox(height: height * 0.02),
+                  InterApptext(
+                    text: widget.model.description,
+                    maxLines: 3,
+                    textAlign: TextAlign.start,
+                    fontSize: width * 0.04,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ],
               ),
-              SizedBox(height: height * 0.02),
-              InterApptext(
-                text: model.description,
-                maxLines: 3,
-                textAlign: TextAlign.start,
-                fontSize: width * 0.04,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ],
+            ),
           ),
         ),
       ],

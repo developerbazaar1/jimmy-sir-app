@@ -15,6 +15,7 @@ export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%
 export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%20Preferences/Retake%20Quiz/retake_quiz_welcome.dart';
 export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Wellness%20Preferences/Retake%20Quiz/retake_quiz_screen.dart';
 export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/My%20Subscription/screen/my_subscription_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/Help/screen/help_screen.dart';
 export 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen.dart';
 export 'package:jimmy_sir_app/features/registeration/presentation/screens/Allergies/allergies_screen1.dart';
 export 'package:jimmy_sir_app/features/registeration/presentation/screens/PersonalGoal/personalgoal_screen.dart';
@@ -32,3 +33,4 @@ export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentati
 export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/screens/paypal_details_screen.dart';
 export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/screens/spinwheel_screen.dart';
 export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/screens/wallet_detail_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/My%20Subscription/screen/widget/my_subscriptionList.dart';

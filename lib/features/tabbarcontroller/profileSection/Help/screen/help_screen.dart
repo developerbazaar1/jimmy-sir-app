@@ -5,19 +5,20 @@ import 'package:go_router/go_router.dart';
 import '../../../../../../core/constants/app_colors.dart';
 import '../../../../../../core/constants/app_text.dart';
 import '../../../../../../core/components/apptext/urbanist_apptext.dart';
-import 'widget/my_subscription_widget.dart';
+import 'widget/help_widget.dart';
 
-class MySubscriptionScreen extends ConsumerWidget {
-  const MySubscriptionScreen({super.key});
+class HelpScreen extends ConsumerWidget {
+  const HelpScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: AppColor.white,
       appBar: AppBar(
         title: UrbanistApptext(
-          text: AppText.mySubscription,
-          fontSize: 24,
+          text: AppText.helpAndSupport,
+          fontSize: width * (24 / width),
           fontWeight: FontWeight.w700,
           color: AppColor.black,
         ),
@@ -26,7 +27,7 @@ class MySubscriptionScreen extends ConsumerWidget {
           onPressed: () {
             context.pop();
           },
-          icon: Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.arrow_back_ios_new),
           color: AppColor.black,
         ),
         backgroundColor: AppColor.white,
@@ -39,16 +40,7 @@ class MySubscriptionScreen extends ConsumerWidget {
             child: Column(
               children: [
                 const SizedBox(height: 16),
-                MySubscriptionWidget(
-                  subscriptionType: 'Free trial',
-                  renewalDate: '27/12/2024',
-                  price: '0',
-                  pricePer: 'month',
-                  planFeatures: 'Basic features',
-                  cancelSubscription: 'Cancel Subscription',
-                  needHelp: 'Need Help',
-                  contactUs: 'Contact Us',
-                ),
+                const HelpWidget(),
                 const SizedBox(height: 32),
               ],
             ),
