@@ -59,26 +59,54 @@ class ProfileSections extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   icon,
+
+                  height:
+                      color == AppColor.primaryColor ||
+                          color == AppColor.redColor
+                      ? width * (30 / width)
+                      : width * (35 / width),
+                  width:
+                      color == AppColor.primaryColor ||
+                          color == AppColor.redColor
+                      ? width * (30 / width)
+                      : height * (35 / height),
+
                   height: (color == AppColor.primaryColor || color == AppColor.redColor)
                       ? as.w(30)
                       : as.w(35),
                   width: (color == AppColor.primaryColor || color == AppColor.redColor)
                       ? as.w(30)
                       : as.w(35),
+
                 ),
                 SizedBox(width: as.w(8)),
                 PoppinsApptext(
                   text: title,
+
+                  fontSize: width * (16 / width),
+                  fontWeight:
+                      color == AppColor.primaryColor ||
+                          color == AppColor.redColor
                   fontSize: as.w(16), // approx 0.046 * 350 (design width)
                   fontWeight: (color == AppColor.primaryColor || color == AppColor.redColor)
                       ? FontWeight.w700
                       : FontWeight.w500,
                   fontStyle: FontStyle.normal,
+                  color:
+                      color == AppColor.primaryColor ||
+                          color == AppColor.redColor
+
                   color: (color == AppColor.primaryColor || color == AppColor.redColor)
+
                       ? AppColor.white
                       : AppColor.textColor,
                 ),
                 Spacer(),
+
+                if (color != AppColor.primaryColor &&
+                    color != AppColor.redColor)
+                  Icon(Icons.arrow_forward_ios, size: width * (18 / width)),
+
                 if (color != AppColor.primaryColor && color != AppColor.redColor)
                   Icon(
                     Icons.arrow_forward_ios,
