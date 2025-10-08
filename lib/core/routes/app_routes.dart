@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/historical_trends_sreen.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/dashboardSection/home/presentation/screens/sleep_quality_screen.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/CMS_Pages/screen/privacy_policy_screen.dart';
@@ -217,6 +216,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.termsAndConditions,
         name: RouteNames.termsAndConditions,
         builder: (_, __) => TermsConditionsScreen(),
+
+      //----------------Prashant PK----------------
+       GoRoute(
+        path: RoutePaths.mealLogScreen,
+        name: RouteNames.mealLogScreen,
+        builder: (_, __) => MealLogScreen(),
       ),
     ],
   );

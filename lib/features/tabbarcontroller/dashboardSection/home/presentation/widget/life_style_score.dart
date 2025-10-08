@@ -88,14 +88,14 @@ class LifeStyleScore extends ConsumerWidget {
               children: [
                 UrbanistApptext(
                   text: 'Build Today\'s Progress',
-                  fontSize: width * (18 / width),
+                  fontSize: width * 0.04,
                   fontWeight: FontWeight.w700,
 
                   color: AppColor.textColor,
                 ),
                 PlusJakartaSansApptext(
                   text: "LifeStyle Score",
-                  fontSize: width * (14 / width),
+                  fontSize: width * 0.03,
                   fontWeight: FontWeight.w500,
                   color: AppColor.textBrownColor,
                 ),
@@ -131,7 +131,7 @@ class LifeStyleScore extends ConsumerWidget {
               ),
             ),
 
-            SizedBox(height: width * (5 / width)),
+            SizedBox(height: width * 0.01),
 
             Padding(
               padding: EdgeInsets.symmetric(vertical: height * 0.01),
@@ -159,23 +159,23 @@ class LifeStyleScore extends ConsumerWidget {
                 ],
               ),
             ),
-            SizedBox(height: width * (10 / width)),
+            SizedBox(height: width * 0.01),
             CustomButton(
               text: ' Log Activity',
               onPressed: () {},
               color: AppColor.primaryColor,
               textColor: AppColor.white,
-              fontSize: width * (16 / width),
-              height: height * (40 / height),
-              width: width * (200 / width),
+              fontSize: width * 0.03,
+              height: height * 0.05,
+              width: width * 0.40,
               fontWeight: FontWeight.w500,
-              borderRadius: width * (5 / width),
+              borderRadius: width * 0.02,
               borderColor: AppColor.primaryColor,
             ),
-            SizedBox(height: width * (11 / width)),
+            SizedBox(height: width * 0.01),
 
             Container(
-              width: width * (200 / width),
+              width: width * 0.45,
               decoration: BoxDecoration(
                 color: Colors.grey.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(12),

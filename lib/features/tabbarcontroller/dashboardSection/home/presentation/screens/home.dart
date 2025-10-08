@@ -5,10 +5,10 @@ import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/poppins_apptext.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
+import 'package:jimmy_sir_app/core/constants/app_images.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
-import 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/profile/screen/widget/profile_sections.dart';
 import '../widget/life_style_score.dart';
 import '../widget/profile_header.dart';
 
@@ -279,119 +279,77 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   alignment: Alignment.topLeft,
                   child: SvgPicture.asset(AppSvg.homeBannerImage),
                 ),
+
+                // TextField container as per image
+                Container(
+                  height: height * 0.06,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColor.border, width: 1.5),
+                  ),
+                  child: Row(
+                    children: [
+                      // Microphone icon on the left
+
+                      // Text input field
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Type your message...',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade600,
+                              fontSize: width * 0.035,
+                              fontFamily: 'urbanist',
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: height * 0.015,
+                              horizontal: width * 0.03,
+                            ),
+                          ),
+                          style: TextStyle(
+                            fontSize: width * 0.035,
+                            fontFamily: 'urbanist',
+                            color: AppColor.black,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(right: width * 0.04),
+                        child: Icon(
+                          Icons.mic_none,
+                          color: Colors.grey.shade600,
+                          size: width * 0.07,
+                        ),
+                      ),
+
+                      // Orange send button on the right
+                      Container(
+                        margin: EdgeInsets.only(right: width * 0.02),
+                        width: width * 0.1,
+                        height: width * 0.1,
+                        decoration: BoxDecoration(
+                          color: AppColor.primaryColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.send,
+                          color: Colors.white,
+                          size: width * 0.05,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
                 SizedBox(height: height * 0.1),
               ],
             ),
           ),
         ),
       ),
-      // floatingActionButton: Padding(
-      //   padding: EdgeInsets.only(bottom: height * 0.1),
-      //   child: FloatingActionButton(
-      //     backgroundColor: AppColor.bottomBarColor,
-      //     child: SvgPicture.asset(AppSvg.imgFloat),
-      //     shape: RoundedRectangleBorder(
-      //       borderRadius: BorderRadius.circular(width * (40 / width)),
-      //     ),
-      //     elevation: 5,
-      //     onPressed: () {},
-      //   ),
-      // ),
-      floatingActionButton: const ChatExpandFAB(),
-      //  floatingActionButton: SpeedDial(
-      //   animatedIcon: AnimatedIcons.menu_close,
-      //   backgroundColor: AppColors.primary,
-      //   activeForegroundColor: Colors.white,
-      //   overlayColor: Colors.transparent,
-      //   overlayOpacity: 0,
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(100),
-      //   ),
-      //   childrenButtonSize: Size(width * 0.15, width * 0.16),
-      //   spaceBetweenChildren: height * 0.00,
-      //   children: [
-      //     // Add Generator button
-      //     SpeedDialChild(
-      //       shape: RoundedRectangleBorder(
-      //         borderRadius: BorderRadius.circular(100),
-      //       ),
-      //       child: null,
-      //       backgroundColor: Colors.transparent,
-      //       labelWidget: IntrinsicWidth(
-      //         child: Container(
-      //           padding: EdgeInsets.symmetric(
-      //               horizontal: width * 0.04, vertical: height * 0.015),
-      //           decoration: BoxDecoration(
-      //             color: AppColors.primary,
-      //             borderRadius: BorderRadius.circular(width * 0.09),
-      //           ),
-      //           child: Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             mainAxisSize: MainAxisSize.min,
-      //             children: [
-      //               AppTextLato(
-      //                 text: AppText.addGenerator,
-      //                 fontSize: AppSizer.fontSize15,
-      //                 fontWeight: FontWeight.w600,
-      //                 color: AppColors.white,
-      //               ),
-      //               SizedBox(width: width * 0.02),
-      //               SvgPicture.asset(
-      //                 AppSvgs.dualProfileIcon,
-      //                 height: height * 0.028,
-      //                 color: Colors.white,
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //       onTap: () => context.push(AppRouter.driverInviteGeneratorScreen),
-      //     ),
-
-      //     // Create Job button
-      //     SpeedDialChild(
-      //       shape: RoundedRectangleBorder(
-      //         borderRadius: BorderRadius.circular(width * 0.09),
-      //       ),
-      //       child: null,
-      //       backgroundColor: Colors.transparent,
-      //       labelWidget: IntrinsicWidth(
-      //         child: Container(
-      //           padding: EdgeInsets.symmetric(
-      //               horizontal: width * 0.04, vertical: height * 0.015),
-      //           decoration: BoxDecoration(
-      //             color: AppColors.primary,
-      //             borderRadius: BorderRadius.circular(width * 0.09),
-      //           ),
-      //           child: Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             mainAxisSize: MainAxisSize.min,
-      //             children: [
-      //               AppTextLato(
-      //                 text: AppText.createJob,
-      //                 fontSize: AppSizer.fontSize15,
-      //                 fontWeight: FontWeight.w600,
-      //                 color: AppColors.white,
-      //               ),
-      //               SizedBox(width: width * 0.02),
-      //               SvgPicture.asset(
-      //                 AppSvgs.truck_unfilled,
-      //                 height: height * 0.028,
-      //                 colorFilter: ColorFilter.mode(
-      //                   AppColors.white,
-      //                   BlendMode.srcIn,
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //       onTap: () {
-
-      //       },
-      //     ),
-      //   ],
-      // ),
+      floatingActionButton: ChatExpandFAB(),
     );
   }
 
@@ -825,7 +783,10 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOutQuart,
+    );
   }
 
   void _toggleContainer() {
@@ -850,7 +811,7 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
         /// Animated expanding chat container
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
-          bottom: _isOpen ? height * 0.16 : height * 0.2,
+          bottom: _isOpen ? height * 0.17 : height * 0.2,
           right: width * 0.01,
           child: ScaleTransition(
             scale: _animation,
@@ -858,11 +819,12 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
               opacity: _isOpen ? 1 : 0,
               duration: const Duration(milliseconds: 300),
               child: Container(
-                width: width * 0.7,
+                width: width * 0.9,
+                height: height * 0.4,
                 padding: EdgeInsets.all(width * 0.04),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(5),
                   boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
@@ -872,62 +834,221 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
                   ],
                 ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  // mainAxisSize: MainAxisSize.min,
                   children: [
-                    _chatItem(Icons.chat_bubble, "Start Chat"),
-                    const Divider(),
-                    _chatItem(Icons.people, "Invite Friend"),
-                    const Divider(),
-                    _chatItem(Icons.add, "Create Job"),
+                    _chatBubble(
+                      context: context,
+                      isUser: true,
+                      icon: Icons.chat_bubble,
+                      message: "Hello! How can I help you today?",
+                    ),
+                    _chatBubble(
+                      context: context,
+                      isUser: false,
+                      icon: Icons.chat_bubble,
+                      message: "Hello! How can I help you today?",
+                    ),
+                    Container(
+                      height: height * 0.06,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppColor.border, width: 1.5),
+                      ),
+                    ),
+                    // TextField container as per image
+                    // Container(
+                    //   height: height * 0.06,
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.white,
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     border: Border.all(color: AppColor.border, width: 1.5),
+                    //   ),
+                    //   child: Row(
+                    //     children: [
+                    //       // Microphone icon on the left
+
+                    //       // Text input field
+                    //       Expanded(
+                    //         child: TextField(
+                    //           decoration: InputDecoration(
+                    //             hintText: 'Type your message...',
+                    //             hintStyle: TextStyle(
+                    //               color: Colors.grey.shade600,
+                    //               fontSize: width * 0.035,
+                    //               fontFamily: 'urbanist',
+                    //             ),
+                    //             border: InputBorder.none,
+                    //             contentPadding: EdgeInsets.symmetric(
+                    //               vertical: height * 0.015,
+                    //               horizontal: width * 0.03,
+                    //             ),
+                    //           ),
+                    //           style: TextStyle(
+                    //             fontSize: width * 0.035,
+                    //             fontFamily: 'urbanist',
+                    //             color: AppColor.black,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       Padding(
+                    //         padding: EdgeInsets.only(right: width * 0.04),
+                    //         child: Icon(
+                    //           Icons.mic_none,
+                    //           color: Colors.grey.shade600,
+                    //           size: width * 0.07,
+                    //         ),
+                    //       ),
+
+                    //       // Orange send button on the right
+                    //       Container(
+                    //         margin: EdgeInsets.only(right: width * 0.02),
+                    //         width: width * 0.1,
+                    //         height: width * 0.1,
+                    //         decoration: BoxDecoration(
+                    //           color: AppColor.primaryColor,
+                    //           shape: BoxShape.circle,
+                    //         ),
+                    //         child: Icon(
+                    //           Icons.send,
+                    //           color: Colors.white,
+                    //           size: width * 0.05,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
             ),
           ),
         ),
-        // SizedBox(height: height * 0.5),
 
         /// Floating Action Button
         Padding(
           padding: EdgeInsets.only(bottom: height * 0.09),
           child: FloatingActionButton(
-            backgroundColor: Colors.deepPurple,
-            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(28),
+            ),
+            backgroundColor: AppColor.bottomBarColor,
+            elevation: 0,
             onPressed: _toggleContainer,
             child: AnimatedRotation(
-              duration: const Duration(milliseconds: 300),
-              turns: _isOpen ? 0.125 : 0.0, // rotate + icon
-              child: Icon(
-                _isOpen ? Icons.close : Icons.message_rounded,
-                color: Colors.white,
-                size: 28,
-              ),
+              duration: Duration(milliseconds: 300),
+              turns: _isOpen ? 0.250 : 0.0,
+              child: _isOpen
+                  ? Icon(
+                      Icons.close,
+                      color: AppColor.primaryColor,
+                      size: width * 0.08,
+                    )
+                  : SvgPicture.asset(
+                      AppSvg.imgFloat,
+                      height: height * 0.04,
+                      width: width * 0.04,
+                    ),
             ),
           ),
         ),
       ],
     );
   }
+}
 
-  Widget _chatItem(IconData icon, String text) {
-    return GestureDetector(
-      onTap: () {
-        // handle each option click here
-        debugPrint("$text clicked");
-        _toggleContainer(); // close after click
-      },
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.deepPurple),
-          const SizedBox(width: 10),
-          Text(
-            text,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-        ],
+Widget _chatBubble({
+  required BuildContext context,
+  required bool isUser,
+  required IconData icon,
+  required String message,
+}) {
+  final height = MediaQuery.of(context).size.height;
+  final width = MediaQuery.of(context).size.width;
+
+  return Column(
+    crossAxisAlignment: isUser
+        ? CrossAxisAlignment.end
+        : CrossAxisAlignment.start,
+    children: [
+      Container(
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        child: Row(
+          mainAxisAlignment: isUser
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (!isUser)
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(width * 0.01),
+                decoration: BoxDecoration(
+                  color: AppColor.bottomBarColor,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: SvgPicture.asset(
+                  AppSvg.imgFloat,
+                  height: height * 0.03,
+                  width: width * 0.03,
+                ),
+              ),
+            if (!isUser) SizedBox(width: width * 0.02),
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.all(width * 0.02),
+                decoration: BoxDecoration(
+                  color: isUser
+                      ? Colors.deepPurple.shade50
+                      : Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: UrbanistApptext(
+                  text: message,
+                  fontSize: width * 0.03,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.black,
+                ),
+              ),
+            ),
+            if (isUser) SizedBox(width: width * 0.02),
+            if (isUser)
+              CircleAvatar(
+                radius: width * 0.03,
+                backgroundColor: AppColor.bottomBarColor,
+                backgroundImage: AssetImage(AppImages.personTemp),
+              ),
+          ],
+        ),
       ),
-    );
-  }
+
+      // ✅ Added TextField below the bubble
+      // Container(
+      //   margin: const EdgeInsets.only(top: 8),
+      //   padding: const EdgeInsets.symmetric(horizontal: 12),
+      //   decoration: BoxDecoration(
+      //     border: Border.all(color: Colors.grey.shade300),
+      //     borderRadius: BorderRadius.circular(30),
+      //     color: Colors.grey.shade100,
+      //   ),
+      //child:
+      // TextField(
+      //   decoration: InputDecoration(
+      //     hintText: 'Type a message...',
+      //     border: InputBorder.none,
+      //     suffixIcon: Row(
+      //       mainAxisSize: MainAxisSize.min,
+      //       children: [
+      //         Icon(Icons.mic_none, color: Colors.grey),
+      //         const SizedBox(width: 8),
+      //         Icon(Icons.send, color: Colors.deepPurple),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      //),
+    ],
+  );
 }
 
 
@@ -938,6 +1059,41 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------ROUGHT WORK ---------------------------------
 
 
 // import 'package:flutter/material.dart';

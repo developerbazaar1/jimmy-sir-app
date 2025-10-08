@@ -46,6 +46,8 @@ class RouteNames {
   static const notificationSettings = 'notification_settings_screen';
   static const privacyPolicy = 'privacy_policy_screen';
   static const termsAndConditions = 'terms_and_condition_screen';
+  //----------------Prashant PK----------------
+  static const mealLogScreen = 'meal_log_screen';
 }
 
 class RoutePaths {
@@ -97,4 +99,6 @@ class RoutePaths {
   static const notificationSettings = '/notification_settings_screen';
   static const privacyPolicy = '/privacy_policy_screen';
   static const termsAndConditions = '/terms_and_condition_screen';
+  //----------------Prashant PK----------------
+  static const mealLogScreen = '/meal_log_screen';
 }
