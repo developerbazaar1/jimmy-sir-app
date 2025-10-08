@@ -8,7 +8,6 @@ import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
-import 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/profile/screen/widget/profile_sections.dart';
 import '../widget/life_style_score.dart';
 import '../widget/profile_header.dart';
 

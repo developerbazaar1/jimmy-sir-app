@@ -31,4 +31,9 @@ class AppColor {
   static Color placeholderColor = Color(0XFFA4A4A4);
   static Color black = Color(0XFF000000);
   static Color shadowColor = Color(0X838BB41F).withOpacity(0.12);
+
+  // ----------------------------Prashant -----------------------
+  static Color baseGrey = Color(0XFF4A5660);
+  static Color weekGray = Color(0XFF616161);
+  
 }

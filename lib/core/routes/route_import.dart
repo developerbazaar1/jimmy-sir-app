@@ -32,3 +32,8 @@ export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentati
 export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/screens/paypal_details_screen.dart';
 export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/screens/spinwheel_screen.dart';
 export 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/presentation/screens/wallet_detail_screen.dart';
+export 'package:jimmy_sir_app/features/tabbarcontroller/logsSecton/logs/presentation/screen/meal_log_screen.dart';
+export 'package:jimmy_sir_app/core/constants/app_colors.dart';
+export 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
+export 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
+export 'package:go_router/go_router.dart';
