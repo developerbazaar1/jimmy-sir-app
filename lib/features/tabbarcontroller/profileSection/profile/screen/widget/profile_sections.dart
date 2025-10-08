@@ -20,6 +20,7 @@ class ProfileSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
+    final height = MediaQuery.sizeOf(context).height;
     return Padding(
       padding: EdgeInsets.only(
         bottom: width * (16 / width),
@@ -61,7 +62,7 @@ class ProfileSections extends StatelessWidget {
                       : width * (35 / width),
                   width: color == AppColor.primaryColor || color == AppColor.redColor
                       ? width * (30 / width)
-                      : width * (35 / width),
+                      : height * (35 / height),
                 ),
 
                 SizedBox(width: width * (8 / width)),
