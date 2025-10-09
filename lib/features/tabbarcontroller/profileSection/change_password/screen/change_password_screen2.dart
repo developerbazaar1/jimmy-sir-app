@@ -79,7 +79,7 @@ class ChangePasswordScreen2 extends ConsumerWidget {
             //
             //   }
             // },
-            onPressed:() async{
+            onPressed: () async {
               // Validate the form first
               if (formKey.currentState?.validate() ?? false) {
                 // ✅ Only show bottom sheet when valid
@@ -113,8 +113,7 @@ class ChangePasswordScreen2 extends ConsumerWidget {
                             ),
                             const SizedBox(height: 16),
                             const UrbanistApptext(
-                              text:
-                              'Account details updated successfully',
+                              text: 'Account details updated successfully',
                               textAlign: TextAlign.center,
                             ),
                           ],

@@ -820,7 +820,7 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
               duration: const Duration(milliseconds: 300),
               child: Container(
                 width: width * 0.9,
-                height: height * 0.4,
+                // height: height * 0.2,
                 padding: EdgeInsets.all(width * 0.04),
                 decoration: BoxDecoration(
                   color: Colors.white,
