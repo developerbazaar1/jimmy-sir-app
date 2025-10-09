@@ -8,11 +8,7 @@ class HomeState {
   final bool isLoading;
   final String error;
 
-  HomeState({
-    required this.homeData,
-    this.isLoading = false,
-    this.error = '',
-  });
+  HomeState({required this.homeData, this.isLoading = false, this.error = ''});
 
   HomeState copyWith({MapSD? homeData, bool? isLoading, String? error}) {
     return HomeState(
@@ -27,9 +23,9 @@ class HomeNotifier extends StateNotifier<HomeState> {
   final HomeServices homeServices;
 
   HomeNotifier({required this.homeServices})
-      : super(HomeState(homeData: {}, isLoading: false, error: '')) {
+    : super(HomeState(homeData: {}, isLoading: false, error: '')) {
     // automatically fetch once created
-    fetchHomeData();
+    // fetchHomeData();
   }
 
   // fetch & store in state
@@ -39,10 +35,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
       final MapSD data = await homeServices.getHomeData();
       state = state.copyWith(homeData: data, isLoading: false);
     } catch (e, st) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: e.toString());
       // optionally log st
     }
   }
@@ -55,5 +48,6 @@ class HomeNotifier extends StateNotifier<HomeState> {
 
 final homeServiceProvider = Provider<HomeServices>((ref) => HomeServices());
 
-final homeProvider =
-    StateNotifierProvider<HomeNotifier, HomeState>((ref) => HomeNotifier(homeServices: ref.read(homeServiceProvider)));
+final homeProvider = StateNotifierProvider<HomeNotifier, HomeState>(
+  (ref) => HomeNotifier(homeServices: ref.read(homeServiceProvider)),
+);

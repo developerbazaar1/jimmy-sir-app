@@ -7,6 +7,7 @@ import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
+import 'package:jimmy_sir_app/core/routes/route_import.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/myWinsSection/provider/add_goals_provider.dart';
 import 'package:jimmy_sir_app/features/tabbarcontroller/profileSection/profileInfo/screen/widget/profile_save_pop.dart';
 
@@ -18,8 +19,11 @@ class AddGoalScreen extends ConsumerWidget {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      backgroundColor: AppColor.white,
-      appBar: CustomAppBar2(title: AppText.addGoal),
+      backgroundColor: AppColor.white, 
+      appBar: CustomAppBar2(
+        onBackTap: () => context.pop(),
+        title: AppText.addGoal,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.05),

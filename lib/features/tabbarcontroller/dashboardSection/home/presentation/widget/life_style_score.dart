@@ -1,8 +1,8 @@
 import 'dart:math';
-
 import 'package:dotted_line/dotted_line.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_radar_chart/flutter_radar_chart.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jimmy_sir_app/core/components/apptext/plus_jakarta_sans.dart';
@@ -80,7 +80,7 @@ class LifeStyleScore extends ConsumerWidget {
       ),
 
       child: Padding(
-        padding: EdgeInsets.all(width * (16 / width)),
+        padding: EdgeInsets.all(width * 0.04),
         child: Column(
           children: [
             Row(
@@ -102,7 +102,7 @@ class LifeStyleScore extends ConsumerWidget {
               ],
             ),
 
-            SizedBox(height: width * (16 / width)),
+            SizedBox(height: width * 0.04),
 
             Container(
               padding: EdgeInsets.symmetric(
@@ -113,12 +113,12 @@ class LifeStyleScore extends ConsumerWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
-                    blurRadius: 8,
+                    blurRadius: width * 0.02,
                     offset: const Offset(0, 2),
                   ),
                 ],
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(width * 0.02),
                 border: Border.all(color: AppColor.border.withOpacity(0.2)),
               ),
 
@@ -130,9 +130,9 @@ class LifeStyleScore extends ConsumerWidget {
                 goalData: goal,
               ),
             ),
-
             SizedBox(height: width * 0.01),
 
+            //chart section
             Padding(
               padding: EdgeInsets.symmetric(vertical: height * 0.01),
               child: Row(
@@ -166,46 +166,46 @@ class LifeStyleScore extends ConsumerWidget {
               color: AppColor.primaryColor,
               textColor: AppColor.white,
               fontSize: width * 0.03,
-              height: height * 0.05,
-              width: width * 0.40,
+              height: height * 0.04,
+              width: width * 0.50,
               fontWeight: FontWeight.w500,
               borderRadius: width * 0.02,
               borderColor: AppColor.primaryColor,
             ),
-            SizedBox(height: width * 0.01),
+            SizedBox(height: width * 0.02),
 
             Container(
-              width: width * 0.45,
+              width: width * 0.50,
               decoration: BoxDecoration(
                 color: Colors.grey.withOpacity(0.05),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(width * 0.02),
                 border: Border.all(color: AppColor.border.withOpacity(0.2)),
               ),
               child: Padding(
-                padding: EdgeInsets.all(width * (10 / width)),
+                padding: EdgeInsets.all(width * 0.02),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SvgPicture.asset(
                       AppSvg.tadaCelebrateIcon,
-                      height: height * (18 / height),
-                      width: width * (18 / width),
+                      height: height * 0.02,
+                      width: width * 0.02,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PlusJakartaSansApptext(
                           text: 'Complete today’s logs to earn:',
-                          fontSize: width * (9 / width),
+                          fontSize: width * 0.02,
                           fontWeight: FontWeight.w500,
                           color: AppColor.textColor,
                         ),
 
                         PlusJakartaSansApptext(
                           text: '10% cashback / xxx',
-                          fontSize: width * (9 / width),
+                          fontSize: width * 0.02,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.textColor,
+                          color: AppColor.textBrownColor,
                         ),
                       ],
                     ),
@@ -299,32 +299,51 @@ class ChartSection extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: height * 0.03),
+
+          //chart
+          // CustomRadarChart(),
           Center(
-            child: SizedBox(
-              width: width * 0.35,
-              height: width * 0.35,
-              child: CustomPaint(
-                child: RadarChart(
-                  ticks: ticks,
-                  features: features,
-                  reverseAxis: false,
-                  sides: 8,
-                  data: [actualData, goalData],
-                  graphColors: [
-                    AppColor.primaryColor.withOpacity(0.6),
-                    Colors.green.withOpacity(0.5),
-                  ],
-                  featuresTextStyle: TextStyle(
-                    fontSize: width * (12 / width),
-                    color: AppColor.black,
-                  ),
-                  outlineColor: Colors.grey,
-                  axisColor: AppColor.primaryColor,
-                ),
-              ),
+            child: CustomRadarChart(
+              features: [
+                'Sleep Quality',
+                'Physical Activity',
+                'Hydration',
+                'Stress Management',
+                'Focus',
+                'Meditation',
+                'Social Media',
+              ],
+              actualData: [60, 50, 45, 55, 40, 40, 40, 60],
+              goalData: [80, 70, 70, 80, 70, 50, 50, 50],
             ),
           ),
 
+          // Center(
+          //   child: SizedBox(
+          //     width: width * 0.35,
+          //     height: width * 0.35,
+          //     child: CustomPaint(
+          //       child: RadarChart(
+          //         ticks: ticks,
+          //         features: features,
+          //         reverseAxis: false,
+          //         sides: 8,
+          //         data: [actualData, goalData],
+          //         graphColors: [
+          //           AppColor.primaryColor.withOpacity(0.6),
+          //           Colors.green.withOpacity(0.5),
+          //         ],
+          //         featuresTextStyle: TextStyle(
+          //           fontSize: width * (12 / width),
+          //           color: AppColor.black,
+          //         ),
+          //         outlineColor: Colors.grey,
+          //         axisColor: AppColor.primaryColor,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SizedBox(height: width * 0.02),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -337,63 +356,278 @@ class ChartSection extends StatelessWidget {
   }
 }
 
-class DottedRadarPainter extends CustomPainter {
+// class ReusableRadarChart extends StatelessWidget {
+//   final List<String>
+//   features; // e.g. ["Stress", "Sleep", "Physical", "Hydration"]
+//   final List<double> actual; // same length as features
+//   final List<double> goal; // same length as features
+//   final int threadCount; // e.g. 6
+//   final double maxValue; // maximum value scale (e.g. 100)
+//   final Color actualColor;
+//   final Color goalColor;
+//   final Color gridColor;
+//   final TextStyle labelStyle;
+
+//   const ReusableRadarChart({
+//     Key? key,
+//     required this.features,
+//     required this.actual,
+//     required this.goal,
+//     this.threadCount = 6,
+//     this.maxValue = 100,
+//     this.actualColor = Colors.orange,
+//     this.goalColor = Colors.green,
+//     this.gridColor = const Color(0xFFCCCCCC),
+//     this.labelStyle = const TextStyle(fontSize: 12, color: Colors.black),
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     assert(
+//       features.length == actual.length && features.length == goal.length,
+//       "features, actual, goal must have the same length",
+//     );
+
+//     return RadarChart(
+//       RadarChartData(
+//         radarBackgroundColor: Colors.transparent,
+//         radarShape: RadarShape.polygon,
+//         tickCount: threadCount,
+//         ticksTextStyle: const TextStyle(color: Colors.transparent),
+//         // getTitle: (int index) {
+//         //   return RadarChartTitle(
+//         //     text: features[index],
+//         //     textStyle: labelStyle,
+//         //   );
+//         // },
+//         radarBorderData: BorderSide(color: gridColor, width: 0.6),
+//         tickBorderData: BorderSide(color: gridColor, width: 0.3),
+//         gridBorderData: BorderSide(color: gridColor, width: 0.3),
+//         // You can choose whether to draw the inner grid (polygons) or not
+//         // The below shows data sets
+//         dataSets: [
+//           // Actual (solid orange)
+//           RadarDataSet(
+//             fillColor: actualColor.withOpacity(0.3),
+//             borderColor: actualColor,
+//             entryRadius: 3,
+//             borderWidth: 2,
+//             dataEntries: actual.map((e) => RadarEntry(value: e)).toList(),
+//           ),
+//           // Goal (dotted green)
+//           RadarDataSet(
+//             fillColor: Colors.transparent,
+//             borderColor: goalColor,
+//             borderWidth: 1.8,
+//             entryRadius: 4,
+//             dataEntries: goal.map((e) => RadarEntry(value: e)).toList(),
+//             // borderDashArray: [6, 3], // dotted style
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+//--3rdd graph
+// class CustomRadarChart extends StatelessWidget {
+//   const CustomRadarChart({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // Features shown on each axis
+//     const features = [
+//       'Sleep Quality',
+//       'Physical Activity',
+//       'Hydration',
+//       'Stress Management',
+//     ];
+
+//     // Actual data (orange solid)
+//     final actualData = [60.0, 55.0, 50.0, 48.0];
+
+//     // Goal data (green dotted)
+//     final goalData = [75.0, 70.0, 65.0, 60.0];
+
+//     return Center(
+//       child: SizedBox(
+//         width: 300,
+//         height: 300,
+//         child: RadarChart(
+//           RadarChartData(
+//             radarBackgroundColor: Colors.transparent,
+//             radarShape: RadarShape.polygon,
+//             tickCount: 5,
+//             ticksTextStyle: const TextStyle(
+//               color: Colors.transparent, // Hide ticks text
+//             ),
+//             // getTitle: (index) {
+//             //   return RadarChartTitle(
+//             //     text: features[index],
+//             //     textStyle: const TextStyle(
+//             //       fontSize: 14,
+//             //       fontWeight: FontWeight.w500,
+//             //       color: Colors.black,
+//             //     ),
+//             //   );
+//             // },
+//             radarBorderData: const BorderSide(
+//               color: Colors.black87,
+//               width: 0.4,
+//             ),
+//             tickBorderData: BorderSide(
+//               color: Colors.orange.withOpacity(0.3),
+//               width: 0.4,
+//             ),
+//             gridBorderData: BorderSide(
+//               color: Colors.orange.withOpacity(0.3),
+//               width: 0.4,
+//             ),
+//             dataSets: [
+//               // Actual (solid orange)
+//               RadarDataSet(
+//                 fillColor: Colors.orange.withOpacity(0.3),
+//                 borderColor: Colors.orange,
+//                 entryRadius: 3,
+//                 borderWidth: 2,
+//                 dataEntries: actualData
+//                     .map((e) => RadarEntry(value: e))
+//                     .toList(),
+//               ),
+
+//               // Goal (dotted green)
+//               RadarDataSet(
+//                 fillColor: Colors.transparent,
+//                 borderColor: Colors.green,
+//                 borderWidth: 2,
+//                 // borderDashArray: [6, 3], // Dotted line
+//                 entryRadius: 4,
+//                 dataEntries: goalData.map((e) => RadarEntry(value: e)).toList(),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+//-------------custom raidr painter-----------------------
+class CustomRadarChart extends StatelessWidget {
+  final List<String> features;
   final List<double> actualData;
   final List<double> goalData;
-  final List<String> features;
-  final Color outlineColor;
-  final Color axisColor;
-  final Color actualColor;
-  final Color goalColor;
+  final int levels;
+  final double maxValue;
 
-  DottedRadarPainter({
+  const CustomRadarChart({
+    super.key,
+    required this.features,
     required this.actualData,
     required this.goalData,
+    this.levels = 6,
+    this.maxValue = 100,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      size: Size(140, 140), // You can make this dynamic
+      painter: RadarChartPainter(
+        features: features,
+        actualData: actualData,
+        goalData: goalData,
+        levels: levels,
+        maxValue: maxValue,
+      ),
+    );
+  }
+}
+
+class RadarChartPainter extends CustomPainter {
+  final List<String> features;
+  final List<double> actualData;
+  final List<double> goalData;
+  final int levels;
+  final double maxValue;
+
+  RadarChartPainter({
     required this.features,
-    required this.outlineColor,
-    required this.axisColor,
-    required this.actualColor,
-    required this.goalColor,
+    required this.actualData,
+    required this.goalData,
+    required this.levels,
+    required this.maxValue,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint axisPaint = Paint()
-      ..color = axisColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 0.8; // ✅ thinner lines
-
-    final Paint outlinePaint = Paint()
-      ..color = outlineColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 0.5;
-
-    final Paint actualPaint = Paint()
-      ..color = actualColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
-
-    final Paint goalPaint = Paint()
-      ..color = goalColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
-
+    final int sides = features.length;
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width * 0.42;
-    final sides = features.length;
+    final radius = min(size.width, size.height) / 2 * 0.8;
     final angle = (2 * pi) / sides;
 
-    // ✅ Draw axes (thin)
+    //  Grid ring color pattern
+    final List<Color> gridColors = [
+      Colors.grey,
+      Colors.red,
+      Colors.red,
+      Colors.orange.withOpacity(0.6),
+      Colors.orange.withOpacity(0.6),
+    ];
+
+    final Paint axisPaint = Paint()
+      ..color = AppColor.textGreyColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 0.6;
+
+    final Paint actualPaint = Paint()
+      ..color = Colors.orange.withOpacity(0.5)
+      ..style = PaintingStyle.fill;
+
+    final Paint goalPaint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.3;
+
+    // 1. Draw background grid (polygons) with custom colors
+    for (int i = 1; i <= levels; i++) {
+      final r = radius * (i / levels);
+      final path = Path();
+
+      for (int j = 0; j < sides; j++) {
+        final x = center.dx + r * cos(angle * j - pi / 2);
+        final y = center.dy + r * sin(angle * j - pi / 2);
+        if (j == 0) {
+          path.moveTo(x, y);
+        } else {
+          path.lineTo(x, y);
+        }
+      }
+      path.close();
+
+      // Use color from gridColors list (wrap around if needed)
+      final color = gridColors[(i - 1) % gridColors.length];
+
+      final Paint gridPaint = Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 0.4;
+
+      canvas.drawPath(path, gridPaint);
+    }
+
+    // 2. Draw axis lines
     for (int i = 0; i < sides; i++) {
       final x = center.dx + radius * cos(angle * i - pi / 2);
       final y = center.dy + radius * sin(angle * i - pi / 2);
       canvas.drawLine(center, Offset(x, y), axisPaint);
     }
 
-    // ✅ Actual data line (solid)
+    // 3. Draw actualData shape (filled orange)
     final Path actualPath = Path();
     for (int i = 0; i < sides; i++) {
-      final r = (actualData[i] / 100) * radius;
+      final value = actualData[i] / maxValue;
+      final r = value * radius;
       final x = center.dx + r * cos(angle * i - pi / 2);
       final y = center.dy + r * sin(angle * i - pi / 2);
       if (i == 0) {
@@ -405,10 +639,11 @@ class DottedRadarPainter extends CustomPainter {
     actualPath.close();
     canvas.drawPath(actualPath, actualPaint);
 
-    // ✅ Goal data line (dotted)
+    // 4. Draw goalData shape (dotted orange)
     final Path goalPath = Path();
     for (int i = 0; i < sides; i++) {
-      final r = (goalData[i] / 100) * radius;
+      final value = goalData[i] / maxValue;
+      final r = value * radius;
       final x = center.dx + r * cos(angle * i - pi / 2);
       final y = center.dy + r * sin(angle * i - pi / 2);
       if (i == 0) {
@@ -419,10 +654,10 @@ class DottedRadarPainter extends CustomPainter {
     }
     goalPath.close();
 
-    // Draw as dashed line
+    // Dotted/dashed path
+    const dashWidth = 3.0;
+    const dashSpace = 2.0;
     final Path dashedPath = Path();
-    const dashWidth = 4.0;
-    const dashSpace = 3.0;
     for (final metric in goalPath.computeMetrics()) {
       double distance = 0.0;
       while (distance < metric.length) {
@@ -434,12 +669,329 @@ class DottedRadarPainter extends CustomPainter {
       }
     }
     canvas.drawPath(dashedPath, goalPaint);
+
+    // 5. Draw dots on vertices
+    final Paint dotPaint = Paint()..style = PaintingStyle.fill;
+    for (int i = 0; i < sides; i++) {
+      final rActual = actualData[i] / maxValue * radius;
+      final xActual = center.dx + rActual * cos(angle * i - pi / 2);
+      final yActual = center.dy + rActual * sin(angle * i - pi / 2);
+      dotPaint.color = Colors.orange;
+      canvas.drawCircle(Offset(xActual, yActual), 3, dotPaint);
+
+      final rGoal = goalData[i] / maxValue * radius;
+      final xGoal = center.dx + rGoal * cos(angle * i - pi / 2);
+      final yGoal = center.dy + rGoal * sin(angle * i - pi / 2);
+      dotPaint.color = Colors.green;
+      canvas.drawCircle(Offset(xGoal, yGoal), 3, dotPaint);
+    }
+
+    // 6. Draw feature labels
+    final textStyle = const TextStyle(color: Colors.black, fontSize: 14);
+    for (int i = 0; i < sides; i++) {
+      final label = features[i];
+      final textPainter = TextPainter(
+        text: TextSpan(text: label, style: textStyle),
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+      )..layout(maxWidth: 100);
+
+      final r = radius + 20;
+      final x = center.dx + r * cos(angle * i - pi / 2);
+      final y = center.dy + r * sin(angle * i - pi / 2);
+
+      canvas.save();
+      canvas.translate(x - textPainter.width / 2, y - textPainter.height / 2);
+      textPainter.paint(canvas, Offset.zero);
+      canvas.restore();
+    }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
+
+// class RadarChartPainter extends CustomPainter {
+//   final List<String> features;
+//   final List<double> actualData;
+//   final List<double> goalData;
+//   final int levels;
+//   final double maxValue;
+
+//   RadarChartPainter({
+//     required this.features,
+//     required this.actualData,
+//     required this.goalData,
+//     required this.levels,
+//     required this.maxValue,
+//   });
+
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     final int sides = features.length;
+//     final center = Offset(size.width / 2, size.height / 2);
+//     final radius = min(size.width, size.height) / 2 * 0.8;
+//     final angle = (2 * pi) / sides;
+
+//     final Paint gridPaint = Paint()
+//       ..color = AppColor.textGreyColor
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 0.4;
+
+//     final Paint axisPaint = Paint()
+//       ..color = AppColor.textGreyColor
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 0.6;
+
+//     final Paint actualPaint = Paint()
+//       ..color = Colors.orange.withOpacity(0.5)
+//       ..style = PaintingStyle.fill;
+
+//     final Paint goalPaint = Paint()
+//       ..color = Colors.green
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 1.3;
+
+//     // 1. Draw background grid (polygons)
+//     for (int i = 1; i <= levels; i++) {
+//       final r = radius * (i / levels);
+//       final path = Path();
+//       for (int j = 0; j < sides; j++) {
+//         final x = center.dx + r * cos(angle * j - pi / 2);
+//         final y = center.dy + r * sin(angle * j - pi / 2);
+//         if (j == 0) {
+//           path.moveTo(x, y);
+//         } else {
+//           path.lineTo(x, y);
+//         }
+//       }
+//       path.close();
+//       canvas.drawPath(path, gridPaint);
+//     }
+
+//     // 2. Draw axis lines
+//     for (int i = 0; i < sides; i++) {
+//       final x = center.dx + radius * cos(angle * i - pi / 2);
+//       final y = center.dy + radius * sin(angle * i - pi / 2);
+//       canvas.drawLine(center, Offset(x, y), axisPaint);
+//     }
+
+//     // 3. Draw actualData shape
+//     final Path actualPath = Path();
+//     for (int i = 0; i < sides; i++) {
+//       final value = actualData[i] / maxValue;
+//       final r = value * radius;
+//       final x = center.dx + r * cos(angle * i - pi / 2);
+//       final y = center.dy + r * sin(angle * i - pi / 2);
+//       if (i == 0) {
+//         actualPath.moveTo(x, y);
+//       } else {
+//         actualPath.lineTo(x, y);
+//       }
+//     }
+//     actualPath.close();
+//     canvas.drawPath(actualPath, actualPaint);
+
+//     // 4. Draw goalData shape (dotted)
+//     final Path goalPath = Path();
+//     for (int i = 0; i < sides; i++) {
+//       final value = goalData[i] / maxValue;
+//       final r = value * radius;
+//       final x = center.dx + r * cos(angle * i - pi / 2);
+//       final y = center.dy + r * sin(angle * i - pi / 2);
+//       if (i == 0) {
+//         goalPath.moveTo(x, y);
+//       } else {
+//         goalPath.lineTo(x, y);
+//       }
+//     }
+//     goalPath.close();
+
+//     // Dashed/dotted path
+//     const dashWidth = 4.0;
+//     const dashSpace = 3.0;
+//     final Path dashedPath = Path();
+//     for (final metric in goalPath.computeMetrics()) {
+//       double distance = 0.0;
+//       while (distance < metric.length) {
+//         dashedPath.addPath(
+//           metric.extractPath(distance, distance + dashWidth),
+//           Offset.zero,
+//         );
+//         distance += dashWidth + dashSpace;
+//       }
+//     }
+//     canvas.drawPath(dashedPath, goalPaint);
+
+//     // 5. Draw dots on vertices
+//     final Paint dotPaint = Paint()..style = PaintingStyle.fill;
+
+//     for (int i = 0; i < sides; i++) {
+//       final rActual = actualData[i] / maxValue * radius;
+//       final xActual = center.dx + rActual * cos(angle * i - pi / 2);
+//       final yActual = center.dy + rActual * sin(angle * i - pi / 2);
+//       dotPaint.color = Colors.orange;
+//       canvas.drawCircle(Offset(xActual, yActual), 3, dotPaint);
+
+//       final rGoal = goalData[i] / maxValue * radius;
+//       final xGoal = center.dx + rGoal * cos(angle * i - pi / 2);
+//       final yGoal = center.dy + rGoal * sin(angle * i - pi / 2);
+//       dotPaint.color = Colors.green;
+//       canvas.drawCircle(Offset(xGoal, yGoal), 3, dotPaint);
+//     }
+
+//     // 6. Draw labels
+//     final textStyle = const TextStyle(color: Colors.black, fontSize: 14);
+//     for (int i = 0; i < sides; i++) {
+//       final label = features[i];
+//       final textPainter = TextPainter(
+//         text: TextSpan(text: label, style: textStyle),
+//         textAlign: TextAlign.center,
+//         textDirection: TextDirection.ltr,
+//       )..layout(maxWidth: 100);
+
+//       final r = radius + 20;
+//       final x = center.dx + r * cos(angle * i - pi / 2);
+//       final y = center.dy + r * sin(angle * i - pi / 2);
+
+//       canvas.save();
+//       canvas.translate(x - textPainter.width / 2, y - textPainter.height / 2);
+//       textPainter.paint(canvas, Offset.zero);
+//       canvas.restore();
+//     }
+//   }
+
+//   @override
+//   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+// }
+
+
+//------------------custom radar painter---------------------
+
+
+
+
+
+
+
+
+
+//-------------------------this is for an fortune --------
+
+// class DottedRadarPainter extends CustomPainter {
+//   final List<double> actualData;
+//   final List<double> goalData;
+//   final List<String> features;
+//   final Color outlineColor;
+//   final Color axisColor;
+//   final Color actualColor;
+//   final Color goalColor;
+
+//   DottedRadarPainter({
+//     required this.actualData,
+//     required this.goalData,
+//     required this.features,
+//     required this.outlineColor,
+//     required this.axisColor,
+//     required this.actualColor,
+//     required this.goalColor,
+//   });
+
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     final Paint axisPaint = Paint()
+//       ..color = axisColor
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 0.8; // ✅ thinner lines
+
+//     final Paint outlinePaint = Paint()
+//       ..color = outlineColor
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 0.5;
+
+//     final Paint actualPaint = Paint()
+//       ..color = actualColor
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 1.5;
+
+//     final Paint goalPaint = Paint()
+//       ..color = goalColor
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 1.5;
+
+//     final center = Offset(size.width / 2, size.height / 2);
+//     final radius = size.width * 0.42;
+//     final sides = features.length;
+//     final angle = (2 * pi) / sides;
+
+//     // ✅ Draw axes (thin)
+//     for (int i = 0; i < sides; i++) {
+//       final x = center.dx + radius * cos(angle * i - pi / 2);
+//       final y = center.dy + radius * sin(angle * i - pi / 2);
+//       canvas.drawLine(center, Offset(x, y), axisPaint);
+//     }
+
+//     // ✅ Actual data line (solid)
+//     final Path actualPath = Path();
+//     for (int i = 0; i < sides; i++) {
+//       final r = (actualData[i] / 100) * radius;
+//       final x = center.dx + r * cos(angle * i - pi / 2);
+//       final y = center.dy + r * sin(angle * i - pi / 2);
+//       if (i == 0) {
+//         actualPath.moveTo(x, y);
+//       } else {
+//         actualPath.lineTo(x, y);
+//       }
+//     }
+//     actualPath.close();
+//     canvas.drawPath(actualPath, actualPaint);
+
+//     // ✅ Goal data line (dotted)
+//     final Path goalPath = Path();
+//     for (int i = 0; i < sides; i++) {
+//       final r = (goalData[i] / 100) * radius;
+//       final x = center.dx + r * cos(angle * i - pi / 2);
+//       final y = center.dy + r * sin(angle * i - pi / 2);
+//       if (i == 0) {
+//         goalPath.moveTo(x, y);
+//       } else {
+//         goalPath.lineTo(x, y);
+//       }
+//     }
+//     goalPath.close();
+
+//     // Draw as dashed line
+//     final Path dashedPath = Path();
+//     const dashWidth = 4.0;
+//     const dashSpace = 3.0;
+//     for (final metric in goalPath.computeMetrics()) {
+//       double distance = 0.0;
+//       while (distance < metric.length) {
+//         dashedPath.addPath(
+//           metric.extractPath(distance, distance + dashWidth),
+//           Offset.zero,
+//         );
+//         distance += dashWidth + dashSpace;
+//       }
+//     }
+//     canvas.drawPath(dashedPath, goalPaint);
+//   }
+
+//   @override
+//   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+// }
+
+
+
+
+
+
+
+
+
+
+//------------------------------------forutne--------------
 
 
 

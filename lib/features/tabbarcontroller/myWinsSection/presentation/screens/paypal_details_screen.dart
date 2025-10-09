@@ -19,7 +19,10 @@ class PayPalDetailsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColor.white,
 
-      appBar: CustomAppBar2(title: AppText.paypalDetails),
+      appBar: CustomAppBar2(
+        onBackTap: () => context.pop(),
+        title: AppText.paypalDetails,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.05),
         child: Column(
