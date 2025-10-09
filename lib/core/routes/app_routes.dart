@@ -216,6 +216,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.termsAndConditions,
         name: RouteNames.termsAndConditions,
         builder: (_, __) => TermsConditionsScreen(),
+      ),
 
       GoRoute(
         path: RoutePaths.helpAndSupport,
@@ -226,14 +227,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.mySubscriptionList,
         name: RouteNames.mySubscriptionList,
         builder: (_, __) => MySubscriptionListScreen(),
-
+      ),
 
       //----------------Prashant PK----------------
-       GoRoute(
+      GoRoute(
         path: RoutePaths.mealLogScreen,
         name: RouteNames.mealLogScreen,
         builder: (_, __) => MealLogScreen(),
-
       ),
     ],
   );
