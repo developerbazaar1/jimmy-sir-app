@@ -280,69 +280,68 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   child: SvgPicture.asset(AppSvg.homeBannerImage),
                 ),
 
-                // TextField container as per image
-                Container(
-                  height: height * 0.06,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColor.border, width: 1.5),
-                  ),
-                  child: Row(
-                    children: [
-                      // Microphone icon on the left
+                // // TextField container as per image
+                // Container(
+                //   height: height * 0.06,
+                //   decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     borderRadius: BorderRadius.circular(10),
+                //     border: Border.all(color: AppColor.border, width: 1.5),
+                //   ),
+                //   child: Row(
+                //     children: [
+                //       // Microphone icon on the left
 
-                      // Text input field
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Type your message...',
-                            hintStyle: TextStyle(
-                              color: Colors.grey.shade600,
-                              fontSize: width * 0.035,
-                              fontFamily: 'urbanist',
-                            ),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: height * 0.015,
-                              horizontal: width * 0.03,
-                            ),
-                          ),
-                          style: TextStyle(
-                            fontSize: width * 0.035,
-                            fontFamily: 'urbanist',
-                            color: AppColor.black,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(right: width * 0.04),
-                        child: Icon(
-                          Icons.mic_none,
-                          color: Colors.grey.shade600,
-                          size: width * 0.07,
-                        ),
-                      ),
+                //       // Text input field
+                //       Expanded(
+                //         child: TextField(
+                //           decoration: InputDecoration(
+                //             hintText: 'Type your message...',
+                //             hintStyle: TextStyle(
+                //               color: Colors.grey.shade600,
+                //               fontSize: width * 0.035,
+                //               fontFamily: 'urbanist',
+                //             ),
+                //             border: InputBorder.none,
+                //             contentPadding: EdgeInsets.symmetric(
+                //               vertical: height * 0.015,
+                //               horizontal: width * 0.03,
+                //             ),
+                //           ),
+                //           style: TextStyle(
+                //             fontSize: width * 0.035,
+                //             fontFamily: 'urbanist',
+                //             color: AppColor.black,
+                //           ),
+                //         ),
+                //       ),
+                //       Padding(
+                //         padding: EdgeInsets.only(right: width * 0.04),
+                //         child: Icon(
+                //           Icons.mic_none,
+                //           color: Colors.grey.shade600,
+                //           size: width * 0.07,
+                //         ),
+                //       ),
 
-                      // Orange send button on the right
-                      Container(
-                        margin: EdgeInsets.only(right: width * 0.02),
-                        width: width * 0.1,
-                        height: width * 0.1,
-                        decoration: BoxDecoration(
-                          color: AppColor.primaryColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.send,
-                          color: Colors.white,
-                          size: width * 0.05,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
+                //       // Orange send button on the right
+                //       Container(
+                //         margin: EdgeInsets.only(right: width * 0.02),
+                //         width: width * 0.1,
+                //         height: width * 0.1,
+                //         decoration: BoxDecoration(
+                //           color: AppColor.primaryColor,
+                //           shape: BoxShape.circle,
+                //         ),
+                //         child: Icon(
+                //           Icons.send,
+                //           color: Colors.white,
+                //           size: width * 0.05,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 SizedBox(height: height * 0.1),
               ],
             ),
@@ -754,7 +753,7 @@ class healthOverviewtile extends StatelessWidget {
               ),
               Spacer(),
 
-              Icon(Icons.arrow_forward_ios, size: width * (18 / width)),
+              Icon(Icons.arrow_forward_ios, size: width * 0.06),
             ],
           ),
         ),
@@ -813,6 +812,7 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
           duration: const Duration(milliseconds: 300),
           bottom: _isOpen ? height * 0.17 : height * 0.2,
           right: width * 0.01,
+
           child: ScaleTransition(
             scale: _animation,
             child: AnimatedOpacity(
@@ -820,7 +820,7 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
               duration: const Duration(milliseconds: 300),
               child: Container(
                 width: width * 0.9,
-                // height: height * 0.2,
+                height: height * 0.5,
                 padding: EdgeInsets.all(width * 0.04),
                 decoration: BoxDecoration(
                   color: Colors.white,

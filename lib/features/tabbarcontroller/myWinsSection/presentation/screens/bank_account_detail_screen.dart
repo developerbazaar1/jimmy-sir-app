@@ -18,7 +18,11 @@ class BankAccountDetailScreen extends ConsumerWidget {
     final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: AppColor.white,
-      appBar: CustomAppBar2(title: AppText.bankAccountDetail),
+      appBar: CustomAppBar2(
+        onBackTap: () => context.pop(),
+
+        title: AppText.bankAccountDetail,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.05),
