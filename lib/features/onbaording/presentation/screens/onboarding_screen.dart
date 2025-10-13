@@ -249,16 +249,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
                         return Transform.scale(
                           scale: _buttonScaleAnimation.value,
                           child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.white.withOpacity(0.3),
-                                  blurRadius: 10,
-                                  spreadRadius: 2,
-                                ),
-                              ],
-                            ),
+                            decoration: BoxDecoration(shape: BoxShape.circle),
                             child: SvgPicture.asset(
                               AppSvg.roundNextIcon,
                               height: height * 0.06,
