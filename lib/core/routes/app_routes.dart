@@ -257,6 +257,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: RouteNames.mealLogScreen,
         builder: (_, __) => MealLogScreen(),
       ),
+      GoRoute(
+        path: RoutePaths.activityLogScreen,
+        name: RouteNames.activityLogScreen,
+        builder: (_, __) => ActivityLogScreen(),
+      ),
     ],
   );
 });

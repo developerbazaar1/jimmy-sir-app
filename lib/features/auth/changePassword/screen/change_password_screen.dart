@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:jimmy_sir_app/features/auth/widget/header_widget.dart';
-
 import '../../../../core/components/Button/custom_button.dart';
-import '../../../../core/components/apptext/plus_jakarta_sans.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_svg.dart';
 import '../../../../core/constants/app_text.dart';

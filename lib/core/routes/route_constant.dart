@@ -53,6 +53,10 @@ class RouteNames {
 
   //----------------Prashant PK----------------
   static const mealLogScreen = 'meal_log_screen';
+
+  static const activityLogScreen = 'activity_log_screen';
+
+
 }
 
 class RoutePaths {
@@ -109,4 +113,7 @@ class RoutePaths {
   static const termsAndConditions = '/terms_and_condition_screen';
   //----------------Prashant PK----------------
   static const mealLogScreen = '/meal_log_screen';
+
+  static const activityLogScreen = '/activity_log_screen';
+
 }

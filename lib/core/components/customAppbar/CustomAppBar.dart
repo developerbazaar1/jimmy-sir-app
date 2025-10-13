@@ -89,7 +89,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-
+  final double? fontSize;
   final VoidCallback? onBackTap;
   final VoidCallback? onSkipTap;
 
@@ -97,7 +97,7 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.onBackTap,
-    this.onSkipTap,
+    this.onSkipTap, this.fontSize,
   });
 
   @override
@@ -115,21 +115,22 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              onBackTap != null ?
-              GestureDetector(
-                onTap: onBackTap ?? () => context.pop(),
-                child: SvgPicture.asset(
-                  AppSvg.arrowLeftIcon,
-                  height: height * 0.03,
-                  width: width * 0.02,
-                ),
-              ) : SizedBox.shrink(),
+              onBackTap != null
+                  ? GestureDetector(
+                      onTap: onBackTap ?? () => context.pop(),
+                      child: SvgPicture.asset(
+                        AppSvg.arrowLeftIcon,
+                        height: height * 0.03,
+                        width: width * 0.02,
+                      ),
+                    )
+                  : SizedBox.shrink(),
               UrbanistApptext(
                 textAlign: TextAlign.center,
                 text: title,
                 fontWeight: FontWeight.w700,
                 color: AppColor.black,
-                fontSize: width * 0.055,
+                fontSize: fontSize ?? width * 0.055,
               ),
               Container(),
             ],

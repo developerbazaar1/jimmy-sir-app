@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
-import 'package:jimmy_sir_app/core/components/TextFeild/text_feild.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 
 class ProfileTextFiledInfo extends StatelessWidget {
@@ -20,7 +19,7 @@ class ProfileTextFiledInfo extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: width * (8 / width),
+      spacing: width * .02,
       children: [
         UrbanistApptext(
           text: label,

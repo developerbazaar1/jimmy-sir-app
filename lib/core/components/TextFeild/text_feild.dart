@@ -17,7 +17,7 @@ class AppTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final double? fontSize;
   final double? labelFontSize;
-
+  final int? maxLines;
   const AppTextField({
     super.key,
     this.prefixIconImg,
@@ -34,6 +34,7 @@ class AppTextField extends StatefulWidget {
     this.focusNode,
     this.fontSize,
     this.labelFontSize,
+    this.maxLines,
   });
 
   @override
@@ -71,7 +72,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
+    // final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     Color borderColor;
     if (_errorText != null) {
@@ -112,6 +113,7 @@ class _AppTextFieldState extends State<AppTextField> {
                     key: _fieldKey,
                     onTap: widget.onTap,
                     focusNode: widget.focusNode,
+                    maxLines: widget.maxLines ?? 1,
                     controller: widget.controller,
                     keyboardType: widget.keyboardType,
                     readOnly: widget.readOnly,
@@ -127,14 +129,14 @@ class _AppTextFieldState extends State<AppTextField> {
                       labelText: widget.labelText,
                       labelStyle: TextStyle(
                         fontSize: widget.labelFontSize ?? width * 0.046,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         fontFamily: 'urbanist',
                         color: AppColor.placeholderColor,
                       ),
                       hintText: widget.hint ?? widget.defaultText,
                       hintStyle: TextStyle(
                         fontSize: widget.labelFontSize ?? width * 0.040,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                         fontFamily: 'urbanist',
                         color: AppColor.placeholderColor,
                       ),

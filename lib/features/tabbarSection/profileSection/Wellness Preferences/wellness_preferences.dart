@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
+import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
@@ -34,20 +35,10 @@ class WellnessPreferences extends ConsumerWidget {
     final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: AppColor.white,
-      appBar: AppBar(
-        title: UrbanistApptext(
-          text: AppText.wellnessPreferences,
-          fontSize: width * (24 / width),
-          fontWeight: FontWeight.w700,
-          color: AppColor.black,
-        ),
-        backgroundColor: AppColor.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () => context.pop(),
-          child: Icon(Icons.arrow_back_ios_new, color: AppColor.black),
-        ),
+      appBar: CustomAppBar2(
+        title: AppText.wellnessPreferences,
+        fontSize: width * 0.055,
+        onBackTap: () => context.pop(),
       ),
       body: SafeArea(
         child: Padding(
@@ -55,9 +46,10 @@ class WellnessPreferences extends ConsumerWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(height: width * 0.03),
                 UrbanistApptext(
                   text: AppText.bodyMetricsMsg,
-                  fontSize: width * (20 / width),
+                  fontSize: width * 0.047,
                   fontWeight: FontWeight.w500,
                   color: AppColor.black,
                 ),

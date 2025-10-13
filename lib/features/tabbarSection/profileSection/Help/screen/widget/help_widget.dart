@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
-
-import '../../../../../../core/components/apptext/poppins_apptext.dart';
 import '../../../../../../core/components/apptext/urbanist_apptext.dart';
 import '../../../../../../core/constants/app_colors.dart';
 import '../../../../../../core/constants/app_svg.dart';
@@ -55,10 +54,11 @@ class _HelpWidgetState extends ConsumerState<HelpWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        SizedBox(height: width * (32 / width)),
         // Illustration Section
         SvgPicture.asset(
           AppSvg.helpStateIcon,
-          height: width * (200 / width),
+          height: width * (220 / width),
           width: width * (200 / width),
         ),
 
@@ -102,7 +102,7 @@ class _HelpWidgetState extends ConsumerState<HelpWidget> {
               child: TextField(
                 controller: _messageController,
                 focusNode: _messageFocusNode,
-                maxLines: 6,
+                maxLines: 3,
                 decoration: InputDecoration(
                   hintText: AppText.haveAQuestionOrNeedAssistance,
                   hintStyle: TextStyle(
@@ -126,52 +126,79 @@ class _HelpWidgetState extends ConsumerState<HelpWidget> {
         const SizedBox(height: 32),
 
         // Submit Button
-        SizedBox(
-          width: double.infinity,
-          height: 56,
-          child: ElevatedButton(
-            onPressed: helpState.isLoading
-                ? null
-                : () {
-                    if (_messageController.text.trim().isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(AppText.pleaseEnterYourMessage),
-                          backgroundColor: AppColor.redColor,
-                        ),
-                      );
-                      return;
-                    }
+        CustomButton(
+          text: AppText.submit,
+          onPressed: helpState.isLoading
+              ? () {}
+              : () {
+                  if (_messageController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(AppText.pleaseEnterYourMessage),
+                        backgroundColor: AppColor.redColor,
+                      ),
+                    );
+                    return;
+                  }
 
-                    ref
-                        .read(helpProvider.notifier)
-                        .postHelp(message: _messageController.text.trim());
-                  },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.primaryColor,
-              foregroundColor: AppColor.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 0,
-            ),
-            child: helpState.isLoading
-                ? SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColor.white),
-                    ),
-                  )
-                : PoppinsApptext(
-                    text: AppText.submit,
-                    fontSize: width * (16 / width),
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.white,
-                  ),
-          ),
+                  ref
+                      .read(helpProvider.notifier)
+                      .postHelp(message: _messageController.text.trim());
+                },
+          height: height * 0.06,
+          fontSize: width * 0.04,
+          fontWeight: FontWeight.w500,
+          borderRadius: width * 0.02,
+          borderColor: AppColor.primaryColor,
+          color: AppColor.primaryColor,
+          textColor: AppColor.white,
         ),
+        // SizedBox(
+        //   width: double.infinity,
+        //   height: 56,
+        //   child: ElevatedButton(
+        //     onPressed: helpState.isLoading
+        //         ? null
+        //         : () {
+        //             if (_messageController.text.trim().isEmpty) {
+        //               ScaffoldMessenger.of(context).showSnackBar(
+        //                 SnackBar(
+        //                   content: Text(AppText.pleaseEnterYourMessage),
+        //                   backgroundColor: AppColor.redColor,
+        //                 ),
+        //               );
+        //               return;
+        //             }
+
+        //             ref
+        //                 .read(helpProvider.notifier)
+        //                 .postHelp(message: _messageController.text.trim());
+        //           },
+        //     style: ElevatedButton.styleFrom(
+        //       backgroundColor: AppColor.primaryColor,
+        //       foregroundColor: AppColor.white,
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.circular(12),
+        //       ),
+        //       elevation: 0,
+        //     ),
+        //     child: helpState.isLoading
+        //         ? SizedBox(
+        //             width: 24,
+        //             height: 24,
+        //             child: CircularProgressIndicator(
+        //               strokeWidth: 2,
+        //               valueColor: AlwaysStoppedAnimation<Color>(AppColor.white),
+        //             ),
+        //           )
+        //         : PoppinsApptext(
+        //             text: AppText.submit,
+        //             fontSize: width * (16 / width),
+        //             fontWeight: FontWeight.w600,
+        //             color: AppColor.white,
+        //           ),
+        //   ),
+        // ),
       ],
     );
   }
