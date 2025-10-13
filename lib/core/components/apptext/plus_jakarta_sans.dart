@@ -12,6 +12,7 @@ class PlusJakartaSansApptext extends StatelessWidget {
   final TextAlign? textAlign;
   final TextDecoration? textDecoration;
   final FontStyle? fontStyle;
+  final bool? underline;
 
   const PlusJakartaSansApptext({
     super.key,
@@ -24,6 +25,7 @@ class PlusJakartaSansApptext extends StatelessWidget {
     this.textAlign,
     this.textDecoration,
     this.fontStyle,
+    this.underline,
   });
 
   @override
@@ -38,7 +40,10 @@ class PlusJakartaSansApptext extends StatelessWidget {
         fontStyle: fontStyle ?? FontStyle.normal,
         color: color ?? AppColor.textColor,
         height: height ?? (heights > 650 ? heights / 600 : heights / 600),
-        decoration: textDecoration ?? TextDecoration.none,
+        decoration: underline == true
+            ? TextDecoration.underline
+            : textDecoration ?? TextDecoration.none,
+        decorationColor: underline == true ? AppColor.primaryColor : null,
       ),
       textAlign: textAlign ?? TextAlign.start,
       maxLines: maxLines ?? 2,

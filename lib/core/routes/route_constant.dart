@@ -20,6 +20,7 @@ class RouteNames {
   static const walletDetailScreen = 'wallet_detail_screen';
   static const sleepQualityScreen = 'sleep_quality_screen';
   static const historicalTrendsScreen = 'historical_trends_sreen';
+  static const graphExpandScreen = 'graph_expand_screen';
 
   //----------------pramod sir----------
   static const signup = 'signup_screen';
@@ -41,11 +42,8 @@ class RouteNames {
   static const retakeQuizScreen = 'retake_quiz_screen';
   static const mySubscription = 'my_subscription_screen';
 
-
   static const helpAndSupport = 'help_and_support_screen';
   static const mySubscriptionList = 'my_subscription_list_screen';
-
-
 
   //---------------Abhijeet-------------
   static const changePassword2 = 'change_password_screen2';
@@ -55,7 +53,9 @@ class RouteNames {
 
   //----------------Prashant PK----------------
   static const mealLogScreen = 'meal_log_screen';
+
   static const activityLogScreen = 'activity_log_screen';
+
 
 }
 
@@ -82,6 +82,8 @@ class RoutePaths {
   static const walletDetailScreen = '/wallet_detail_screen';
   static const sleepQualityScreen = '/sleep_quality_screen';
   static const historicalTrendsScreen = '/historical_trends_sreen';
+  static const graphExpandScreen = '/graph_expand_screen';
+
   //----------------pramod sir-----------
   static const signup = '/signup_screen';
   static const login = '/login_screen';
@@ -104,9 +106,6 @@ class RoutePaths {
   static const helpAndSupport = '/help_and_support_screen';
   static const mySubscriptionList = '/my_subscription_list_screen';
 
-
-
-
   //-------------Abhijeet----------
   static const changePassword2 = '/change_password_screen2';
   static const notificationSettings = '/notification_settings_screen';
@@ -114,5 +113,7 @@ class RoutePaths {
   static const termsAndConditions = '/terms_and_condition_screen';
   //----------------Prashant PK----------------
   static const mealLogScreen = '/meal_log_screen';
+
   static const activityLogScreen = '/activity_log_screen';
+
 }

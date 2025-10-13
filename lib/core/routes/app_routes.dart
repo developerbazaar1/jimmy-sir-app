@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/screens/graph_expand_screen.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/screens/historical_trends_sreen.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/screens/sleep_quality_screen.dart';
-
+import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/providers/graph_provider.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/profileSection/CMS_Pages/screen/privacy_policy_screen.dart';
 
 import '../../features/tabbarSection/profileSection/CMS_Pages/screen/terms_and_condition_screen.dart';
@@ -99,8 +101,27 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: RoutePaths.historicalTrendsScreen,
         name: RouteNames.historicalTrendsScreen,
-        builder: (_, __) => const HistoricalTrendsScreen(),
+        pageBuilder: (context, state) {
+          final graphData = state.extra as GraphData;
+          return MaterialPage(
+            child: HistoricalTrendsScreen(graphData: graphData),
+          );
+        },
       ),
+      GoRoute(
+        name: RouteNames.graphExpandScreen,
+        path: RoutePaths.graphExpandScreen,
+        pageBuilder: (context, state) {
+          final graphData = state.extra as GraphData;
+          return MaterialPage(child: GraphExpandScreen(graphData: graphData));
+        },
+      ),
+
+      // GoRoute(
+      //   path: RoutePaths.graphExpandScreen,
+      //   name: RouteNames.graphExpandScreen,
+      //   builder: (_, __) =>  GraphExpandScreen(),
+      // ),
       //----------------pramod sir----------------
       GoRoute(
         path: RoutePaths.login,
