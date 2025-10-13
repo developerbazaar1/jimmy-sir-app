@@ -73,7 +73,6 @@ class ProfileScreen extends ConsumerWidget {
                     //   icon: AppSvg.bankAccountDetailsIcon,
                     //   onTap: () {},
                     // ),
-
                     ProfileSections(
                       title: AppText.changePassword,
                       icon: AppSvg.changePasswordIcon,
@@ -93,7 +92,9 @@ class ProfileScreen extends ConsumerWidget {
                     ProfileSections(
                       title: AppText.helpAndSupport,
                       icon: AppSvg.helpAndSupportIcon,
-                      onTap: () {},
+                      onTap: () {
+                        context.push(RoutePaths.helpAndSupport);
+                      },
                     ),
 
                     ProfileSections(

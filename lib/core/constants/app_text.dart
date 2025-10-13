@@ -106,6 +106,12 @@ class AppText {
       "How would you rate your overall sleep quality in the past week?";
   static const String sleepQualityQuestion3 =
       "How would you rate your overall sleep quality in the past week?";
+  static const String actual = "Actual";
+  static const String goal = "Goal";
+  static const String buildTodayProgress = "Build Today\'s Progress";
+  static const String historicalTrends = "Historical Trends";
+  static const String logActivity = "Log Activity";
+  static const String logMeal = "Log Meal";
   //----------pramod sir-----------
   //------------login-----------
   static const String welcomeBackDescription =
