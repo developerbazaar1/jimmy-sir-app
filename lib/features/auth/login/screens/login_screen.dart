@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
 
 import '../../../../core/components/TextFeild/text_feild.dart';
 import '../../../../core/components/apptext/inter_apptext.dart';
-import '../../../../core/components/apptext/plus_jakarta_sans.dart';
-import '../../../../core/constants/app_images.dart';
 import '../../../../core/constants/app_text.dart';
 import '../../../../core/routes/route_constant.dart';
 import '../../widget/header_widget.dart';
@@ -84,7 +80,7 @@ class LoginScreen extends ConsumerWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // TODO: forgot password
+                  
                       context.goNamed(RouteNames.forgotPassword);
                     },
                     child: InterApptext(

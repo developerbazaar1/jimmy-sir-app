@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jimmy_sir_app/data/data%20sources/remote/network_api_service.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/logsSecton/logs/services/logs_services.dart';
@@ -20,3 +21,5 @@ class MealLogsNotifier extends StateNotifier<MealLogsState> {
   MealLogsNotifier({required this.mealLogsServices})
     : super(MealLogsState(mealLogsData: {}, isLoading: false, error: ''));
 }
+
+final selectedImageProvider = StateProvider<File?>((ref) => null);

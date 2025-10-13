@@ -68,10 +68,12 @@ class AppSvg {
   static String runIcon = '$basePath/run_icon.svg';
   static String smileIcon = '$basePath/smile_icon.svg';
   static String helpStateIcon = '$basePath/imgHelpAndSupport.svg';
-  
-
 
   //----------------prashant--------------
   static String arrowDown = '$basePath/arrow_down.svg';
-
+  static String galleryIcon = '$basePath/gallery.svg';
+  static String cameraIcon = '$basePath/camera.svg';
+  static String helpAndSupport= '$basePath/help_support.svg';
+  static String deleteAccount = '$basePath/delete.svg';
+  static String editIcon = '$basePath/edit_profile.svg';
 }
