@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimmy_sir_app/core/components/TextFeild/text_feild.dart';
+import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
+import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/profileSection/profileInfo/screen/widget/profile_save_pop.dart';
 
-import '../../../../../../core/components/apptext/urbanist_apptext.dart';
 import '../../../../../../core/components/button/custom_button.dart';
 import '../../../../../../core/components/apptext/poppins_apptext.dart';
 import '../../../../../../core/constants/app_colors.dart';
-import '../../../../../../core/constants/app_images.dart';
 import '../../../../../../core/constants/app_text.dart';
 import '../../../../../../core/constants/app_svg.dart';
-import '../../../../../../core/constants/enum.dart';
-import '../../../../auth/widget/updated_sheet_popup.dart';
 import '../provider/profile_info_provider.dart';
 import 'widget/delete_account_profile.dart';
-import 'widget/profileTextFiled_info.dart';
 
 class ProfileInfoScreen extends ConsumerWidget {
   const ProfileInfoScreen({super.key});
@@ -23,27 +22,15 @@ class ProfileInfoScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final width = MediaQuery.sizeOf(context).width;
     // final height = MediaQuery.sizeOf(context).height;
-    final state = ref.watch(profileInfoProvider);
+    // final state = ref.watch(profileInfoProvider);
     final notifier = ref.read(profileInfoProvider.notifier);
     return Scaffold(
       backgroundColor: AppColor.white,
       extendBodyBehindAppBar: false,
-      appBar: AppBar(
-        backgroundColor: AppColor.white,
-        title: UrbanistApptext(
-          text: AppText.personalInfo,
-          fontWeight: FontWeight.w700,
-          fontSize: width * (24 / width),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            context.pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: AppColor.textBrownColor,
-        ),
+      appBar: CustomAppBar2(
+        title: AppText.personalInfo,
+        fontSize: width * (24 / width),
+        onBackTap: () => context.pop(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -53,18 +40,14 @@ class ProfileInfoScreen extends ConsumerWidget {
               child: Form(
                 key: notifier.formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: width * (10 / width),
                   children: [
-                    SizedBox(height: width * (10 / width)),
+                    SizedBox(height: width * .045),
                     Stack(
                       children: [
                         Container(
-                          width: width * (207 / width),
-                          height: width * (207 / width),
+                          width: width * .4,
+                          height: width * .4,
                           decoration: BoxDecoration(
-                            //color: AppColor.redColor,
                             borderRadius: BorderRadius.circular(
                               width * (207 / width),
                             ),
@@ -94,16 +77,13 @@ class ProfileInfoScreen extends ConsumerWidget {
                           ),
                         ),
                         Positioned(
-                          bottom: 8,
-                          right: 8,
+                          bottom: width * .01,
+                          right: width * .01,
                           child: GestureDetector(
-                            onTap: () {
-                              // Add your edit functionality here
-                              print('Edit profile picture tapped');
-                            },
+                            onTap: () {},
                             child: Container(
-                              width: width * (40 / width),
-                              height: width * (40 / width),
+                              width: width * .075,
+                              height: width * .075,
                               decoration: BoxDecoration(
                                 color: AppColor.white,
                                 shape: BoxShape.circle,
@@ -112,78 +92,110 @@ class ProfileInfoScreen extends ConsumerWidget {
                                   width: 1.0,
                                 ),
                               ),
-                              child: Icon(
-                                Icons.edit,
-                                color: AppColor.black,
-                                size: width * (20 / width),
+                              child: SvgPicture.asset(
+                                AppSvg.editIcon,
+                                height: width * .05,
+                                width: width * .05,
+                                fit: BoxFit.scaleDown,
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
+                    SizedBox(height: width * .045),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        UrbanistApptext(
+                          text: "Name",
+                          fontSize: width * 0.042,
+                          fontWeight: FontWeight.w600,
+                          color: AppColor.black,
+                        ),
+                        SizedBox(height: width * .02),
+                        AppTextField(
+                          fontSize: width * .036,
+                          hint: AppText.name,
+                          controller: notifier.nameController,
+                          keyboardType: TextInputType.name,
+                        ),
+                        SizedBox(height: width * .05),
 
-                    ProfileTextFiledInfo(
-                      label: AppText.name,
-                      hint: AppText.name,
-                      controller: notifier.nameController,
-                      keyboardType: TextInputType.name,
-                    ),
-                    ProfileTextFiledInfo(
-                      label: AppText.email,
-                      hint: AppText.email,
-                      controller: notifier.emailController,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    ProfileTextFiledInfo(
-                      label: AppText.phone,
-                      hint: AppText.phone,
-                      controller: notifier.phoneController,
-                      keyboardType: TextInputType.phone,
-                    ),
+                        UrbanistApptext(
+                          text: "Email Address",
+                          fontSize: width * 0.042,
+                          fontWeight: FontWeight.w600,
+                          color: AppColor.black,
+                        ),
+                        SizedBox(height: width * .02),
 
-                    SizedBox(height: width * (50 / width)),
-                    CustomButton(
-                      text: AppText.save,
-                      color: AppColor.primaryColor,
-                      textColor: AppColor.white,
-                      fontSize: width * (18 / width),
-                      fontWeight: FontWeight.w600,
-                      borderRadius: width * (10 / width),
-                      borderColor: AppColor.primaryColor,
-                      elevation: 5,
-                      height: width * (56 / width),
-                      onPressed: () {
-                        if (notifier.formKey.currentState!.validate()) {
-                          notifier.formKey.currentState!.save();
-                        }
-                        notifier.submitProfileInfoData();
-                        ProfileSavePopUp.show(
-                          context,
-                          AppText.profileInfoUpdatedSuccessfully,
-                        );
-                      },
-                    ),
+                        AppTextField(
+                          fontSize: width * .036,
+                          hint: AppText.emailAddress,
+                          controller: notifier.emailController,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        SizedBox(height: width * .05),
 
-                    SizedBox(height: width * (12 / width)),
-                    GestureDetector(
-                      onTap: () {
-                        DeleteAccountProfilePopup.show(context);
-                      },
-                      child: Row(
-                        children: [
-                          Icon(Icons.delete, color: AppColor.redColor),
-                          PoppinsApptext(
-                            text: AppText.deleteAccount,
-                            fontSize: width * (18 / width),
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.redColor,
-                            textDecoration: TextDecoration.underline,
-                            textDecorationColor: AppColor.redColor,
-                            textDecorationThickness: 2.0,
+                        UrbanistApptext(
+                          text: "Phone Number",
+                          fontSize: width * 0.042,
+                          fontWeight: FontWeight.w600,
+                          color: AppColor.black,
+                        ),
+                        SizedBox(height: width * .02),
+
+                        AppTextField(
+                          fontSize: width * .036,
+                          hint: AppText.phone,
+                          controller: notifier.phoneController,
+                          keyboardType: TextInputType.number,
+                        ),
+
+                        SizedBox(height: width * .2),
+                        CustomButton(
+                          text: AppText.save,
+                          color: AppColor.primaryColor,
+                          textColor: AppColor.white,
+                          fontSize: width * .042,
+                          fontWeight: FontWeight.w600,
+                          borderRadius: width * .035,
+                          borderColor: AppColor.primaryColor,
+                          height: width * .13,
+                          onPressed: () {
+                            if (notifier.formKey.currentState!.validate()) {
+                              notifier.formKey.currentState!.save();
+                            }
+                            notifier.submitProfileInfoData();
+                            ProfileSavePopUp.show(
+                              context,
+                              AppText.profileInfoUpdatedSuccessfully,
+                            );
+                          },
+                        ),
+
+                        SizedBox(height: width * .06),
+                        GestureDetector(
+                          onTap: () {
+                            DeleteAccountProfilePopup.show(context);
+                          },
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(AppSvg.deleteAccount),
+                              SizedBox(width: width * .01),
+                              PoppinsApptext(
+                                text: AppText.deleteAccount,
+                                fontSize: width * .035,
+                                fontWeight: FontWeight.w600,
+                                color: AppColor.redColor,
+                                textDecoration: TextDecoration.underline,
+                                textDecorationColor: AppColor.redColor,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

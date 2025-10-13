@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import '../../../../../../core/constants/app_colors.dart';
-import '../../../../../../core/constants/app_svg.dart';
 import '../../../../../../core/constants/app_text.dart';
-import '../../../../../../core/routes/route_constant.dart';
 import '../../../../../core/components/Button/custom_button.dart';
 import '../../../../../core/components/apptext/urbanist_apptext.dart';
-import '../../../../../core/components/customAppbar/CustomAppBar.dart';
 import '../../../../registeration/presentation/screens/PersonalGoal/personalgoal_screen.dart';
 import '../../../../registeration/providers/personalgoal_provider.dart';
 import '../../profileInfo/screen/widget/profile_save_pop.dart';
@@ -56,26 +53,12 @@ class MyGoalsScreen extends ConsumerWidget {
     final selectedGoals = ref.watch(personalGoalProvider);
     return Scaffold(
       backgroundColor: AppColor.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: UrbanistApptext(
-          text: AppText.myGoalsTitle,
-          fontSize: width * (24 / width),
-          fontWeight: FontWeight.w700,
-          color: AppColor.black,
-        ),
-        backgroundColor: AppColor.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () => context.pop(),
-          child: Icon(
-            Icons.arrow_back_ios_new,
-            color: AppColor.black,
-            size: width * 0.05,
-          ),
-        ),
+      appBar: CustomAppBar2(
+        title: AppText.myGoalsTitle,
+        fontSize: width * 0.055,
+        onBackTap: () => context.pop(),
       ),
+
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.05),

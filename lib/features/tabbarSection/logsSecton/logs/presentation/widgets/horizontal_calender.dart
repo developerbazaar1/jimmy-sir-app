@@ -14,8 +14,7 @@ class HorizontalWeekCalendar extends ConsumerWidget {
     final width = MediaQuery.sizeOf(context).width;
 
     return Container(
-      height: width * 0.4,
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      // margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
       decoration: BoxDecoration(
         color: AppColor.white,
