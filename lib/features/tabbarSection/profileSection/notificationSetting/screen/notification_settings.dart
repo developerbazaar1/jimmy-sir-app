@@ -14,13 +14,13 @@ class NotificationSettings extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ✅ Watch current switch state
     final isPushEnabled = ref.watch(pushNotificationProvider);
-
+    final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar2(
         title: "Notification Settings",
+        fontSize: width * 0.055,
         onBackTap: () => context.pop(),
       ),
       body: Padding(
@@ -36,18 +36,17 @@ class NotificationSettings extends ConsumerWidget {
             Switch(
               value: isPushEnabled,
               activeColor: AppColor.greenColor,
-              thumbColor: WidgetStateProperty.resolveWith<Color>(
-                    (Set<WidgetState> states) {
-                  return Colors.white;
-                },
-              ),
-              trackOutlineColor: WidgetStateProperty.resolveWith<Color>(
-                    (Set<WidgetState> states) {
-                  return Colors.white;
-                },
-              ),
+              thumbColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                return Colors.white;
+              }),
+              trackOutlineColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                return Colors.white;
+              }),
               onChanged: (value) {
-                // ✅ Update Riverpod state
                 ref.read(pushNotificationProvider.notifier).state = value;
               },
             ),

@@ -82,7 +82,7 @@ class MyGoalsScreen extends ConsumerWidget {
                       //   final selectedGoals = ref.watch(myGoalsProvider);
                       final isSelected = selectedGoals.contains(goal['title']!);
 
-                      return commonSelectableContainer(
+                      return CommonSelectableContainer(
                         title: goal['title']!,
                         description: goal['description'],
                         isSelected: isSelected,
@@ -114,6 +114,7 @@ class MyGoalsScreen extends ConsumerWidget {
                   // context.pushNamed(RouteNames.membershipscreen);
                 },
               ),
+              SizedBox(height: height * 0.03),
             ],
           ),
         ),

@@ -8,6 +8,7 @@ class CommonTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final Widget? suffixIcon;
   final int? maxLength;
+  final FontWeight? textWeight;
   final bool isNotesField;
   final int? maxLines;
 
@@ -22,6 +23,7 @@ class CommonTextField extends StatefulWidget {
     this.maxLength,
     this.isNotesField = false,
     this.maxLines,
+    this.textWeight,
   });
 
   @override
@@ -75,12 +77,13 @@ class _CommonTextFieldState extends State<CommonTextField> {
         onChanged: widget.onChanged,
         style: TextStyle(
           fontSize: width * 0.04,
-          fontWeight: FontWeight.w400,
+          fontWeight: widget.textWeight ?? FontWeight.w400,
           color: _isFocused ? Colors.brown : Colors.black,
         ),
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: TextStyle(
+            fontWeight: FontWeight.w400,
             color: Colors.grey.withOpacity(0.5),
             fontSize: width * 0.038,
           ),

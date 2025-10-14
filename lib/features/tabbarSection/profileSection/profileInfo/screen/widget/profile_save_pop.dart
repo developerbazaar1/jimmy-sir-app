@@ -29,17 +29,15 @@ class ProfileSavePopUp {
         final width = MediaQuery.sizeOf(context).width;
 
         // Start the auto-dismiss timer
-        _timer = Timer(const Duration(seconds: 5), () {
+        _timer = Timer(const Duration(seconds: 2), () {
           if (context.mounted) {
             context.pop();
-            // Navigate to login if it's a change password flow
-
             context.pushReplacementNamed(RouteNames.tabBar);
           }
         });
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.06, vertical: width * 0.04),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

@@ -6,7 +6,7 @@ import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/features/registeration/models/quid_model.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_selectable_container.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/quiz_screen_provider.dart';
 
 import '../../../../../core/constants/app_text.dart';
@@ -96,8 +96,8 @@ class RetakeQuizScreen extends ConsumerWidget {
                   children: step.options
                       .map(
                         (option) => Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: commonSelectableContainer1(
+                          padding:  EdgeInsets.only(bottom: width * 0.02),
+                          child: CommonSelectableContainer1(
                             title: option.label,
                             isSelected:
                                 state.selections[state.currentStep] ==
@@ -125,7 +125,7 @@ class RetakeQuizScreen extends ConsumerWidget {
                 fontSize: width * 0.046,
                 height: width * 0.13,
                 width: width,
-                borderRadius: 10,
+                borderRadius: width * 0.025,
                 borderColor: AppColor.primaryColor,
                 fontWeight: FontWeight.w600,
                 onPressed: () {
@@ -139,7 +139,7 @@ class RetakeQuizScreen extends ConsumerWidget {
                   }
                 },
               ),
-              SizedBox(height: 20),
+              SizedBox(height: width * 0.05),
             ],
           ),
         ),

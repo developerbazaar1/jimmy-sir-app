@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
@@ -22,33 +23,25 @@ class LifeStyleScreen extends ConsumerWidget {
     final currentStepData = lifestyleSteps[state.currentStep];
     return Scaffold(
       backgroundColor: AppColor.white,
-      appBar: AppBar(
-        title: UrbanistApptext(
-          text: AppText.lifeStyle,
-          fontSize: width * 0.055,
-          fontWeight: FontWeight.w700,
-          color: AppColor.black,
-        ),
-        backgroundColor: AppColor.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
-            if (state.currentStep == 0) {
-              context.pop();
-            } else {
-              notifier.prevStep();
-            }
-          },
-          child: Icon(Icons.arrow_back_ios_new, color: AppColor.black),
-        ),
+      appBar: CustomAppBar2(
+        title: AppText.lifeStyle,
+        fontSize: width * 0.055,
+        onBackTap: () {
+          if (state.currentStep == 0) {
+            context.pop();
+          } else {
+            notifier.prevStep();
+          }
+        },
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * (24 / width)),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.06),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: width * 0.03),
+
               SizedBox(height: width * 0.03),
               UrbanistApptext(
                 text: currentStepData.title,
@@ -56,14 +49,13 @@ class LifeStyleScreen extends ConsumerWidget {
                 color: AppColor.textBrownColor,
                 fontWeight: FontWeight.w500,
               ),
-
-              SizedBox(height: width * 0.02),
+              SizedBox(height: width * 0.03),
               Expanded(
                 child: ListView(
                   children: [
                     ...List.generate(currentStepData.options.length, (index) {
                       final option = currentStepData.options[index];
-                      return commonSelectableContainer(
+                      return CommonSelectableContainer(
                         title: option.label,
                         description: option.desc,
                         isSelected:

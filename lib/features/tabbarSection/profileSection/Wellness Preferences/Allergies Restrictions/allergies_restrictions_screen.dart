@@ -20,7 +20,7 @@ class AllergiesRestrictionsScreen extends ConsumerWidget {
     final step = allergies['step'] as int;
     final sections = allergies['sections'] as List;
     final section = sections[step];
-    final notifier = ref.read(allergyProvider.notifier);
+    // final notifier = ref.read(allergyProvider.notifier);
     return Scaffold(
       backgroundColor: AppColor.white,
       appBar: AppBar(

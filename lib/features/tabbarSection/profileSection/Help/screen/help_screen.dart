@@ -17,19 +17,19 @@ class HelpScreen extends ConsumerWidget {
       backgroundColor: AppColor.white,
       appBar: CustomAppBar2(
         title: AppText.helpAndSupport,
-        fontSize: width * (24 / width),
+        fontSize: width * 0.055,
         onBackTap: () => context.pop(),
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.07),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 16),
+                 SizedBox(height: width * 0.04),
                 const HelpWidget(),
-                const SizedBox(height: 32),
+                SizedBox(height: width * 0.03),
               ],
             ),
           ),
