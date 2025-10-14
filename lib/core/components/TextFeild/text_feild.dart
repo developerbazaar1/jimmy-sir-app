@@ -72,7 +72,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
-    // final height = MediaQuery.sizeOf(context).height;
+    final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     Color borderColor;
     if (_errorText != null) {
@@ -89,7 +89,7 @@ class _AppTextFieldState extends State<AppTextField> {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: borderColor, width: 1.5),
+            border: Border.all(color: borderColor, width: width * 0.004),
             color: Colors.white,
           ),
           child: Row(
@@ -97,14 +97,21 @@ class _AppTextFieldState extends State<AppTextField> {
             children: [
               if (widget.prefixIconImg != null) ...[
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.04,
+                    vertical: height * 0.02,
+                  ),
                   child: SvgPicture.asset(
                     widget.prefixIconImg!,
-                    height: 22,
-                    width: 22,
+                    height: height * 0.028,
+                    width: width * 0.028,
                   ),
                 ),
-                Container(width: 1, height: 40, color: AppColor.border),
+                Container(
+                  width: 1,
+                  height: height * 0.038,
+                  color: AppColor.border,
+                ),
               ],
               Expanded(
                 child: Padding(
@@ -186,11 +193,11 @@ class _AppTextFieldState extends State<AppTextField> {
               // If not password and suffix provided, show it at the end
               if (!widget.isPassword && widget.suffixIcon != null)
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: EdgeInsets.all(width * 0.02),
                   child: SvgPicture.asset(
                     widget.suffixIcon!,
-                    height: 22,
-                    width: 22,
+                    height: height * 0.028,
+                    width: width * 0.028,
                   ),
                 ),
             ],
@@ -199,14 +206,14 @@ class _AppTextFieldState extends State<AppTextField> {
 
         // Error text OUTSIDE (below) the bordered container
         if (_errorText != null) ...[
-          const SizedBox(height: 6),
+          SizedBox(height: height * 0.01),
           Padding(
-            padding: const EdgeInsets.only(left: 12),
+            padding: EdgeInsets.only(left: width * 0.02),
             child: Text(
               _errorText!,
               style: TextStyle(
                 color: Colors.red.shade600,
-                fontSize: 13,
+                fontSize: width * 0.04,
                 fontWeight: FontWeight.w400,
               ),
             ),

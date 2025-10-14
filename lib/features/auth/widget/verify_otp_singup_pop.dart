@@ -5,7 +5,6 @@ import 'package:jimmy_sir_app/core/components/apptext/poppins_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../../../core/constants/enum.dart';
 import 'updated_sheet_popup.dart';
 import '../../../core/validators/validators.dart';

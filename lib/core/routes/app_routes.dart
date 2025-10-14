@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/screens/graph_expand_screen.dart';
-import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/screens/historical_trends_sreen.dart';
-import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/screens/sleep_quality_screen.dart';
-import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/providers/graph_provider.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/profileSection/CMS_Pages/screen/privacy_policy_screen.dart';
 
-import '../../features/tabbarSection/profileSection/CMS_Pages/screen/terms_and_condition_screen.dart';
-import '../../features/tabbarSection/profileSection/change_password/screen/change_password_screen2.dart';
-import '../../features/tabbarSection/profileSection/notificationSetting/screen/notification_settings.dart';
-import '../../features/tabbarSection/tabbar/screens/tab_bar.dart';
 import 'route_import.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
