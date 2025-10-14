@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
-import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/registeration/models/membershipPlan.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/membershipCard.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/membership_Provider.dart';

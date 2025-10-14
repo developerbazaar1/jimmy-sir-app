@@ -4,7 +4,7 @@ import 'package:jimmy_sir_app/core/components/TextFeild/customTextField.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_selectable_container.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/allergies_Provider.dart';
 
 class FoodAllergyWidget extends ConsumerWidget {
@@ -88,7 +88,7 @@ class FoodAllergyWidget extends ConsumerWidget {
             .map(
               (option) => Padding(
                 padding: EdgeInsets.only(bottom: height * 0.015),
-                child: commonSelectableContainer(
+                child: CommonSelectableContainer(
                   title: option.label,
                   description: option.desc,
                   isSelected: selected.contains(option.label),

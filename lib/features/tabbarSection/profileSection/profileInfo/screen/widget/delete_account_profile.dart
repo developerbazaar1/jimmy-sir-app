@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';

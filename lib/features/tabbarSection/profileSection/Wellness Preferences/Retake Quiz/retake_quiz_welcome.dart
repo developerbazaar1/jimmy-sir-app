@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
-import 'package:jimmy_sir_app/core/components/Button/custom_outline_border_button.dart';
-import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/components/apptext/urbanist_apptext.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/freezelottie_widget.dart';
-import 'package:lottie/lottie.dart';
 
 class RetakeQuizWelcomeScreen extends ConsumerWidget {
   const RetakeQuizWelcomeScreen({super.key});
@@ -61,7 +58,7 @@ class RetakeQuizWelcomeScreen extends ConsumerWidget {
                 SizedBox(height: height * 0.06),
                 Center(
                   child: UrbanistApptext(
-                    text: AppText.welcomeToEliteQuiz + " Jamie!",
+                    text: "${AppText.welcomeToEliteQuiz} Jamie!",
                     fontSize: width * 0.06,
                     color: AppColor.textBrownColor,
                     fontWeight: FontWeight.w700,

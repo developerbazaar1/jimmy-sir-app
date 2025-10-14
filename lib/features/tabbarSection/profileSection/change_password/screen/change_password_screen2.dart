@@ -68,31 +68,23 @@ class ChangePasswordScreen2 extends ConsumerWidget {
         ),
       ),
 
-      // ✅ Bottom Button with proper validation
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(width * 0.04),
           child: CustomButton(
             text: state.isLoading ? "Please wait..." : AppText.save,
-            // onPressed: () {
-            //   if(formKey.currentState?.validate() ?? false){
-            //
-            //   }
-            // },
+
             onPressed: () async {
-              // Validate the form first
               if (formKey.currentState?.validate() ?? false) {
-                // ✅ Only show bottom sheet when valid
                 await showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
+                  shape:  RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
+                      top: Radius.circular(width * 0.055),
                     ),
                   ),
                   builder: (context) {
-                    // Auto-close after 2 seconds
                     Future.delayed(const Duration(seconds: 2), () {
                       if (context.mounted) {
                         Navigator.pop(context); // Close BottomSheet
@@ -111,7 +103,7 @@ class ChangePasswordScreen2 extends ConsumerWidget {
                               width: width * 0.31,
                               height: width * 0.31,
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: width * 0.04),
                             const UrbanistApptext(
                               text: 'Account details updated successfully',
                               textAlign: TextAlign.center,

@@ -22,11 +22,11 @@ class MySubscriptionScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.07),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 16),
+                SizedBox(height: width * 0.04),
                 MySubscriptionWidget(
                   subscriptionType: 'Free trial',
                   renewalDate: '27/12/2024',
@@ -37,7 +37,7 @@ class MySubscriptionScreen extends ConsumerWidget {
                   needHelp: 'Need Help',
                   contactUs: 'Contact Us',
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: width * 0.03),
               ],
             ),
           ),

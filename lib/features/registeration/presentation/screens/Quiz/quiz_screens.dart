@@ -7,7 +7,7 @@ import 'package:jimmy_sir_app/core/components/customAppbar/CustomAppBar.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/registeration/models/quid_model.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_selectable_container.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/quiz_screen_provider.dart';
 
 class QuizScreens extends ConsumerWidget {
@@ -95,7 +95,7 @@ class QuizScreens extends ConsumerWidget {
                       .map(
                         (option) => Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: commonSelectableContainer1(
+                          child: CommonSelectableContainer1(
                             title: option.label,
                             isSelected:
                                 state.selections[state.currentStep] ==
