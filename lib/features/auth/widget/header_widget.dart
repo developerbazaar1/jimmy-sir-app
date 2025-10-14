@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../core/components/apptext/inter_apptext.dart';
 import '../../../core/components/apptext/plus_jakarta_sans.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_svg.dart';
-import '../../../core/constants/app_text.dart';
 
 class HeaderWidget extends ConsumerWidget {
   const HeaderWidget({

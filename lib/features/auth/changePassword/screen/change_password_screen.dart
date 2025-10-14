@@ -46,6 +46,7 @@ class ChangePasswordScreen extends ConsumerWidget {
                 SizedBox(height: height * 0.02),
                 AppTextField(
                   controller: changePasswordNotifier.confirmPasswordController,
+                  keyboardType: TextInputType.visiblePassword,
                   labelText: AppText.confirmPassword,
                   prefixIconImg: AppSvg.password,
                   isPassword: true,

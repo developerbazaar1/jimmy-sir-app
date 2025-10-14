@@ -1,11 +1,8 @@
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jimmy_sir_app/core/components/apptext/plus_jakarta_sans.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_import.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/widget/customRaderChart.dart';
-import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/providers/graph_provider.dart';
 
 class GraphExpandScreen extends ConsumerWidget {
   final GraphData graphData;

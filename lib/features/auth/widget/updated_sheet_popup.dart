@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
-
 import '../../../core/components/apptext/inter_apptext.dart';
 import '../../../core/components/apptext/poppins_apptext.dart';
 import '../../../core/constants/app_colors.dart';

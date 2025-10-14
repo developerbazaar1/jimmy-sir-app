@@ -1,6 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../Login/providers/auth_provider.dart';
 import '../../Login/services/auth_service.dart';
 
 class VerifyOtpState {

@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
 import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_svg.dart';
-
 import '../../../../core/components/TextFeild/text_feild.dart';
 import '../../../../core/components/apptext/inter_apptext.dart';
 import '../../../../core/constants/app_text.dart';
@@ -58,10 +57,12 @@ class LoginScreen extends ConsumerWidget {
                         validator: (val) => val!.isEmpty
                             ? 'Please enter your email address and phone number'
                             : null,
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(height: width * 0.0612),
                       // Password
                       AppTextField(
+                        keyboardType: TextInputType.visiblePassword,
                         controller: _passwordController,
                         prefixIconImg: AppSvg.password,
                         labelText: "Password",
@@ -80,7 +81,6 @@ class LoginScreen extends ConsumerWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                  
                       context.goNamed(RouteNames.forgotPassword);
                     },
                     child: InterApptext(

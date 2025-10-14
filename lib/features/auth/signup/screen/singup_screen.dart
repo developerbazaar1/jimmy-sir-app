@@ -50,6 +50,7 @@ class SingupScreen extends ConsumerWidget {
                             signupNotifier.validateEmail(value),
                         labelText: AppText.emailAddress,
                         focusNode: signupNotifier.emailFocusNode,
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       AppTextField(
                         controller: signupNotifier.phoneController,
@@ -58,6 +59,7 @@ class SingupScreen extends ConsumerWidget {
                             signupNotifier.validatePhone(value),
                         labelText: AppText.phoneNumber,
                         focusNode: signupNotifier.phoneFocusNode,
+                        keyboardType: TextInputType.number,
                       ),
                       AppTextField(
                         controller: signupNotifier.passwordController,
@@ -67,6 +69,7 @@ class SingupScreen extends ConsumerWidget {
                             signupNotifier.validatePassword(value),
                         labelText: AppText.password,
                         focusNode: signupNotifier.passwordFocusNode,
+                        keyboardType: TextInputType.visiblePassword,
                       ),
                       AppTextField(
                         controller: signupNotifier.confirmPasswordController,
@@ -78,6 +81,7 @@ class SingupScreen extends ConsumerWidget {
                         ),
                         labelText: AppText.confirmPassword,
                         focusNode: signupNotifier.confirmPasswordFocusNode,
+                        keyboardType: TextInputType.visiblePassword,
                       ),
                     ],
                   ),

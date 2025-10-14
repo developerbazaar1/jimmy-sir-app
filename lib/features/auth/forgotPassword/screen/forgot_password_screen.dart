@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/components/Button/custom_button.dart';
 import '../../../../core/components/TextFeild/text_feild.dart';
 import '../../../../core/components/apptext/inter_apptext.dart';
-import '../../../../core/components/apptext/plus_jakarta_sans.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_svg.dart';
 import '../../../../core/constants/app_text.dart';
@@ -47,6 +44,8 @@ class ForgotPasswordScreen extends ConsumerWidget {
                     children: [
                       // Email or Phone
                       AppTextField(
+                        keyboardType: TextInputType.emailAddress,
+
                         controller: _emailController,
                         prefixIconImg: AppSvg.emailIcon,
                         labelText: "Email Address / Phone Number",
@@ -71,6 +70,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
                   borderColor: AppColor.primaryColor,
                   fontWeight: FontWeight.w600,
                   fontSize: width * 0.046,
+
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // _formKey.currentState!.save();
