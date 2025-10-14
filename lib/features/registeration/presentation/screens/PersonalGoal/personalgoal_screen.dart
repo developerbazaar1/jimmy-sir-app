@@ -184,7 +184,7 @@ class PersonalGoalScreen extends ConsumerWidget {
                             goal['title']!,
                           );
 
-                          return commonSelectableContainer(
+                          return CommonSelectableContainer(
                             title: goal['title']!,
                             description: goal['description'],
                             isSelected: isSelected,
@@ -222,14 +222,14 @@ class PersonalGoalScreen extends ConsumerWidget {
   }
 }
 
-class commonSelectableContainer extends StatelessWidget {
+class CommonSelectableContainer extends StatelessWidget {
   final String title;
   final String? description;
   final bool isSelected;
   final VoidCallback onTap;
   final IconData? icon;
 
-  const commonSelectableContainer({
+  const CommonSelectableContainer({
     super.key,
     required this.title,
     this.description,
@@ -247,25 +247,27 @@ class commonSelectableContainer extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(bottom: width * 0.03),
         padding: EdgeInsets.symmetric(
-          vertical: width * 0.04,
-          horizontal: width * 0.05,
+          vertical: width * 0.035,
+          horizontal: width * 0.04,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(width * 0.03),
           border: Border.all(
-            color: isSelected ? Colors.green : Colors.transparent,
+            color: isSelected ? AppColor.borderGreenLight : Colors.transparent,
             width: 1.5,
           ),
           color: isSelected
-              ? Colors.green.withValues(alpha: 0.008)
-              : Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6,
-              offset: Offset(0, 3),
-            ),
-          ],
+              ? AppColor.borderGreenLight.withAlpha((.06 * 255).round())
+              : AppColor.white,
+          boxShadow: !isSelected
+              ? [
+                  BoxShadow(
+                    color: Colors.grey.withAlpha((0.2 * 255).round()),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
+              : [],
         ),
         child: Row(
           children: [
@@ -276,7 +278,7 @@ class commonSelectableContainer extends StatelessWidget {
                   UrbanistApptext(
                     text: title,
                     fontSize: width * 0.04,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                     color: AppColor.textBrownColor,
                   ),
                   if (description != null) SizedBox(height: width * 0.01),
@@ -285,7 +287,7 @@ class commonSelectableContainer extends StatelessWidget {
                       text: description!,
                       fontSize: width * 0.035,
                       fontWeight: FontWeight.w400,
-                      color: Colors.grey,
+                      color: AppColor.textGreyColor3,
                     ),
                 ],
               ),
@@ -293,7 +295,7 @@ class commonSelectableContainer extends StatelessWidget {
             SizedBox(width: width * 0.02),
             Icon(
               isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: isSelected ? Colors.green : Colors.grey,
+              color: isSelected ? AppColor.greenColor : AppColor.textGreyColor3,
             ),
           ],
         ),

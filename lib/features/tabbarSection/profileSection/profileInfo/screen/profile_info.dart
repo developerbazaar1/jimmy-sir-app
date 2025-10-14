@@ -29,14 +29,14 @@ class ProfileInfoScreen extends ConsumerWidget {
       extendBodyBehindAppBar: false,
       appBar: CustomAppBar2(
         title: AppText.personalInfo,
-        fontSize: width * (24 / width),
+        fontSize: width * .056,
         onBackTap: () => context.pop(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * (24 / width)),
+              padding: EdgeInsets.symmetric(horizontal: width * .06),
               child: Form(
                 key: notifier.formKey,
                 child: Column(
@@ -49,7 +49,7 @@ class ProfileInfoScreen extends ConsumerWidget {
                           height: width * .4,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                              width * (207 / width),
+                              width * .5,
                             ),
                             border: Border.all(
                               color: AppColor.primaryColor,
@@ -58,18 +58,18 @@ class ProfileInfoScreen extends ConsumerWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(
-                              width * (207 / width),
+                              width * .5,
                             ),
                             child: Image.network(
                               "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                              width: width * (207 / width),
-                              height: width * (207 / width),
+                              // width: width * .03,
+                              // height: width * .03,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Image.asset(
                                   AppSvg.profilePicIcon,
-                                  width: width * (207 / width),
-                                  height: width * (207 / width),
+                                  // width: width * .03,
+                                  // height: width * .03,
                                   fit: BoxFit.cover,
                                 );
                               },

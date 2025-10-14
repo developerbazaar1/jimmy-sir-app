@@ -8,6 +8,7 @@ class AttachedDropdown extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
   const AttachedDropdown({
+    super.key,
     required this.value,
     required this.items,
     required this.onChanged,
@@ -53,9 +54,10 @@ class _AttachedDropdownState extends State<AttachedDropdown> {
                 UrbanistApptext(
                   text: widget.value,
                   fontSize: width * 0.04,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
                   color: AppColor.textBrownColor,
                 ),
+                SizedBox(width: width * 0.01),
                 Icon(
                   expanded
                       ? Icons.keyboard_arrow_up

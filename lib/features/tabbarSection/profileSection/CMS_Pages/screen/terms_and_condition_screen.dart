@@ -14,6 +14,7 @@ class TermsConditionsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final htmlContent = ref.watch(termsConditionsHtmlProvider);
+    final width = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -44,10 +45,10 @@ class TermsConditionsScreen extends ConsumerWidget {
                 fontSize: FontSize(AppSizer.width * 0.048),
                 fontWeight: FontWeight.w600,
                 color: AppColor.primaryColor.withOpacity(0.9),
-                margin: Margins.only(top: 16, bottom: 8),
+                margin: Margins.only(top: width * 0.04, bottom: width * 0.02),
               ),
               "ul": Style(
-                margin: Margins.only(left: 12, bottom: 12),
+                margin: Margins.only(left: width * 0.03, bottom: width * 0.03),
               ),
               "li": Style(
                 fontSize: FontSize(AppSizer.width * 0.04),

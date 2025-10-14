@@ -9,7 +9,7 @@ import 'package:jimmy_sir_app/core/constants/app_colors.dart';
 import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/routes/route_constant.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/screens/aboutYourSelf/attached_drop_down.dart';
-import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_SelectableContainer.dart';
+import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_selectable_container.dart';
 import 'package:jimmy_sir_app/features/registeration/presentation/widgets/common_progressIndicator.dart';
 import 'package:jimmy_sir_app/features/registeration/providers/aboutyourself_Provider.dart';
 
@@ -119,17 +119,17 @@ class _StepOne extends ConsumerWidget {
         ),
         SizedBox(height: height * 0.02),
 
-        commonSelectableContainer1(
+        CommonSelectableContainer1(
           title: AppText.male,
           isSelected: state.gender == "Male",
           onTap: () => notifier.updateGender("Male"),
         ),
-        commonSelectableContainer1(
+        CommonSelectableContainer1(
           title: AppText.female,
           isSelected: state.gender == "Female",
           onTap: () => notifier.updateGender("Female"),
         ),
-        commonSelectableContainer1(
+        CommonSelectableContainer1(
           title: AppText.others,
           isSelected: state.gender == "Others",
           onTap: () => notifier.updateGender("Others"),

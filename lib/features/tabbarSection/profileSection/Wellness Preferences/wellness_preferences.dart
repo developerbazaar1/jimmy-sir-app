@@ -42,11 +42,10 @@ class WellnessPreferences extends ConsumerWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.05, vertical: width * 0.05),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: width * 0.03),
                 UrbanistApptext(
                   text: AppText.bodyMetricsMsg,
                   fontSize: width * 0.047,
@@ -54,9 +53,9 @@ class WellnessPreferences extends ConsumerWidget {
                   color: AppColor.black,
                 ),
 
-                SizedBox(height: width * 0.02),
+                SizedBox(height: width * 0.05),
 
-                ...List.generate(wellnessPreferences.length, (index) {
+                ...List.generate(wellnessPreferences.length, (index) {                  
                   final item = wellnessPreferences[index];
                   return GestureDetector(
                     onTap: () {
@@ -71,7 +70,7 @@ class WellnessPreferences extends ConsumerWidget {
                       }
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: width * (16 / width)),
+                      padding: EdgeInsets.only(bottom: width * 0.04),
                       child: WellnessPreferencesWidget(
                         title: item['title'],
                         keys: item['keys'],
