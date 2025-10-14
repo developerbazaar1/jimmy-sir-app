@@ -269,19 +269,20 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
   bool _isOpen = false;
   late AnimationController _controller;
   late Animation<double> _animation;
+  final TextEditingController _messageController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   // super.initState();
-  //   // _controller = AnimationController(
-  //   //   vsync: this,
-  //   //   duration: const Duration(milliseconds: 300),
-  //   // );
-  //   // _animation = CurvedAnimation(
-  //   //   parent: _controller,
-  //   //   curve: Curves.easeOutQuart,
-  //   // );
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOutQuart,
+    );
+  }
 
   void _toggleContainer() {
     setState(() {
@@ -295,145 +296,202 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  // ------------------------ CHAT CONTAINER ------------------------
+  Widget _buildChatContainer(double width, double height) {
+    return Container(
+      width: width * 0.6,
+      height: height * 0.35,
+      padding: EdgeInsets.all(width * 0.04),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10,
+            offset: Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _chatBubble(
+                    context: context,
+                    isUser: false,
+                    icon: Icons.chat_bubble,
+                    message: "Hi, How can I help you today?",
+                  ),
+                  _chatBubble(
+                    context: context,
+                    isUser: true,
+                    icon: Icons.chat_bubble,
+                    message:
+                        "I'm feeling great! What activities do you suggest to stay energized?",
+                  ),
+                  _chatBubble(
+                    context: context,
+                    isUser: false,
+                    icon: Icons.chat_bubble,
+                    message:
+                        "Dancing to your favorite tunes for a fun energy lift.",
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: height * 0.015),
+
+          /// ---- TEXT FIELD WITH MIC + SEND ICON ----
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: AppColor.border, width: width * 0.003),
+              color: Colors.white,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _messageController,
+                    textInputAction: TextInputAction.send,
+                    decoration: InputDecoration(
+                      hintText: "Type your message...",
+                      hintStyle: TextStyle(
+                        fontSize: width * 0.032,
+                        color: Colors.grey.shade500,
+                      ),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.mic_none_rounded,
+                        color: AppColor.primaryColor,
+                        size: width * 0.05,
+                      ),
+                      onPressed: () {
+                        // Handle mic tap
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.send_rounded,
+                        color: AppColor.primaryColor,
+                        size: width * 0.05,
+                      ),
+                      onPressed: () {
+                        // Handle send tap
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Container(
+          //   height: height * 0.06,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(30),
+          //     border: Border.all(color: AppColor.border, width: 1.3),
+          //     color: Colors.white,
+          //   ),
+          //   child: TextField(
+          //     controller: _messageController,
+          //     decoration: InputDecoration(
+          //       hintText: "Type your message...",
+          //       hintStyle: TextStyle(
+          //         fontSize: width * 0.032,
+          //         color: Colors.grey.shade500,
+          //       ),
+          //       border: InputBorder.none,
+          //       contentPadding: EdgeInsets.symmetric(
+          //         horizontal: width * 0.04,
+          //         vertical: 8,
+          //       ),
+          //       suffixIcon: Row(
+          //         mainAxisSize: MainAxisSize.min,
+          //         children: [
+          //           IconButton(
+          //             icon: Icon(
+          //               Icons.mic_none_rounded,
+          //               color: AppColor.primaryColor,
+          //             ),
+          //             onPressed: () {
+          //               // Handle voice input
+          //             },
+          //           ),
+          //           IconButton(
+          //             icon: Icon(
+          //               Icons.send_rounded,
+          //               color: AppColor.primaryColor,
+          //             ),
+          //             onPressed: () {
+          //               // Handle send
+          //             },
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
+    );
+  }
+
+  // ------------------------ BUILD METHOD ------------------------
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
     return Stack(
       alignment: Alignment.bottomRight,
+      clipBehavior: Clip.none,
       children: [
-        /// Animated expanding chat container
-        AnimatedPositioned(
-          duration: const Duration(milliseconds: 300),
-          bottom: _isOpen ? height * 0.17 : height * 0.2,
-          right: width * 0.01,
-
-          child: ScaleTransition(
-            scale: _animation,
-            child: AnimatedOpacity(
-              opacity: _isOpen ? 1 : 0,
-              duration: const Duration(milliseconds: 300),
-              child: Container(
-                width: width * 0.6,
-                height: height * 0.3,
-                padding: EdgeInsets.all(width * 0.04),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _chatBubble(
-                      context: context,
-                      isUser: true,
-                      icon: Icons.chat_bubble,
-                      message: "Hello! How can I help you today?",
-                    ),
-                    _chatBubble(
-                      context: context,
-                      isUser: false,
-                      icon: Icons.chat_bubble,
-                      message: "Hello! How can I help you today?",
-                    ),
-                    SizedBox(height: height * 0.04),
-                    Container(
-                      height: height * 0.06,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: AppColor.border, width: 1.5),
-                      ),
-                    ),
-                    // TextField container as per image
-                    // Container(
-                    //   height: height * 0.06,
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.white,
-                    //     borderRadius: BorderRadius.circular(10),
-                    //     border: Border.all(color: AppColor.border, width: 1.5),
-                    //   ),
-                    //   child: Row(
-                    //     children: [
-                    //       // Microphone icon on the left
-
-                    //       // Text input field
-                    //       Expanded(
-                    //         child: TextField(
-                    //           decoration: InputDecoration(
-                    //             hintText: 'Type your message...',
-                    //             hintStyle: TextStyle(
-                    //               color: Colors.grey.shade600,
-                    //               fontSize: width * 0.035,
-                    //               fontFamily: 'urbanist',
-                    //             ),
-                    //             border: InputBorder.none,
-                    //             contentPadding: EdgeInsets.symmetric(
-                    //               vertical: height * 0.015,
-                    //               horizontal: width * 0.03,
-                    //             ),
-                    //           ),
-                    //           style: TextStyle(
-                    //             fontSize: width * 0.035,
-                    //             fontFamily: 'urbanist',
-                    //             color: AppColor.black,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       Padding(
-                    //         padding: EdgeInsets.only(right: width * 0.04),
-                    //         child: Icon(
-                    //           Icons.mic_none,
-                    //           color: Colors.grey.shade600,
-                    //           size: width * 0.07,
-                    //         ),
-                    //       ),
-
-                    //       // Orange send button on the right
-                    //       Container(
-                    //         margin: EdgeInsets.only(right: width * 0.02),
-                    //         width: width * 0.1,
-                    //         height: width * 0.1,
-                    //         decoration: BoxDecoration(
-                    //           color: AppColor.primaryColor,
-                    //           shape: BoxShape.circle,
-                    //         ),
-                    //         child: Icon(
-                    //           Icons.send,
-                    //           color: Colors.white,
-                    //           size: width * 0.05,
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                  ],
-                ),
+        if (_isOpen)
+          Positioned(
+            bottom: height * 0.17,
+            right: width * 0.02,
+            child: ScaleTransition(
+              scale: _animation,
+              child: AnimatedOpacity(
+                opacity: _isOpen ? 1 : 0,
+                duration: const Duration(milliseconds: 300),
+                child: _buildChatContainer(width, height),
               ),
             ),
           ),
-        ),
 
         /// Floating Action Button
         Padding(
-          padding: EdgeInsets.only(bottom: height * 0.09),
+          padding: EdgeInsets.only(bottom: height * 0.09, right: width * 0.02),
           child: FloatingActionButton(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(28),
             ),
             backgroundColor: AppColor.bottomBarColor,
-            elevation: 0,
+            elevation: 4,
             onPressed: _toggleContainer,
             child: AnimatedRotation(
-              duration: Duration(milliseconds: 300),
-              turns: _isOpen ? 0.250 : 0.0,
+              duration: const Duration(milliseconds: 300),
+              turns: _isOpen ? 0.25 : 0.0,
               child: _isOpen
                   ? Icon(
                       Icons.close,
@@ -453,6 +511,7 @@ class _ChatExpandFABState extends State<ChatExpandFAB>
   }
 }
 
+// ------------------------ CHAT BUBBLE ------------------------
 Widget _chatBubble({
   required BuildContext context,
   required bool isUser,
@@ -462,86 +521,364 @@ Widget _chatBubble({
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
 
-  return Column(
-    crossAxisAlignment: isUser
-        ? CrossAxisAlignment.end
-        : CrossAxisAlignment.start,
-    children: [
-      Container(
-        margin: const EdgeInsets.symmetric(vertical: 6),
-        child: Row(
-          mainAxisAlignment: isUser
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (!isUser)
-              Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(width * 0.01),
-                decoration: BoxDecoration(
-                  color: AppColor.bottomBarColor,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: SvgPicture.asset(
-                  AppSvg.imgFloat,
-                  height: height * 0.03,
-                  width: width * 0.03,
-                ),
-              ),
-            if (!isUser) SizedBox(width: width * 0.02),
-            Flexible(
-              child: Container(
-                padding: EdgeInsets.all(width * 0.02),
-                decoration: BoxDecoration(
-                  color: isUser
-                      ? Colors.deepPurple.shade50
-                      : Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: UrbanistApptext(
-                  text: message,
-                  fontSize: width * 0.03,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.black,
-                ),
-              ),
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 6),
+    child: Row(
+      mainAxisAlignment: isUser
+          ? MainAxisAlignment.end
+          : MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (!isUser)
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(width * 0.01),
+            decoration: BoxDecoration(
+              color: AppColor.bottomBarColor,
+              borderRadius: BorderRadius.circular(50),
             ),
-            if (isUser) SizedBox(width: width * 0.02),
-            if (isUser)
-              CircleAvatar(
-                radius: width * 0.03,
-                backgroundColor: AppColor.bottomBarColor,
-                backgroundImage: AssetImage(AppImages.personTemp),
-              ),
-          ],
+            child: SvgPicture.asset(
+              AppSvg.imgFloat,
+              height: height * 0.03,
+              width: width * 0.03,
+            ),
+          ),
+        if (!isUser) SizedBox(width: width * 0.02),
+        Flexible(
+          child: Container(
+            padding: EdgeInsets.all(width * 0.025),
+            decoration: BoxDecoration(
+              color: isUser ? Colors.deepPurple.shade50 : Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: UrbanistApptext(
+              text: message,
+              fontSize: width * 0.032,
+              fontWeight: FontWeight.w500,
+              color: AppColor.black,
+            ),
+          ),
         ),
-      ),
-
-      // ✅ Added TextField below the bubble
-      // Container(
-      //   margin: const EdgeInsets.only(top: 8),
-      //   padding: const EdgeInsets.symmetric(horizontal: 12),
-      //   decoration: BoxDecoration(
-      //     border: Border.all(color: Colors.grey.shade300),
-      //     borderRadius: BorderRadius.circular(30),
-      //     color: Colors.grey.shade100,
-      //   ),
-      //   child: TextField(
-      //     decoration: InputDecoration(
-      //       hintText: 'Type a message...',
-      //       border: InputBorder.none,
-      //       suffixIcon: Row(
-      //         mainAxisSize: MainAxisSize.min,
-      //         children: [
-      //           Icon(Icons.mic_none, color: Colors.grey),
-      //           const SizedBox(width: 8),
-      //           Icon(Icons.send, color: Colors.deepPurple),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
-    ],
+        if (isUser) SizedBox(width: width * 0.02),
+        if (isUser)
+          CircleAvatar(
+            radius: width * 0.03,
+            backgroundColor: AppColor.bottomBarColor,
+            backgroundImage: AssetImage(AppImages.personTemp),
+          ),
+      ],
+    ),
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------------------rough work-------------------------------------------
+// class ChatExpandFAB extends StatefulWidget {
+//   const ChatExpandFAB({super.key});
+
+//   @override
+//   State<ChatExpandFAB> createState() => _ChatExpandFABState();
+// }
+
+// class _ChatExpandFABState extends State<ChatExpandFAB>
+//     with SingleTickerProviderStateMixin {
+//   bool _isOpen = false;
+//   late AnimationController _controller;
+//   late Animation<double> _animation;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = AnimationController(
+//       vsync: this,
+//       duration: const Duration(milliseconds: 300),
+//     );
+//     _animation = CurvedAnimation(
+//       parent: _controller,
+//       curve: Curves.easeOutQuart,
+//     );
+//   }
+
+//   void _toggleContainer() {
+//     setState(() {
+//       _isOpen = !_isOpen;
+//       if (_isOpen) {
+//         _controller.forward();
+//       } else {
+//         _controller.reverse();
+//       }
+//     });
+//   }
+//     @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final height = MediaQuery.of(context).size.height;
+//     final width = MediaQuery.of(context).size.width;
+
+//     return Stack(
+//       alignment: Alignment.bottomRight,
+//       children: [
+//         /// Animated expanding chat container
+//         AnimatedPositioned(
+//           duration: const Duration(milliseconds: 300),
+//           bottom: _isOpen ? height * 0.17 : height * 0.2,
+//           right: width * 0.01,
+
+//           child: ScaleTransition(
+//             scale: _animation,
+//             child: AnimatedOpacity(
+//               opacity: _isOpen ? 1 : 0,
+//               duration: const Duration(milliseconds: 300),
+//               child: Container(
+//                 width: width * 0.6,
+//                 height: height * 0.3,
+//                 padding: EdgeInsets.all(width * 0.04),
+//                 decoration: BoxDecoration(
+//                   color: Colors.white,
+//                   borderRadius: BorderRadius.circular(5),
+//                   boxShadow: const [
+//                     BoxShadow(
+//                       color: Colors.black26,
+//                       blurRadius: 10,
+//                       offset: Offset(0, 5),
+//                     ),
+//                   ],
+//                 ),
+//                 child: Column(
+//                   // mainAxisSize: MainAxisSize.min,
+//                   children: [
+//                     _chatBubble(
+//                       context: context,
+//                       isUser: true,
+//                       icon: Icons.chat_bubble,
+//                       message: "Hello! How can I help you today?",
+//                     ),
+//                     _chatBubble(
+//                       context: context,
+//                       isUser: false,
+//                       icon: Icons.chat_bubble,
+//                       message: "Hello! How can I help you today?",
+//                     ),
+//                     SizedBox(height: height * 0.04),
+//                     Container(
+//                       height: height * 0.06,
+//                       decoration: BoxDecoration(
+//                         color: Colors.white,
+//                         borderRadius: BorderRadius.circular(10),
+//                         border: Border.all(color: AppColor.border, width: 1.5),
+//                       ),
+//                     ),
+//                     // TextField container as per image
+                    
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+
+//         /// Floating Action Button
+//         Padding(
+//           padding: EdgeInsets.only(bottom: height * 0.09),
+//           child: FloatingActionButton(
+//             shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(28),
+//             ),
+//             backgroundColor: AppColor.bottomBarColor,
+//             elevation: 0,
+//             onPressed: _toggleContainer,
+//             child: AnimatedRotation(
+//               duration: Duration(milliseconds: 300),
+//               turns: _isOpen ? 0.250 : 0.0,
+//               child: _isOpen
+//                   ? Icon(
+//                       Icons.close,
+//                       color: AppColor.primaryColor,
+//                       size: width * 0.08,
+//                     )
+//                   : SvgPicture.asset(
+//                       AppSvg.imgFloat,
+//                       height: height * 0.04,
+//                       width: width * 0.04,
+//                     ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// Widget _chatBubble({
+//   required BuildContext context,
+//   required bool isUser,
+//   required IconData icon,
+//   required String message,
+// }) {
+//   final height = MediaQuery.of(context).size.height;
+//   final width = MediaQuery.of(context).size.width;
+
+//   return Column(
+//     crossAxisAlignment: isUser
+//         ? CrossAxisAlignment.end
+//         : CrossAxisAlignment.start,
+//     children: [
+//       Container(
+//         margin: const EdgeInsets.symmetric(vertical: 6),
+//         child: Row(
+//           mainAxisAlignment: isUser
+//               ? MainAxisAlignment.end
+//               : MainAxisAlignment.start,
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             if (!isUser)
+//               Container(
+//                 alignment: Alignment.center,
+//                 padding: EdgeInsets.all(width * 0.01),
+//                 decoration: BoxDecoration(
+//                   color: AppColor.bottomBarColor,
+//                   borderRadius: BorderRadius.circular(50),
+//                 ),
+//                 child: SvgPicture.asset(
+//                   AppSvg.imgFloat,
+//                   height: height * 0.03,
+//                   width: width * 0.03,
+//                 ),
+//               ),
+//             if (!isUser) SizedBox(width: width * 0.02),
+//             Flexible(
+//               child: Container(
+//                 padding: EdgeInsets.all(width * 0.02),
+//                 decoration: BoxDecoration(
+//                   color: isUser
+//                       ? Colors.deepPurple.shade50
+//                       : Colors.grey.shade200,
+//                   borderRadius: BorderRadius.circular(12),
+//                 ),
+//                 child: UrbanistApptext(
+//                   text: message,
+//                   fontSize: width * 0.03,
+//                   fontWeight: FontWeight.w500,
+//                   color: AppColor.black,
+//                 ),
+//               ),
+//             ),
+//             if (isUser) SizedBox(width: width * 0.02),
+//             if (isUser)
+//               CircleAvatar(
+//                 radius: width * 0.03,
+//                 backgroundColor: AppColor.bottomBarColor,
+//                 backgroundImage: AssetImage(AppImages.personTemp),
+//               ),
+//           ],
+//         ),
+//       ),
+
+//       // ✅ Added TextField below the bubble
+//       Container(
+//         margin: const EdgeInsets.only(top: 8),
+//         padding: const EdgeInsets.symmetric(horizontal: 12),
+//         decoration: BoxDecoration(
+//           border: Border.all(color: Colors.grey.shade300),
+//           borderRadius: BorderRadius.circular(30),
+//           color: Colors.grey.shade100,
+//         ),
+//         child: TextField(
+//           decoration: InputDecoration(
+//             hintText: 'Type a message...',
+//             border: InputBorder.none,
+//             suffixIcon: Row(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 Icon(Icons.mic_none, color: Colors.grey),
+//                 const SizedBox(width: 8),
+//                 Icon(Icons.send, color: Colors.deepPurple),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     ],
+//   );
+// }

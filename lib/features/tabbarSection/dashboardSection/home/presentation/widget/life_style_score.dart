@@ -1,6 +1,4 @@
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jimmy_sir_app/core/components/apptext/plus_jakarta_sans.dart';
 import 'package:jimmy_sir_app/core/components/Button/custom_button.dart';
@@ -9,11 +7,9 @@ import 'package:jimmy_sir_app/core/constants/app_text.dart';
 import 'package:jimmy_sir_app/core/constants/enum.dart';
 import 'package:jimmy_sir_app/core/routes/route_import.dart';
 import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/presentation/widget/customRaderChart.dart';
-import 'package:jimmy_sir_app/features/tabbarSection/dashboardSection/home/providers/graph_provider.dart';
 
 class LifeStyleScore extends ConsumerWidget {
   const LifeStyleScore({super.key});
-  // Helper to safely parse numeric values from a map
   double _getValue(Map data, String key, double fallback) {
     if (data.isEmpty) return fallback;
     final v = data[key];
@@ -31,9 +27,7 @@ class LifeStyleScore extends ConsumerWidget {
     final height = MediaQuery.sizeOf(context).height;
     final graphData = ref.watch(graphProvider);
 
-    return 
-    
-    Container(
+    return Container(
       padding: EdgeInsets.symmetric(
         horizontal: width * 0.01,
         vertical: height * 0.01,
@@ -135,7 +129,15 @@ class LifeStyleScore extends ConsumerWidget {
               text: graphData.type == ScoreType.lifestyle
                   ? AppText.logActivity
                   : AppText.logMeal,
-              onPressed: () {},
+              onPressed: () {
+                if (graphData.type == ScoreType.lifestyle) {
+                  // Navigator.pushNamed(context, RouteNames.activityLogScreen);
+                  context.pushNamed(RouteNames.activityLogScreen);
+                } else {
+                  // Navigator.pushNamed(context, RouteNames.mealLogScreen);
+                  context.pushNamed(RouteNames.mealLogScreen);
+                }
+              },
               color: AppColor.primaryColor,
               textColor: AppColor.white,
               fontSize: width * 0.03,

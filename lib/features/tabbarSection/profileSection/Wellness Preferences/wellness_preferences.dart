@@ -42,7 +42,10 @@ class WellnessPreferences extends ConsumerWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.05, vertical: width * 0.05),
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.05,
+            vertical: width * 0.05,
+          ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -55,7 +58,7 @@ class WellnessPreferences extends ConsumerWidget {
 
                 SizedBox(height: width * 0.05),
 
-                ...List.generate(wellnessPreferences.length, (index) {                  
+                ...List.generate(wellnessPreferences.length, (index) {
                   final item = wellnessPreferences[index];
                   return GestureDetector(
                     onTap: () {
